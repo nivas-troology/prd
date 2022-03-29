@@ -1,0 +1,10 @@
+.form-control {
+    width: 100%  !important;
+}
+
+[class*=icheck-]>input:first-child+input[type=hidden]+label::before, [class*=icheck-]>input:first-child+label::before{
+    position: relative;
+}
+
+
+ 

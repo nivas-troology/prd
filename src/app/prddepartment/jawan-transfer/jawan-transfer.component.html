@@ -1,0 +1,212 @@
+
+
+<div class="content-wrapper" style="min-height: 242px;">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+  
+          </div><!-- /.col -->
+    
+        </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <div class="card card-default">
+            <div class="card-header">
+                <h3>Jawan Transfer</h3>
+            </div>
+     <div class="card-body">
+         <div class="row">
+            <div class="col-md-6">
+<div class="card card-warning">
+    <div class="card-header">
+        <h5>Jawan Search</h5>
+    </div>
+    <div class="card-body">
+<div class="col-md-12">
+    <div class="row">
+        <div class="col-md-8">
+            <label class="control-label">सर्विस नं0</label>
+    <input type="text" class="form-control" [(ngModel)]="ServiceNo" (ngModelChange)="ServiceNo = $event.toUpperCase()">
+        </div>
+     
+        <div class="col-md-2">
+            <input type="button" class="btn btn-success" value="Search"  style="margin-top: 31px;" (click)="GetJawanForTransfer(ServiceNo)">
+        </div>
+    </div>
+    <br/>
+    <br/>
+<div class="row" *ngIf="divJawanDetail">
+    <div class="col-md-12">
+<div class="card card-success">
+    <div class="card-header"><strong>स्वयंसेवक का नाम:{{jawan.empName}}</strong></div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-4">वर्तमान पता</div>:
+            <div class="col-md-4">{{jawan.currentAddress}}</div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">मण्डल</div>:
+            <div class="col-md-4">{{jawan.currentZoneName}}</div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">जिला</div>:
+            <div class="col-md-4">{{jawan.currentDistName}}</div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">थाना</div>:
+            <div class="col-md-4">{{jawan.currentThanaName}}</div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">विकासखंड/कंपनी का नाम </div>:
+            <div class="col-md-4">{{jawan.currentBlockName}}/{{jawan.currentCompName}}</div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">पिनकोड </div>:
+            <div class="col-md-4">{{jawan.currentPincode}}</div>
+        </div>
+       
+                                </div>
+</div>
+    </div>
+</div>
+</div>
+    </div>
+</div>
+            </div>
+          
+            <div class="col-md-6">
+                <div class="card card-warning">
+                    <div class="card-header">
+                        <h5>Transfer Process</h5>
+                    </div>
+                    <div class="card-body">
+                        <form>
+                            <div class="col-md-12">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <input type="radio" id="rdCurrentUrban"  name="radioCurrentUrban" #residanceTypeCurrentControl="ngModel" [(ngModel)]="empcontact.residanceTypeCurrent" value="Urban" >
+                                        <label class="control-label">शहरी</label>&nbsp;&nbsp;
+                                        <input type="radio" id="rdCurrentRural" name="radioCurrentRural" #residanceTypeCurrentControl="ngModel" [(ngModel)]="empcontact.residanceTypeCurrent" value="Rural" (click)="getBlock(empcontact.CurrentDistId)" >
+                                        <label class="control-label">ग्रामीण</label>
+                                    </div>
+                                  
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                    <div class="form-group" [class.has-error]="CurrentAddressControl.invalid && CurrentAddressControl.touched" [class.has-success]="CurrentAddressControl.valid">
+                                        <label class="control-label" for="CurrentAddress">वर्तमान पता<span style="color:red;">*</span> :</label>
+                                        <!-- <input type="text" class="form-control" id="CurrentAddress" name="CurrentAddress" #CurrentAddressControl="ngModel" [(ngModel)]="empcontact.CurrentAddress" required (ngModelChange)="empcontact.CurrentAddress = $event.toUpperCase()" > -->
+                                        <textarea class="form-control" id="CurrentAddress" name="CurrentAddress" #CurrentAddressControl="ngModel" [(ngModel)]="empcontact.CurrentAddress" required (ngModelChange)="empcontact.CurrentAddress = $event.toUpperCase()" ></textarea>
+                                        <span class="help-block" *ngIf="CurrentAddressControl.invalid && CurrentAddressControl.touched">कृपया वर्तमान पता भरें </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="control-label" for="CurrentZoneId">मण्डल :</label>
+                                        <select class="form-control" id="CurrentZoneId" name="CurrentZoneId" #CurrentZoneIdControl="ngModel" [(ngModel)]="empcontact.CurrentZoneId" (change)="getdistrict(empcontact.CurrentZoneId,'')"required >
+                                            <option value="0">--Select--</option>
+                                            <option [value]="zone.zoneId" *ngFor="let zone of currentZonelist">{{zone.zoneName}}</option>
+                                        </select>
+                                
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="control-label" for="CurrentDistId">जिला :</label>
+                                        <select class="form-control" id="CurrentDistId" name="CurrentDistId" #CurrentDistIdControl="ngModel" [(ngModel)]="empcontact.CurrentDistId" (change)="getCompany(empcontact.CurrentDistId,'');getBlock(empcontact.CurrentDistId);getThana(empcontact.CurrentDistId)"required >
+                                            <option value="0">--Select--</option>
+                                            <option [value]="district.distId" *ngFor="let district of currentdistlist">{{district.distName}}</option>
+                                        </select>
+                                
+                                    </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                    <div class="form-group" [class.has-error]="CurrentBlockIdControl.pristine && CurrentBlockIdControl.touched" [class.has-success]="CurrentBlockIdControl.dirty" *ngIf="empcontact.residanceTypeCurrent=='Rural'">
+                                                            
+                                        <label class="control-label" for="CurrentBlockId">ब्लॉक/विकास खंड<span style="color:red;">*</span> :</label>
+                                        <select class="form-control" id="CurrentBlockId" name="CurrentBlockId" #CurrentBlockIdControl="ngModel" [(ngModel)]="empcontact.CurrentBlockId" (change)="getCompany(empcontact.CurrentDistId,empcontact.CurrentBlockId)"required >
+                                            <option value="0">--Select--</option>
+                                            
+                                            <option [value]="block.blockId" *ngFor="let block of blocklst">{{block.blockName}}</option>
+                                        </select>
+                                        <span class="help-block" *ngIf="CurrentBlockIdControl.pristine && CurrentBlockIdControl.touched">ब्लॉक/विकास खंड  </span>
+                                        </div>
+                                        <div class="form-group" [class.has-error]="CurrentCompanyIdControl.pristine && CurrentCompanyIdControl.touched" [class.has-success]="CurrentCompanyIdControl.dirty">
+                                    
+                                            <label class="control-label" for="CurrentCompanyId">कंपनी का नाम<span style="color:red;">*</span> :</label>
+                                          
+                                            <select class="form-control" id="CurrentCompanyId" name="CurrentCompanyId" #CurrentCompanyIdControl="ngModel" [(ngModel)]="empcontact.CurrentCompanyId" required >
+                                                <option value="0">--Select--</option>
+                                                <option [value]="company.compId" *ngFor="let company of companylst">{{company.compName}}</option>
+                                                
+                                            </select>
+                                            <span class="help-block" *ngIf="CurrentCompanyIdControl.pristine && CurrentCompanyIdControl.touched">कृपया कंपनी चुनें  </span>
+                                            </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                    <div class="form-group" [class.has-error]="CurrentThanaIdControl.pristine && CurrentThanaIdControl.touched" [class.has-success]="CurrentThanaIdControl.dirty">
+                                                            
+                                        <label class="control-label" for="CurrentThanaId">थाना<span style="color:red;">*</span> :</label>
+                                        <select class="form-control" id="CurrentThanaId" name="CurrentThanaId" #CurrentThanaIdControl="ngModel" [(ngModel)]="empcontact.CurrentThanaId" required >
+                                            <option value="0">--Select--</option>
+                                            
+                                            <option [value]="thana.thanaId" *ngFor="let thana of thanalist">{{thana.thanaName}}</option>
+                                        </select>
+                                        <span class="help-block" *ngIf="CurrentThanaIdControl.pristine && CurrentThanaIdControl.touched">कृपया थाना चुनें  </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                    <div class="form-group" [class.has-error]="CurrentPincodeControl.invalid && CurrentPincodeControl.touched" [class.has-success]="CurrentPincodeControl.valid">
+                                                            
+                                        <label class="control-label" for="CurrentPincode">पिनकोड<span style="color:red;">*</span> :</label>
+                                        <input type="text" class="form-control" id="CurrentPincode" name="CurrentPincode" maxlength="6"      #CurrentPincodeControl="ngModel" [(ngModel)]="empcontact.CurrentPincode" required>
+                                        <span class="help-block" *ngIf="CurrentPincodeControl.invalid && CurrentPincodeControl.touched">कृपया पिनकोड भरें   </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <input type="button" class="btn btn-success" value="Transfer Finally" (click)="JawanTransfer(empcontact)">
+                                    </div>
+                                </div>
+                                <br/>
+                                <br/>
+                 
+                            </div>
+                        </form>
+              
+                    </div>
+                </div>
+                            </div>
+     </div>
+  
+     <ngx-spinner bdColor="rgba(51, 51, 51, 0.8)" size="default" type="ball-spin-clockwise">  
+        <p style="color: white">Please Wait. </p>  
+        </ngx-spinner>
+        </div>
+ 
+    </div>
+</div>
+  </section>
+
+</div>
+
+
+

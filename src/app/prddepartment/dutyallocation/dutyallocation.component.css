@@ -1,0 +1,15 @@
+th,td
+{
+    font-family: auto;
+    font-size: small;
+}
+.modal-content
+{
+    width:758px;
+    display: block;
+}
+input[type=text]
+{
+    font-size: 16px;
+    font-family: 'Times New Roman', Times, serif
+}

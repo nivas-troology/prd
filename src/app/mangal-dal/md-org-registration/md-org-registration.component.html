@@ -1,0 +1,144 @@
+
+
+<main>
+
+  
+    <!-- About Law End-->
+    <!--? Brand Area Start -->
+    <section class="team-area pt-180 pb-100 section-bg" style="background-image: url('../../../assets/MangalDal/img/gallery/section_bg02.png');background-size:auto;">
+    
+            <div class="row RegForm">
+                <div class="col-md-12">
+                   <div class="card card-default">
+              
+                       <div class="card-header"><h4>मंगल दल रजिस्ट्रेशन</h4>
+                        <button type="button" class="btn btn-tool" data-card-widget="collapse" style="float: right;"><i class="fas fa-minus"></i></button>
+                    </div>
+                       <div class="card-body">
+                           <form #OrgRegForm="ngForm" autocomplete="off">
+
+                        
+                           <div class="row">
+                               <div class="col-md-4">
+                                   <div class="form-group" [class.has-error]="District.pristine && District.touched" [class.has-success]="District.dirty">
+                                       <label class="control-label">जिला:&nbsp;<code>*</code></label>
+                                       <select class="form-control" id="District" name="District" #District="ngModel" [(ngModel)]="Team.DistId" (change)="getBlock(Team.DistId)" required>
+                                           <option value=0>--Select--</option>
+                                           <option [value]="dist.distId" *ngFor="let dist of distlist">{{dist.distName}}</option>
+                                       </select>
+                                       <span class="help-block" *ngIf="District.pristine && District.touched">कृपया जिला चुनें </span>
+                                   </div>
+                               </div>
+                               <div class="col-md-4">
+                                <div class="form-group" [class.has-error]="Block.pristine && Block.touched" [class.has-success]="Block.dirty">
+                                    <label class="control-label">विकासखंड:&nbsp;<code>*</code></label>
+                                    <select class="form-control" id="Block" name="Block" #Block="ngModel" [(ngModel)]="Team.BlockId" (change)="getGP(Team.BlockId)" required>
+                                        <option value=0>--Select--</option>
+                                        <option [value]="block.blockId" *ngFor="let block of blocklst">{{block.blockName}}</option>
+                                    </select>
+                                    <span class="help-block" *ngIf="Block.pristine && Block.touched">कृपया विकासखंड चुनें</span>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group" [class.has-error]="GP.pristine && GP.touched" [class.has-success]="GP.dirty">
+                                    <label class="control-label">ग्रामपंचायत:&nbsp;<code>*</code></label>
+                                    <select class="form-control" id="GP" name="GP" #GP="ngModel" [(ngModel)]="Team.Gpid" (change)="GetOrganisationName()" required>
+                                        <option value=0>--Select--</option>
+                                        <option [value]="gp.gramPId" *ngFor="let gp of Gplst">{{gp.gramPName}}</option>
+                                    </select>
+                                    <span class="help-block" *ngIf="GP.pristine && GP.touched">कृपया ग्रामपंचायत चुनें </span>
+                                </div>
+                            </div>
+                            
+                           </div>
+                           <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group" [class.has-error]="TeamType.pristine && TeamType.touched" [class.has-success]="TeamType.dirty">
+                                    <label class="control-label">संस्था का प्रकार:&nbsp;<code>*</code></label>
+                                    <select class="form-control" id="TeamType" name="TeamType" #TeamType="ngModel" [(ngModel)]="Team.TeamTypeId" (change)="GetOrganisationName()" required>
+                                        <option value=0>--Select--</option>
+                                        <option [value]="teamtype.teamTypeId" *ngFor="let teamtype of TeamTypelst">{{teamtype.teamType1}}</option>
+                                    </select>
+                                    <span class="help-block" *ngIf="TeamType.pristine && TeamType.touched">कृपया संस्था का प्रकारचुनें</span>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                             <div class="form-group" [class.has-error]="TeamName.invalid && TeamName.touched" [class.has-success]="TeamName.valid">
+                                <label class="control-label">संस्था का नाम:&nbsp;<code>*</code></label>
+                                <input class="form-control" id="TeamName" name="TeamName" #TeamName="ngModel" [(ngModel)]="Team.TeamName" (ngModelChange)="Team.TeamName=$event.toUpperCase()" required>
+                                <span class="help-block" *ngIf="TeamName.invalid && TeamName.touched">कृपया संस्था का नाम भरें</span>
+                             </div>
+                         </div>
+                         <div class="col-md-4">
+                          <div class="form-group">
+                              <label class="control-label"><span style="color: white;">;;;;;</span></label>
+                            <input type="button" class="btn btn-success form-control" value="Save" (click)="OrgRegistration(Team)" [disabled]="Team.DistId==0||Team.BlockId==0||Team.Gpid==0||Team.TeamTypeId==0||Team.TeamName==null">
+                          </div>
+                           
+                         </div>
+                         
+                        </div>
+                    </form>
+                    <div class="card card-default">
+                    
+                        <div class="card-header"><h5>मंगल दल का विविरण</h5>
+                            <button type="button" class="btn btn-tool" data-card-widget="collapse" style="float: right;"><i class="fas fa-minus"></i></button>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-12">
+                                 <table class="table  table-responsive table-bordered">
+                                     <thead class="table table-primary">
+                                         <tr>
+                                  
+                                       <th style="width:20%;">जिला</th>
+                                       <th style="width:20%;">विकासखंड </th>
+                                       <th style="width:20%;">ग्रामपंचायत</th>
+                                       <th style="width:20%;">संस्था का प्रकार</th>
+                                       <th style="width:20%;">संस्था का नाम </th>
+                                <!--        <th style="width:20%;">Certificate</th> -->
+                                       <th style="width:20%;">Add Members</th>
+                                       <th style="width:20%;">Add Activities</th>
+                                       <th style="width:20%;">Upload Attachements</th>
+                                         </tr>
+                                     </thead>
+                                     <tbody>
+                                         <tr *ngFor="let org of Orglst">
+                                         
+                                           <td>{{org.district}}</td>
+                                           <td>{{org.block}}</td>
+                                           <td>{{org.gpanchayat}}</td>
+                                           <td>{{org.teamType}}</td>
+                                           <td>{{org.teamName}}</td>
+                                    <!--        <td><input type="button" class="btn btn-primary" value="Click here..." (click)="GetCertificate()"></td> -->
+                                           <td><input type="button" class="btn btn-primary" value="Click here..." (click)="AddMember()"></td>
+                                          
+                                           <td><input type="button" class="btn btn-primary" value="Click here..." (click)="Activities()"></td>
+                                           <td><input type="button" class="btn btn-primary" value="Click here..." (click)="UploadAttachment()"></td>
+                                         
+
+                                         </tr>
+                                     </tbody>
+                                 </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                       </div>
+                 
+                   </div>
+                  
+                </div>
+           
+         
+               
+          
+              
+            
+            </div>
+      
+    </section>
+  
+    </main>
+
+  

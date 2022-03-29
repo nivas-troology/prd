@@ -1,0 +1,23 @@
+th
+{
+    width:300px;
+    font-weight: lighter;
+    font-size: 14px;
+}
+select option
+{
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 12px;
+}
+input[type=text]
+{
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 14px;
+}
+label,span
+{
+    font-size: 14px;
+}
+::ng-deep .mat-horizontal-stepper-header{
+    pointer-events: none !important;
+}

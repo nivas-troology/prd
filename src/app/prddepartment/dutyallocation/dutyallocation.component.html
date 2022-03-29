@@ -1,0 +1,453 @@
+
+<style>
+  @media print and (min-width: 768px)
+  {
+table,th,td {
+  border:1px solid black;
+};
+table{
+  border-collapse:collapse;
+}
+.row
+{
+  margin-left: 400px;
+}
+.col-md-8, .bordersolid
+{
+  border-style: solid;
+}
+} 
+</style>
+<div class="content-wrapper" style="min-height: 242px; padding-bottom: 50px;">
+  <!-- Content Header (Page header) -->
+  <div class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+
+        </div><!-- /.col -->
+  
+      </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+  </div>
+  <!-- /.content-header -->
+
+  <!-- Main content -->
+  <section class="content">
+  
+    <div class="container-fluid">
+      <form #DutyAllocationForm="ngForm" autocomplete="off" (ngSubmit)="DutyAllocation(DutyAllocationForm)">
+      <div class="card card-default">
+          <div class="card-header">
+              <h3>Duty Allocation    <button type="button" id="collpaseallocation"class="btn btn-tool" data-card-widget="collapse" style="float: right;"><i class="fas fa-minus"></i></button></h3>
+          
+          </div>
+   
+          <div class="card-body" *ngIf="MRoleId==3">
+          
+              <div class="row">
+                  <!-- <div class="col-md-4">
+                      <div class="form-group" >
+                              
+                          <label class="control-label" for="CurrentBlockId">ब्लॉक/विकास खंड :</label>
+                          <select class="form-control" id="CurrentBlockId" name="CurrentBlockId" #CurrentBlockIdControl="ngModel" [(ngModel)]="empcontact.CurrentBlockId">
+                              <option value="--Select--">--Select--</option>
+                              
+                              <option [value]="block.blockId" *ngFor="let block of blocklst">{{block.blockName}}</option>
+                          </select>
+                       
+                          </div>
+                  </div> -->
+                  <div class="col-md-6">
+                  <div class="form-group">
+  
+                      <label class="control-label" for="CurrentThanaId">थाना :</label>
+                      <ng-multiselect-dropdown
+[placeholder]="'थाना चुनें'"
+[settings]="dropdownSettings"
+[data]="thanalist"
+[(ngModel)]="selectedItems "
+
+(onSelect)="onItemSelect($event)" 
+(onDeSelect)="OnItemDeSelect($event)"
+(onSelectAll)="onSelectAll($event)"
+(onDeSelectAll)="onDeSelectAll($event)"
+>
+</ng-multiselect-dropdown>
+                      </div>
+                  </div>
+                  <div class="col-md-6">
+                      <div class="form-group">
+                          <label class="control-label">सर्विस नं0 :</label>
+                          <input type="text" id="ServiceNo" name="ServiceNo" class="form-control" [(ngModel)]="ServiceNo" (ngModelChange)="ServiceNo=$event.toUpperCase()">
+                      </div>
+                      </div>
+                  </div>
+                <div class="row">
+                
+                    <div class="col-md-6">
+                        <input type="button" value="Search By Thana" class="btn btn-success form-control" style="margin-top:30px" (click)="GetAvailableJawanForDuty()">
+                    </div>
+                    <div class="col-md-6">
+                      <input type="button" value="Search By Service No." class="btn btn-success form-control" style="margin-top:30px" (click)="GetAvailableJawanForDutyByServiceNo(ServiceNo)">
+                  </div>
+                </div>
+                <br/>
+             
+             
+        
+      </div>
+  
+   
+     
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+<div class="card card-primary">
+<div class="card-header"><h5>तैनाती स्थल कर विवरण: <button type="button" id="collpasesite" class="btn btn-tool" data-card-widget="collapse" style="float: right;"><i class="fas fa-minus"></i></button></h5>
+
+</div>
+<div class="card-body">
+<div class="row">
+<div class="col-md-4">
+          
+<div class="form-group">
+
+ <label class="control-label" for="CurrentThanaId">थाना :</label>
+<select class="form-control" id="CurrentThanaId" name="CurrentThanaId" #CurrentThanaIdControl="ngModel" [(ngModel)]="empcontact.CurrentThanaId" [class.is-invalid]="CurrentThanaIdControl.pristine && CurrentThanaIdControl.touched" (change)="GetSites()">
+   <option value="--Select--" disabled>--Select--</option>
+   <option [value]="thana.thanaId" *ngFor="let thana of thanalist">{{thana.thanaName}}</option>
+
+</select>
+<span class="help-block" *ngIf="CurrentThanaIdControl.pristine && CurrentThanaIdControl.touched">कृपया थाना चुनें</span>
+</div>
+</div>
+<div class="col-md-4">
+ <div class="form-group" [class.has-error]="SiteIdControl.pristine && SiteIdControl.touched" [class.has-success]="SiteIdControl.dirty">
+   <label class="control-label" for="SiteId">तैनाती स्थल :</label>
+
+   <select class="form-control" id="SiteId" name="SiteId" #SiteIdControl="ngModel" [(ngModel)]="site.SiteId" required>
+       <option value="-1">--Select--</option>
+       <option [value]="site.siteId" *ngFor="let site of siteList">{{site.siteName}}</option>
+       
+   </select>
+   <span class="help-block" *ngIf="SiteIdControl.pristine && SiteIdControl.touched">कृपया तैनाती स्थल चुनें</span>
+ </div>
+</div>
+<div class="col-md-4">
+<div class="form-group">
+   <input type="button" class="btn btn-primary" value="Add More Site.." data-toggle="modal" data-target="#SiteSaveModal" style="margin-top:31px;" [disabled]="empcontact.CurrentThanaId=='--Select--'">
+</div>
+</div>
+
+
+<div class="col-md-4">
+<div class="modal fade" id="SiteSaveModal" tabindex="-1" role="dialog" aria-labelledby="SiteSaveModalLabel" aria-hidden="true">
+ <div class="modal-dialog" role="document">
+   <div class="modal-content">
+     <div class="modal-header">
+       <h5 class="modal-title" id="SiteSaveModalLabel">Add More Site</h5>
+       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+         <span aria-hidden="true">&times;</span>
+       </button>
+     </div>
+     <div class="modal-body">
+         <div class="form-group" [class.has-error]="SiteNameControl.invalid && SiteNameControl.touched" [class.has-success]="SiteNameControl.valid">
+             <label class="control-label" for="SiteName"> नया तैनाती स्थल </label>
+              <input type="text" class="form-control" id="SiteName" name="SiteName"  #SiteNameControl="ngModel" [(ngModel)]="site.SiteName" (ngModelChange)="site.SiteName = $event.toUpperCase()" required>
+               <span class="help-block" *ngIf="SiteNameControl.invalid && SiteNameControl.touched">कृपया नया तैनाती स्थल भरिये</span>
+              </div>
+     </div>
+     <div class="modal-footer">
+       <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+       <button type="button" class="btn btn-primary" (click)="Addsite()">Save</button>
+     </div>
+   </div>
+ </div>
+</div>
+
+</div>
+</div>
+
+
+</div>
+</div>
+        </div>
+        
+         
+        
+       </div>
+       <div class="row">
+         <div class="col-md-12">
+           <div class="card card-primary">
+<div class="card-header">
+<h5>Duty Allocation Process
+  <button type="button" id="collpaseprocess"class="btn btn-tool" data-card-widget="collapse" style="float: right;"><i class="fas fa-minus"></i></button>
+</h5>
+
+</div>
+<div class="card-body">
+<div class="row">
+  <div class="col-md-6">
+    <div class="form-group" [class.has-error]="PromisorNameControl.invalid && PromisorNameControl.touched" [class.has-success]="PromisorNameControl.valid">
+        <label class="control-label">Promisor Name :</label>
+<textarea class="form-control" id="PromisorName" name="PromisorName"  #PromisorNameControl="ngModel" [(ngModel)]="dutyallocation.PromisorName" (ngModelChange)="dutyallocation.PromisorName = $event.toUpperCase()" required></textarea>
+<span class="help-block" *ngIf="PromisorNameControl.invalid && PromisorNameControl.touched">Please Enter Promisor Name</span>
+    </div>
+  </div>
+  <div class="col-md-6">
+      <input type="button" class="btn btn-success form-control" value="View Previous Duties" data-toggle="modal" data-target="#PrevDuetiesModalLong" (click)="GetPrevioustDuties()" style="margin-top:31px;">
+  </div>
+  <div class="col-md-6">
+    <div class="modal fade" id="PrevDuetiesModalLong" tabindex="-1" role="dialog" aria-labelledby="PrevDuetiesModalLongTitle" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="PrevDuetiesModalLongTitle">Previous Duties</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+             <table class="table table-responsive table-striped">
+<thead>
+<th>क्रम संख्या</th>
+<th>स्वयंसेवक का नाम</th>
+<th>तैनाती स्थल</th>
+<th>Promisor Name</th>
+<th>Duty Type</th>
+<th>दिनांक से</th>
+<th>दिनांक तक</th>
+</thead>
+<tbody>
+
+<tr *ngFor="let prev of PreviuseDutylst;let i=index">
+<td>{{i+1}}</td>
+<td>{{prev.empName}}</td>
+<td>{{prev.siteName}}</td>
+<td>{{prev.promisorName}}</td>
+<td>{{prev.dutyType}}</td>
+<td>{{prev.dateFrom}}</td>
+<td>{{prev.dateTo}}</td>
+
+
+</tr>
+</tbody>
+             </table>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+            </div>
+          </div>
+        </div>
+      </div>
+ </div>
+</div>
+<div class="row">
+    <div class="col-md-6">
+<div class="form-group">
+<label class="control-label">Duty Type :</label>
+<select class="form-control" id="DutyType" name="DutyType" #DutyTypeControl="ngModel" [(ngModel)]="dutyallocation.DutyType" required>
+<option value="--Select--" disabled>--Select--</option>
+<option value="LAW & ORDER DUTY">LAW & ORDER DUTY</option>
+<option value="TRAFFIC DUTY">TRAFFIC DUTY</option>
+<option value="OTHER SECURITY DUTY">OTHER SECURITY DUTY</option>
+
+
+</select>
+</div>
+    </div>
+    <div class="col-md-6" *ngIf="dutyallocation.DutyType=='OTHER SECURITY DUTY'">
+      <div class="form-group">
+      <label class="control-label">Other Security Duty Type :</label>
+      <select class="form-control" id="OtherSecurityDutyType" name="OtherSecurityDutyType" #OtherSecurityDutyTypeControl="ngModel" [(ngModel)]="dutyallocation.OtherSecurityDutyType" required>
+      <option value=null disabled>--Select--</option>
+      <option value="DEPARTMENTAL DUTY">DEPARTMENTAL DUTY</option>
+      <option value="OTHER DEPARTMENTAL DUTY">OTHER DEPARTMENTAL DUTY</option>
+
+      
+      
+      </select>
+      </div>
+            </div>
+  </div>
+<div class="row">
+<div class="col-md-4">
+  <div class="form-group">
+      <div class="form-group" [class.has-error]="DateFromControl.invalid && DateFromControl.touched" [class.has-success]="DateFromControl.valid">
+          
+          <label class="control-label" for="DateFrom">दिनांक से :</label>
+          <input type="text" class="form-control" id="DateFrom" name="DateFrom" #DateFromControl="ngModel" [(ngModel)]="dutyallocation.DateFrom" bsDatepicker [bsConfig]="{dateInputFormat:'DD/MM/YYYY'}" placeholder="dd/mm/yyyy,eg:15/08/1947" required>
+          <span class="help-block" *ngIf="DateFromControl.invalid && DateFromControl.touched">कृपया दिनांक भरिये</span>
+          </div>
+  </div>
+</div>
+<div class="col-md-4">
+  <div class="form-group"  [class.has-error]="DateToControl.invalid && DateToControl.touched" [class.has-success]="DateToControl.valid">
+      <label class="control-label" for="DateTo">दिनांक तक :</label>
+      <input type="text" class="form-control" id="DateTo" name="DateTo" #DateToControl="ngModel" [(ngModel)]="dutyallocation.DateTo" bsDatepicker [bsConfig]="{dateInputFormat:'DD/MM/YYYY'}" placeholder="dd/mm/yyyy,eg:15/08/1947" required>
+      <span class="help-block" *ngIf="DateToControl.invalid && DateToControl.touched">कृपया दिनांक भरिये</span>
+      </div>
+  </div>  
+
+<div class="col-md-4">
+  <div class="form-group" [class.has-error]="AllocatedOnControl.invalid && AllocatedOnControl.touched" [class.has-success]="AllocatedOnControl.valid">
+      <label class="control-label" for="AllocatedOn">आवंटित दिनांक :</label>
+      <input type="text" class="form-control" id="AllocatedOn" name="AllocatedOn" #AllocatedOnControl="ngModel" [(ngModel)]="dutyallocation.AllocatedOn" bsDatepicker [bsConfig]="{dateInputFormat:'DD/MM/YYYY'}" placeholder="dd/mm/yyyy,eg:15/08/1947" required>
+      <span class="help-block" *ngIf="AllocatedOnControl.invalid && AllocatedOnControl.touched">कृपया दिनांक भरिये</span>
+      </div>
+  </div>
+</div>
+<br/>
+<div class="row">
+    <div class="col-md-12">
+      <table class="table table-responsive table-bordered table-striped">
+          <thead>
+              <th><input type="checkbox" [checked]="rowCheck" (click)="bulkCheck($event)" [disabled]="site.SiteId==-1||dutyallocation.PromisorName==null||dutyallocation.DateFrom==null||dutyallocation.DateTo==null||dutyallocation.AllocatedOn==null"></th>
+              <th>क्रम संख्या</th>
+              <th>उपलब्धता  की स्थिति</th>
+              <th>आवंटित कोड संख्या/सर्विस नं0</th>
+              <th>पुराना सर्विस नं0</th>
+              <th>मण्डल का नाम</th>
+              <th>जनपद का नाम</th>
+              <th>विकास खंड/ कम्पनी का नाम</th>
+              <th>स्वयंसेवक का नाम</th>
+              <th>पिता का नाम</th>
+              <th>पता </th>
+              <th>थाना </th>
+              <th>शैक्षिक योग्यता </th>
+              <th>विशेष योग्यता</th>
+              <th>जन्मतिथि</th>
+              <th>श्रेणी</th>
+              <th>लम्बाई(सेमी0)</th>
+              <th>सीना(सेमी0)</th>
+              
+              <th>नॉमिनल रोल रजिस्टर की क्रम संख्या: </th>
+              <th>सर्विस कोड</th>  
+          </thead>
+          <tbody>
+              <tr *ngFor="let jawan of Jawanlist | paginate:{id:'list',
+              itemsPerPage:10,
+              currentPage:page,
+              totalItems:totalReords
+              
+              
+              };let i=index">
+              <td><input type="checkbox" id="empCheck_{{jawan.empId}}"[checked]="rowCheck" (click)="PushDataForDuty(jawan.empId)" [disabled]="site.SiteId==-1||dutyallocation.PromisorName==null||dutyallocation.DateFrom==null||dutyallocation.DateTo==null||dutyallocation.AllocatedOn==null"></td>
+              <td>{{i+1}}</td>
+             <td><a class="btn btn-success btn-sm" *ngIf="jawan.availabilityStatus=='AVAILABLE'" style="color:white;">{{jawan.availabilityStatus}}</a><a class="btn btn-danger btn-sm" *ngIf="jawan.availabilityStatus=='UNAVAILABLE'" style="color:white;">{{jawan.availabilityStatus}}</a></td>
+             <td>{{jawan.empOfficialId}}</td>
+              <td>{{jawan.oldServiceNo}}</td>
+              <td>{{jawan.zone}}</td>
+              <td>{{jawan.dist}}</td>
+              <td>{{jawan.company}}</td>
+              <td>{{jawan.empName}}</td>
+              <td>{{jawan.fatherName}}</td>
+              <td>{{jawan.currAddress}}</td>
+              <td>{{jawan.thana}}</td>
+              <td>{{jawan.empEdu}}</td>
+              <td>{{jawan.empSplSkill}}</td>
+              <td>{{jawan.empDob}}</td>
+              <td>{{jawan.empCaste}}</td>
+              <td>{{jawan.height}}</td>
+              <td>{{jawan.chest}}</td>
+              
+              <td>{{jawan.nominalRegNo}}</td>
+              <td>{{jawan.serialCode}}</td>
+          </tr>
+          </tbody>
+      </table>
+      <pagination-controls id="list" maxSize="5" directionLinks="true" (pageChange)="page=$event"></pagination-controls>
+    </div>
+</div>
+
+<div class="row">
+  <div class="col-md-3">
+  <input type="button" class="btn btn-success" value="Add" (click)="AddFinallistForDuty()">
+  </div>
+  
+  </div>
+<br/>
+<div class="card card-primary">
+  <div class="card card-header"><h5>Duty Final List
+    <button type="button" id="collpaseprocess"class="btn btn-tool" data-card-widget="collapse" style="float: right;"><i class="fas fa-minus"></i></button>
+  </h5></div>
+  <div class="card-body">
+    <div class="row">
+      <div class="col-md-12">
+        <table class="table table-responsive table-bordered table-striped">
+            <thead>
+                
+                <th>क्रम संख्या</th>
+                <th style="width: 10%;">उपलब्धता  की स्थिति</th>
+                <th style="width: 6%;">आवंटित कोड संख्या/सर्विस नं0</th>
+                <th style="width: 6%;">पुराना सर्विस नं0</th>
+              
+                <th style="width: 6%;">ड्यूटी लगाने की स्थिति</th>
+                <th style="width: 6%;">तैनाती स्थल</th>
+                <th style="width: 10%;">मण्डल का नाम</th>
+                <th style="width: 10%;">जनपद का नाम</th>
+                <th style="width: 6%;">विकास खंड/ कम्पनी का नाम</th>
+                <th style="width: 10%;">स्वयंसेवक का नाम</th>
+                <th style="width: 10%;">पिता का नाम</th>
+                <th style="width: 10%;">पता </th>
+                <th style="width: 10%;">थाना </th>
+               
+               
+               
+            </thead>
+            <tbody>
+                <tr *ngFor="let jawan of DutyFinalList | paginate:{id:'list',
+                itemsPerPage:10,
+                currentPage:page,
+                totalItems:totalFinalList
+                
+                
+                };let i=index"[ngStyle]="{'background-color':jawan.DutyAllotmentAction=='Automatic'?'white':'#d6f5f5'}">
+               
+                <td>{{i+1}}</td>
+               <td><a class="btn btn-success btn-sm" *ngIf="jawan.availabilityStatus=='AVAILABLE'" style="color:white;">{{jawan.availabilityStatus}}</a><a class="btn btn-danger btn-sm" *ngIf="jawan.availabilityStatus=='UNAVAILABLE'" style="color:white;">{{jawan.availabilityStatus}}</a></td>
+               <td>{{jawan.empOfficialId}}</td>
+               <td>{{jawan.oldServiceNo}}</td>
+               <td>{{jawan.DutyAllotmentAction}}</td>
+               <td>{{jawan.SiteName}}</td>
+               <td>{{jawan.zone}}</td>
+                <td>{{jawan.dist}}</td>
+                <td>{{jawan.company}}</td>
+                <td>{{jawan.empName}}</td>
+                <td>{{jawan.fatherName}}</td>
+                <td>{{jawan.currAddress}}</td>
+                <td>{{jawan.thana}}</td>
+                
+            </tr>
+            </tbody>
+        </table>
+        <pagination-controls id="list2" maxSize="5" directionLinks="true" (pageChange)="page=$event"></pagination-controls>
+      </div>
+  </div>
+  </div>
+</div>
+
+<footer>
+<div class="row">
+<div class="col-md-3">
+<input type="submit" class="btn btn-success" value="Submit" [disabled]="site.SiteId==-1||dutyallocation.PromisorName==null||dutyallocation.DateFrom==null||dutyallocation.DateTo==null||dutyallocation.AllocatedOn==null">
+</div>
+
+</div>
+</footer>
+</div>
+           </div>
+         </div>
+       </div>
+      <ngx-spinner bdColor="rgba(51, 51, 51, 0.8)" size="default" type="ball-spin-clockwise">  
+          <p style="color: white">Please Wait. </p>  
+          </ngx-spinner>
+        </form> 
+  </div><!-- /.container-fluid -->
+
+</section>
+<!-- /.content -->
+</div>
+

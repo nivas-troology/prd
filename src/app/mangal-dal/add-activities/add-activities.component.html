@@ -1,0 +1,207 @@
+<main>  
+    <!-- About Law End-->
+    <!--? Brand Area Start -->
+    <section class="team-area pt-180 pb-100 section-bg" style="background-image: url('../../../assets/MangalDal/img/gallery/section_bg02.png');">
+    
+            <div class="row RegForm">
+                <div class="col-md-12">
+                   <div class="card card-default">
+                   
+                       <div class="card-header"><h4>मंगल दल की गतिविधियाँ</h4>
+                        <button type="button" class="btn btn-tool" data-card-widget="collapse" style="float: right;"><i class="fas fa-minus"></i></button>
+                    </div>
+                       <div class="card-body">
+                           <form autocomplete="off" #ActivityForm="ngForm" (ngSubmit)="ActivityRegister(ActivityForm)">
+                               <div class="row">
+                                   <div class="col-md-4">
+                                       <div class="form-group">
+                                           <label class="control-label">गतिविधि का नाम:&nbsp;<code>*</code></label>
+                                           <input type="text" class="form-control" id="ActivityName" name="ActivityName" [class.is-invalid]="ActivityName.invalid && ActivityName.touched" #ActivityName="ngModel" [(ngModel)]="Activity.ActivityName" required >
+                                           <span class="help-block"  *ngIf="ActivityName.invalid && ActivityName.touched">कृपया  गतिविधि का नाम भरें</span>
+                                       </div>
+                                   </div>
+                                   <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="control-label">दिनांक से :&nbsp;<code>*</code></label>
+                                        <input type="text" class="form-control" id="FromDate" name="FromDate" #FromDate="ngModel"  placeholder="eg:15/08/1947" bsDatepicker [bsConfig]="{dateInputFormat:'DD/MM/YYYY'}"  [class.is-invalid]="FromDate.invalid && FromDate.touched" [(ngModel)]="Activity.FromDate" required >
+                                        <span class="help-block"  *ngIf="FromDate.invalid && FromDate.touched">कृपया  दिनांक  भरें </span>
+                                    </div>
+                                </div>
+                                 <div class="col-md-4">
+                                 <div class="form-group">
+                                     <label class="control-label">दिनांक तक :&nbsp;<code>*</code></label>
+                                     <input type="text" class="form-control" id="ToDate" name="ToDate" #ToDate="ngModel"  placeholder="eg:15/08/1947" bsDatepicker [bsConfig]="{dateInputFormat:'DD/MM/YYYY'}"  [class.is-invalid]="ToDate.invalid && ToDate.touched" [(ngModel)]="Activity.ToDate" required >
+                                     <span class="help-block"  *ngIf="ToDate.invalid && ToDate.touched">कृपया  दिनांक  भरें </span>
+                                 </div>
+                             </div> 
+                               </div>
+                               <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="control-label">गतिविधि का स्थान:&nbsp;<code>*</code></label>
+                                        <input type="text" class="form-control" id="ActivityPlace" name="ActivityPlace" #ActivityPlace="ngModel" [class.is-invalid]="ActivityPlace.invalid && ActivityPlace.touched" [(ngModel)]="Activity.ActivityPlace" required>
+                                        <span class="help-block"  *ngIf="ActivityPlace.invalid && ActivityPlace.touched">कृपया  गतिविधि का स्थान भरें </span>
+                                    </div>
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="form-group">
+                                        <label class="control-label">गतिविधि का विवरण:&nbsp;</label>
+                                        <input type="text" class="form-control" id="ActivityDetails" name="ActivityDetails" [(ngModel)]="Activity.ActivityDetails">
+                                    </div>
+                                </div>
+                            </div>
+                          <!--   <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group" id="filetxt">
+                                        <label for="file" >File</label><code>*</code>
+                                        <input
+                                            id="file" 
+                                            type="file" 
+                                            class="form-control"
+                                            multiple="" 
+                                            (change)="onFileChange($event)"
+                                            name="Activityfile"
+                                            #Activityfile="ngModel" 
+                                            [class.is-invalid]="Activityfile.invalid && Activityfile.touched"
+                                            [(ngModel)]="Activity.Activityfile" 
+                                            required>
+                                    </div>
+                                 
+                                    <img *ngFor='let url of images'  [src]="url" height="150" width="200px" style="margin: 3px;"> <br/>
+                                </div>
+                            </div> -->
+                            <div class="row">
+                                <div class="col-md-4">
+                            <div class="form-group">
+                                
+                              
+                               
+                                <input type="submit" class="btn btn-success" value="Add Activity" *ngIf="btnSave" [disabled]="ActivityForm.invalid">
+                                <input type="button" class="btn btn-info" value="Update Activity" *ngIf="btnUpdate"(click)="UpdateActivity(Activity)">
+                        
+                            </div>
+                        </div>
+                            </div>
+                           
+                    </form>
+                    <div class="card card-default">
+            
+                        <div class="card-header"><h5>मंगल दल की गतिविधियाँ विवरण</h5>
+                            <button type="button" class="btn btn-tool" data-card-widget="collapse" style="float: right;"><i class="fas fa-minus"></i></button>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-12 table-responsive">
+                                 <table 
+                                 datatable 
+                                 class="table table-striped table-bordered nowrap row-border hover"  
+                                 [dtOptions]="dtOptions"
+                                 [dtTrigger]="dtTrigger">
+                                 <!-- datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">-->
+                                     <thead class="table table-primary">
+                                         <tr>
+                                       <th style="width:10%;">क्रम संख्या</th>
+                                       <th style="width:10%;">Edit</th>  
+                                       <th style="width:10%;">Delete</th>    
+                                       <th style="width:10%;">View Photo</th>      
+                                       <th style="width:10%;">Add Photo</th>                                
+                                       <th style="width:10%;">गतिविधि  का नाम </th>
+                                       <th style="width:10%;">गतिविधि का स्थान</th>
+                                       <th style="width:10%;">गतिविधि का विवरण</th>
+                                       <th style="width:10%;">गतिविधि तिथि (कब से -कब तक) </th>
+                                         </tr>
+                                     </thead>
+                                     <tbody>
+                                         <tr *ngFor="let mdAct of MDActlst;let i=index" >
+                                            <td>{{i+1}}</td>
+                                           <td style="text-align: center"><a class="btn btn-warning text-white" (click)="GetMDActivityDetailsById(mdAct.activityId)"><i class="fa fa-edit"></i></a> </td>
+                                           <td style="text-align: center"><a class="btn btn-danger text-white" (click)="DeleteActivity(mdAct.activityId)"><i class="fa fa-trash"></i></a></td> 
+                                           <td style="text-align: center"><a class="btn btn-info text-white" data-toggle="modal" data-target="#ImageModal" (click)="GetMangaldalActivityPhoto(mdAct.activityId)"><i class="fa fa-eye" ></i></a></td>
+                                           <td style="text-align: center"><a class="btn btn-info text-white" data-toggle="modal" data-target="#AddImage" (click)="AddMorePhoto(mdAct.activityId)"><i class="fa fa-plus" ></i></a></td>
+                                           <td >{{mdAct.activityName}}</td>
+                                           <td>{{mdAct.activityplace}}</td>
+                                           <td>{{mdAct.activitydetails}}</td>
+                                           <td><span>{{mdAct.fromdate | date:'mediumDate'}}</span>&nbsp; - &nbsp;<span>{{mdAct.toDate | date:'mediumDate'}}</span>  </td>
+                                         </tr>
+                                     </tbody>
+                                 </table>
+                                </div>
+                            </div>
+                                
+                            
+                        </div>
+                    </div>
+                    <div class="modal fade bd-example-modal-lg" id="AddImage" tabindex="-1" role="dialog" aria-labelledby="AddImageLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-lg" role="document">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h5 class="modal-title" id="AddImageLabel">अपलोड मंगल दल गतिविधियाँ  की फ़ोटो</h5>
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true" style="color: black;">&times;</span>
+                              </button>
+                            </div>
+                            <form autocomplete="off" #ActivityForm="ngForm">
+                            <div class="modal-body">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label for="file">File</label>
+                                            <input
+                                                id="file" 
+                                                type="file" 
+                                                class="form-control "
+                                                multiple="" 
+                                                (change)="onFileChange($event)"
+                                                name="Activityfile" required>
+                                        </div>
+                                       
+                                        <img *ngFor='let url of images' id="activityimg"  [src]="url" height="150" width="200px" style="margin: 3px;"> <br/>
+                                         
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-info"  (click)="uploadAll(ActivityId)">Submit Image</button>&nbsp;
+                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> 
+                            </div>
+                            </form>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="modal fade bd-example-modal-lg" id="ImageModal" tabindex="-1" role="dialog" aria-labelledby="ImageModalTitle" aria-hidden="true">
+                        <div class="modal-dialog  modal-lg" role="document">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h5 class="modal-title" id="ImageModalTitle">मंगल दल की गतिविधियाँ फ़ोटो</h5>
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true" style="color: black;">&times;</span>
+                              </button>
+                            </div>
+                            <div class="modal-body">
+                                <span class="myGallery" >   
+                                    <ng-container  *ngFor="let photoActlst of MDPhotoActlst;" #activityImage >
+                                        <img src='{{ActivityUrl}}{{photoActlst.image}}' [id]="photoActlst.mdImageId" /> 
+                                        <button type="button" (click)="ImageDelete(photoActlst.mdImageId)" class="imgbtn btn-danger">
+                                            <span aria-hidden="true">&times;</span>
+                                          </button>
+                                    </ng-container>          
+                               
+                                               
+                                </span>
+                            
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <!--   <button type="button" class="btn btn-primary">Save changes</button> -->
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                   </div>
+                </div>   
+            </div>
+           
+    </section>
+</main>
+   

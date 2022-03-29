@@ -1,0 +1,21 @@
+th,td,a{
+    font-size: small;
+    font-family: auto;
+}
+a{
+    color:white;
+    font-weight: bold;
+}
+.modal-content
+{
+    width:976px
+}
+.bordersolid
+{
+    border-style: solid;
+}
+hr
+{
+    margin-top: 0rem;
+    border-top: 1px solid black;
+}

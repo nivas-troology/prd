@@ -1,0 +1,60 @@
+
+
+<div class="content-wrapper" style="min-height: auto; padding-bottom: 20px;">
+    <section class="content">
+        <div class="container-fluid">
+            <div class="card card-default">
+                <div class="card-header">
+                 <h3>Jawan Registration Summary</h3>
+                </div>
+                <div class="card-body">
+                        <div class="row">
+                            <div class=col-md-12>
+                            </div>
+                            <div class="col-md-12">
+                                <table id="tbl1" datatable class="table table-striped table-bordered nowrap row-border hover" datatable 
+                                [dtOptions]="dtOptions"
+                                [dtTrigger]="dtTrigger">
+                                    <thead>
+                                        <tr>
+                                            <th>S. No.</th>
+                                            <th>Division Name</th>
+                                            <th>District Name</th>
+                                           <th>Finally Submit
+                                            PRD Jawan</th>
+                                           <th>In-Process
+                                            Jawan</th>  
+                                            <th>Total PRD
+                                                Jawan</th>
+                                           <th>Approved by
+                                            Division</th>  
+                                           <th>Locked by
+                                            Head Office</th>  
+                                         </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr  *ngFor="let jwnRegSummaryLst of jwnRegSummaryList;let i=index">
+                                            <td>{{i+1}}</td>
+                                            <td>{{jwnRegSummaryLst.zoneName}}</td>
+                                            <td>{{jwnRegSummaryLst.districtName}}</td>                                        
+                                            <td>{{jwnRegSummaryLst.finallySubmit}}</td>    
+                                            <td>{{jwnRegSummaryLst.inProcess}}</td> 
+                                            <td>{{jwnRegSummaryLst.finallySubmit+jwnRegSummaryLst.inProcess}}</td>
+                                            <td>{{jwnRegSummaryLst.approvedByDivision}}</td>   
+                                            <td>{{jwnRegSummaryLst.lockedByHO}}</td>  
+                                        </tr>                                    
+
+                                    </tbody>
+                                
+                                </table>                       
+                            </div>
+                        </div>    
+                </div>
+            </div>
+            <ngx-spinner bdColor="rgba(51, 51, 51, 0.8)" size="default" type="ball-spin-clockwise">  
+                <p style="color: white">Please Wait. </p>  
+            </ngx-spinner>
+      </div>   
+    </section>
+</div>
+

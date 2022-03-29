@@ -1,0 +1,9 @@
+td,th,input[type="text"]{
+    font-family: 'Times New Roman', Times, serif;
+}
+
+th{
+    width: 300px;
+    background-color: #ff8080;
+    color: white;
+}

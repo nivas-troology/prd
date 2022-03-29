@@ -1,0 +1,11 @@
+tr:hover{
+    background-color:#e6e6ff;
+}
+table{
+    width: 100%;
+    position: relative;
+}
+tr,td
+{
+    position: relative;  
+}

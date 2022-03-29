@@ -1,0 +1,131 @@
+@import url('../../../assets/MangalDal/css/style.css');
+
+.RegForm{
+    margin: 0px 5% 0px 5%;
+}
+
+.btn {
+    display: inline-block;
+    font-weight: 400;
+    color: #212529;
+    text-align: center;
+    vertical-align: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-color: transparent;
+    border: 1px solid transparent;
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: 0.25rem;
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  }
+.btn-success {
+    color: #fff;
+    background-color: #28a745;
+    border-color: #28a745;
+  }
+  .btn-warning {
+    color: #fff;
+    background-color:#e6b800;
+    border-color:#e6b800;
+  }
+  .btn-danger {
+    color: #fff;
+    background-color: #ff0000;
+    border-color:#ff0000;
+  }
+  .btn-info {
+    color: #fff;
+    background-color: #0090ef;
+    border-color: #0090ef;
+  }
+  .btn-secondary {
+    color: #fff;
+    background-color: #6c757d;
+    border-color: #6c757d;
+    box-shadow: none;}
+/*
+  The grid itself needs only 4 CSS declarations:
+*/
+
+.myGallery {
+  display: block;
+  grid-gap: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+}
+
+.myGallery img {
+  width: 230px;
+  height: 200px;
+  border-radius: 12px;
+  padding: 10px;
+}
+
+/*
+  And here are some declarations for the image caption.
+  Just hover over one of the last 5 images to see it.
+*/
+
+.myGallery .item {
+  position: relative;
+  overflow: hidden;
+}
+
+.myGallery .item img {
+  vertical-align: middle;
+}
+
+.myGallery .caption {
+  margin: 0;
+  padding: 1em;
+  position: absolute;
+  z-index: 1;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  max-height: 100%;
+  overflow: auto;
+  box-sizing: border-box;
+  transition: transform 0.5s;
+  transform: translateY(100%);
+  background: rgba(0, 0, 0, 0.7);
+  color: rgb(255, 255, 255);
+}
+
+.myGallery .item:hover .caption {
+  transform: translateY(0%);
+}
+
+/*
+  The rest is only styling for this example page
+*/
+
+@import url("https://fonts.googleapis.com/css2?family=Vollkorn:wght@400;900&display=swap");
+
+body {
+  font: 400 1.5em/1.58 Vollkorn, serif;
+}
+
+h1,
+p {
+  text-align: center;
+}
+
+.myGallery {
+  font-size: 1rem;
+}
+.btn-styled {
+  font-size: 14px;
+  margin: 8px;
+  padding: 0 10px;
+  line-height: 2;
+}
+.imgbtn{
+  position: relative;
+  top: -60px;
+  right: 36px;
+}
+

@@ -1,0 +1,199 @@
+
+
+<div class="content-wrapper" style="min-height: 242px; padding-bottom: 30px;">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+  
+          </div><!-- /.col -->
+    
+        </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <div class="card card-default">
+            <div class="card-header">
+                <h3>Duty Swapping</h3>
+            </div>
+     <div class="card-body">
+         <div class="row">
+            <div class="col-md-6">
+<div class="card card-warning">
+    <div class="card-header">
+        <h5>Swap From</h5>
+    </div>
+    <div class="card-body">
+<div class="col-md-12">
+    <div class="row">
+        <div class="col-md-8">
+            <label class="control-label">सर्विस नं0</label>
+    <input type="text" class="form-control" [(ngModel)]="ServiceNoFrom" (ngModelChange)="ServiceNoFrom = $event.toUpperCase()">
+        </div>
+     
+        <div class="col-md-2">
+            <input type="button" class="btn btn-success" value="Search" (click)="GetJawanForSwappingFrom(ServiceNoFrom)" style="margin-top: 31px;">
+        </div>
+    </div>
+    <br/>
+    <br/>
+<div class="row" *ngIf="divJawanDetailSwapFrom">
+    <div class="col-md-12">
+<div class="card card-success">
+    <div class="card-header"><strong>{{JawanDetailSwapFrom.empName}}</strong></div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-4">मण्डल</div>:
+            <div class="col-md-4">{{JawanDetailSwapFrom.zoneName}}</div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">जिला</div>:
+            <div class="col-md-4">{{JawanDetailSwapFrom.distName}}</div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">थाना</div>:
+            <div class="col-md-4">{{JawanDetailSwapFrom.thanaName}}</div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">तैनाती स्थल </div>:
+            <div class="col-md-4">{{JawanDetailSwapFrom.site}}</div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">Promisor Name</div>:
+            <div class="col-md-4">{{JawanDetailSwapFrom.promisorName}}</div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">दिनांक से</div>:
+            <div class="col-md-4">{{JawanDetailSwapFrom.dateFrom}}</div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">दिनांक तक</div>:
+            <div class="col-md-4">{{JawanDetailSwapFrom.dateTo}}</div>
+        </div>
+                                </div>
+</div>
+    </div>
+</div>
+</div>
+    </div>
+</div>
+            </div>
+            <div class="col-md-6">
+                <div class="card card-warning">
+                    <div class="card-header">
+                        <h5>Swap To</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="col-md-12">
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <label class="control-label">सर्विस नं0</label>
+                            <input type="text" class="form-control" [(ngModel)]="ServiceNoTo" (ngModelChange)="ServiceNoTo = $event.toUpperCase()">
+                                </div>
+                                <br/>
+                                <div class="col-md-2">
+                                    <input type="button" class="btn btn-success" value="Search" (click)="GetJawanForSwappingTo(ServiceNoTo)" style="margin-top: 31px;">
+                                </div>
+                            </div>
+                            <br/>
+                            <br/>
+                            <div class="row" *ngIf="divJawanDetailSwapTo">
+                                <div class="col-md-12">
+                            <div class="card card-success">
+                                <div class="card-header"><strong>{{JawanDetailSwapTo.empName}}</strong></div>
+                                <div class="card-body">
+        <div class="row">
+            <div class="col-md-4">मण्डल</div>:
+            <div class="col-md-4">{{JawanDetailSwapTo.zoneName}}</div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">जिला</div>:
+            <div class="col-md-4">{{JawanDetailSwapTo.distName}}</div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">थाना</div>:
+            <div class="col-md-4">{{JawanDetailSwapTo.thanaName}}</div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">तैनाती स्थल </div>:
+            <div class="col-md-4">{{JawanDetailSwapTo.site}}</div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">Promisor Name</div>:
+            <div class="col-md-4">{{JawanDetailSwapTo.promisorName}}</div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">दिनांक से</div>:
+            <div class="col-md-4">{{JawanDetailSwapTo.dateFrom}}</div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">दिनांक तक</div>:
+            <div class="col-md-4">{{JawanDetailSwapTo.dateTo}}</div>
+        </div>
+                                </div>
+                            </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+         </div>
+        
+     </div>
+     <div class="row">
+         <div class="col-md-12">
+             <div class="card card-info">
+                 <div class="card-header"><h5>Swapping Process</h5></div>
+                 <div class="card-body">
+                     <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <div class="form-group" [class.has-error]="DateFromControl.invalid && DateFromControl.touched" [class.has-success]="DateFromControl.valid">
+                                    
+                                    <label class="control-label" for="DateFrom">दिनांक से :</label>
+                                    <input type="text" class="form-control" id="DateFrom" name="DateFrom" #DateFromControl="ngModel" [(ngModel)]="dutyallocation.DateFrom" bsDatepicker [bsConfig]="{dateInputFormat:'DD/MM/YYYY'}" readonly required>
+                                    <span class="help-block" *ngIf="DateFromControl.invalid && DateFromControl.touched">कृपया दिनांक भरिये</span>
+                                    </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group"  [class.has-error]="DateToControl.invalid && DateToControl.touched" [class.has-success]="DateToControl.valid">
+                                <label class="control-label" for="DateTo">दिनांक तक :</label>
+                                <input type="text" class="form-control" id="DateTo" name="DateTo" #DateToControl="ngModel" [(ngModel)]="dutyallocation.DateTo" bsDatepicker [bsConfig]="{dateInputFormat:'DD/MM/YYYY'}" readonly required>
+                                <span class="help-block" *ngIf="DateToControl.invalid && DateToControl.touched">कृपया दिनांक भरिये</span>
+                                </div>
+                            </div>  
+                       
+                        <div class="col-md-3">
+                            <div class="form-group" [class.has-error]="AllocatedOnControl.invalid && AllocatedOnControl.touched" [class.has-success]="AllocatedOnControl.valid">
+                                <label class="control-label" for="AllocatedOn">आवंटित दिनांक :</label>
+                                <input type="text" class="form-control" id="AllocatedOn" name="AllocatedOn" #AllocatedOnControl="ngModel" [(ngModel)]="dutyallocation.AllocatedOn" bsDatepicker [bsConfig]="{dateInputFormat:'DD/MM/YYYY'}" readonly required>
+                                <span class="help-block" *ngIf="AllocatedOnControl.invalid && AllocatedOnControl.touched">कृपया दिनांक भरिये</span>
+                                </div>
+                            </div>  
+                            <div class="col-md-3">
+                                <input type="button" class="btn btn-success" value="Swap" (click)="DutySwapping()" style="margin-top: 31px;" [disabled]="dutyallocation.DateFrom==null||dutyallocation.DateTo==null||dutyallocation.AllocatedOn==null">
+                            </div>
+                     </div>
+                 
+                 </div>
+             </div>
+         </div>
+     </div>
+     <ngx-spinner bdColor="rgba(51, 51, 51, 0.8)" size="default" type="ball-spin-clockwise">  
+        <p style="color: white">Please Wait. </p>  
+        </ngx-spinner>
+        </div>
+ 
+    </div><!-- /.container-fluid -->
+</div>
+  </section>
+  <!-- /.content -->
+</div>
+
+

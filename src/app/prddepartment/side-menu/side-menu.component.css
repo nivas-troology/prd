@@ -1,0 +1,30 @@
+p
+{
+    font-size: 14px;
+}
+
+.nav-link-disbtn{
+    margin-left: 15px;
+    
+}
+.nav-link-disbtn p {
+    display: inline-block;
+    margin: 0;
+    color: rgb(247, 231, 144);
+    padding: 10px 10px 10px 0px;
+}
+
+.nav-icon-disbtn {
+    margin-left: -10px!important;
+    font-size: .9rem!important;
+    margin-right: .2rem;
+    text-align: center;
+    width: 1.6rem;
+    color: #fff;
+}
+
+.nav-icon {
+    margin-left: -10px!important;
+    font-size: .9rem!important;
+   
+}

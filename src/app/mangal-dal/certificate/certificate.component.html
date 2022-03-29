@@ -1,0 +1,122 @@
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css">
+<main>
+
+  
+    <!-- About Law End-->
+    <!--? Brand Area Start -->
+    <section class="team-area pt-180 pb-100 section-bg" style="background-image: url('../../../assets/MangalDal/img/gallery/section_bg02.png');background-size:auto;">
+    
+            <div class="row">
+                <div class="col-md-12">
+                   <!-- <div class="card card-default">
+              
+                       <div class="card-header"><h4>Certificate</h4>
+                       
+                    </div>
+                       <div class="card-body">
+                 
+                      
+                       </div>
+                 
+                   </div> -->
+                   <div class="row">
+                       <div class="col-md-2">
+                
+                       </div>
+                       <div class="col-md-8" id="print-section">
+                        <div class="row">
+                            <table class="table2">
+                                <tr>
+                                    <td class="tdt1"></td><td class="td2t1"></td><td class="tdt1"><h2 class="underline"  >प्रारुप - ' ख ' </h2></td>
+                                    </tr>
+                                    <tr>
+                                    <td class="tdt1"></td><td class="td2t1"><h3 >जिला  युवा  कल्याण  एवं  प्रादेशिक विकास  दल कार्यालय द्वारा  मंगल 
+                                        दलों  को निर्गत  किये जाने वाले पंजीकरण  प्रमाण  पत्र  का  प्रारुप </h3> </td><td class="tdt1"></td>
+                                    </tr>
+                            
+                            </table>
+                        </div>
+                        <div  class="maindiv">
+
+                       
+                            <table class="tableBorder">
+                                <tr>
+                                    <table class="table1">
+                                     
+                                        <tr>
+                                        <!-- ============ HEADER SECTION ============== -->
+                                        <td><img class="imgHWL" src="../../../assets/img/logo1.png" ></td>
+                                        <td ><h1></h1></td>
+                                        <td ><img class="imgHWR" src="../../../assets/img/Mangaldallogo.jpeg"></td>
+                                        </tr>
+                                        
+                                        
+                                        <!-- ============ NAVIGATION BAR SECTION ============== -->
+                                        <tr>
+                                        <td ></td>
+                                        <td ><h4 class="underline" >प्रमाण -पत्र  क्रमांक :</h4></td><td ></td></tr>
+                                        
+                                        <tr>
+                                        <!-- ============ LEFT COLUMN (MENU) ============== -->
+                                        <td  class="tdl" >
+                                        
+                                        </td>
+                                        
+                                        <!-- ============ MIDDLE COLUMN (CONTENT) ============== -->
+                                        <td  class="tdm" >
+                                        
+                                        <h2 class="tdmh2">कार्यालय  जिला  युवा  कल्याण  एवं  प्रादेशिक <span class="tdmh2S"> विकास  दल  अधिकारी</span></h2>
+                                        <h2 class="tdmh2_1">जनपद - <code><u>{{Org.district}}</u></code></h2>
+                                        <h3 class="tdmh3">मंगल  दल  पंजीकरण  प्रमाण -पत्र</h3>
+                                        <h4 class="tdmh4"> पंजीकरण  संख्या :{{Org.certificateNo}} </h4> <br>
+                                        
+                                        <h4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        
+                                        एतद् द्वारा  प्रमाणित  किया  जाता  है  कि  शासनादेश  संख्या - 1731 / पचास / यु ० क ० - 2017- 43 ( विविध ) / 2014  दिनांक  10 .1 0 . 2017  के अनुक्रम में  युवक / महिला  मंगल दल  ग्राम  पंचयात <code>{{Org.gpanchayat}}</code> पोस्ट <code>{{Org.gpanchayat}}</code>विकास खण्ड  <code>{{Org.block}}</code> जनपद   <code>{{Org.district}}</code>, उत्तर  प्रदेश  को  दिनांक  <code>{{Org.validFrom}}</code> से  दिनांक  <code>{{Org.validTo}}</code>तक  के लिए अधोहस्ताक्षरी  कार्यालय  द्वारा  पंजीकृत करते हुए  मान्यता  प्रदान की जाती है |  उक्त  डाक युवा  कल्याण  एंव  प्रादेशिक विकास दल  विभाग  द्वारा &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; चिहिनत /संचालित  कार्यों  को  सम्पादित  करेंगें | </h4><br>
+                                        <br>
+                                        <br>
+                                        
+                                        <h3 class="h3d">दिनांक :-<u>{{Org.registrationDate}}</u> <span class="h3dsH">         हस्ताक्षर -</span></h3>
+                                        <h3 class="h3d_1"><span class="h3d_1s">( नाम )</span><br> जिला युवा कल्याण एवं प्रादेशिक विकास दल अधिकारी जनपद</h3>
+                                        
+                                        
+                                        </td>
+                                        
+                                        <td  class="tdr" >&nbsp;</td>
+                                        
+                                        </tr>
+                                        <tr>
+                                          
+                                           </tr>
+                                        <!-- ============ FOOTER SECTION ============== -->
+                                        <tr><td colspan="3" align="left" height="20" >
+                                            <div style="text-align: center;"> 
+                                                Note: This is a computer-generated certificate. No signature is required
+                                              </div>
+                                        </td></tr>
+                                        </table>
+                                </tr>
+                            </table>
+                        
+                            </div>
+                    </div>
+                    <div class="col-md-2">
+                        <button class="btn btn-success"   [useExistingCss]="true" printSectionId="print-section" ngxPrint>Print Certificate</button>  
+                    </div>
+                   </div>
+                 
+                </div>
+              
+         
+               
+          
+              
+            
+            </div>
+      
+    </section>
+  
+    </main>
+
+
+  

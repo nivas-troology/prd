@@ -1,0 +1,460 @@
+
+<div class="content-wrapper">
+    <section class="content">
+        <div class="container-fluid">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class=" card-default">
+            <form #notificationForm="ngForm" (ngSubmit)="saveNotificationForm(notificationForm)" autocomplete="off" class="form-inline" enctype="multipart/form-data">
+  
+                <div class="card-body">                
+                
+                    <div class="col-md-12 pb-3" >
+                        <div class="row">
+                            <div class="col-md-12 card-header bg-info">
+                                <h3 class="card-title">Nomination From </h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">                                  
+                            <div class="offset-3 col-md-6">                              
+                                <div class="card card-primary card-outline ">
+                                    <div class="card-body" *ngIf="MRoleId==1"> 
+                                        <div class="form-group pb-3">
+                                             
+                                            <label for="nomination" class="control-label col-md-4 col-sm-4 col-xs-12">अधिसूचना किसको भेजनी है </label>
+                                            <div class="col-md-8 col-sm-4 col-xs-12">
+                                            <div class="form-group clearfix ">
+                                                <div class="icheck-primary d-inline">
+                                                  <input type="checkbox" 
+                                                         id="division" 
+                                                         tabindex="9"
+                                                         #divison="ngModel"
+                                                         [(ngModel)]="Division"  
+                                                         [value]="1"
+                                                         required
+                                                         checked 
+                                                         
+                                                         >
+                                                  <label for="division">&nbsp;मण्डल</label>
+                                                </div>
+                                                <div class="icheck-primary d-inline ml-2">
+                                                  <input type="checkbox" 
+                                                         id="district"                                                         
+                                                         #district="ngModel"
+                                                         [(ngModel)]="District"  
+                                                         required
+                                                         [value]="2"
+                                                         required
+                                                         tabindex="10">
+                                                  <label for="district">&nbsp; जनपद      </label>
+                                                </div>
+                                                <div class="icheck-primary d-inline ml-2">
+                                                    <input type="checkbox" 
+                                                           id="block"                                                         
+                                                           #block="ngModel"
+                                                           [(ngModel)]="Block"  
+                                                           required
+                                                           [value]="3"
+                                                           required
+                                                           tabindex="10">
+                                                    <label for="block">&nbsp; ब्लाक </label>
+                                                  </div>
+                                                  <div class="icheck-primary d-inline ml-2">
+                                                    <input type="checkbox" 
+                                                           id="mangaldal"                                                         
+                                                           #mangaldal="ngModel"
+                                                           [(ngModel)]="Mangaldal"  
+                                                           required
+                                                           [value]="4"
+                                                           required
+                                                           tabindex="10">
+                                                    <label for="mangaldal">&nbsp; मंगल दल </label>
+                                                  </div>
+                                              </div>
+                                            </div>
+                                        </div>                         
+                                            <div class="form-group pb-3">
+                                                
+                                                <label class="control-label col-md-2 col-sm-2 col-xs-12">
+                                                    दिनांक से   <code>*</code>
+                                                </label>
+                                                <div class="col-md-4 col-sm-4 col-xs-12">
+                                                    <input type="text" tabindex="1" 
+                                                    id="fromDate" 
+                                                    name="FromDate"  
+                                                    #fromDate="ngModel" 
+                                                    [(ngModel)]="FromDate" 
+                                                    [class.is-invalid]="((fromDate.dirty || fromDate.touched) && fromDate.errors?.required )"  
+                                                    class="ValidityCss form-control" 
+                                                    bsDatepicker [bsConfig]="{dateInputFormat:'DD/MM/YYYY'}" 
+                                                    autocomplete="off"
+                                                    placeholder="dd/MM/yyyy"
+                                                    required>
+                                                    <br>
+                                                    <span class="form-control-feedback text-danger" 
+                                                        *ngIf="((fromDate.dirty || fromDate.touched) && (fromDate.errors || fromDate.errors?.required)) " > 
+                                                        कृपया  अधिसूचना दिनांक  भरें|
+                                                    </span>                                               
+                                                </div>
+                                                <label class="control-label col-md-2 col-sm-2 col-xs-12">दिनांक तक :&nbsp;<code>*</code></label>
+                                                <div class="col-md-4 col-sm-4 col-xs-12">
+                                                    <input type="text" tabindex="2" 
+                                                    id="toDate" 
+                                                    name="ToDate"  
+                                                    #toDate="ngModel" 
+                                                    [(ngModel)]="ToDate" 
+                                                    [class.is-invalid]="((toDate.dirty || toDate.touched) && toDate.errors?.required )"  
+                                                    class="ValidityCss form-control" 
+                                                    bsDatepicker [bsConfig]="{dateInputFormat:'DD/MM/YYYY'}" 
+                                                    placeholder="dd/MM/yyyy"
+                                                    required>
+                                                    <br>
+                                                    <span class="form-control-feedback text-danger" 
+                                                        *ngIf="((toDate.dirty || toDate.touched) && (toDate.errors || toDate.errors?.required)) " > 
+                                                        कृपया  अधिसूचना दिनांक भरें|
+                                                    </span>
+                                                </div>
+                                            </div> 
+                                              
+                                            <div  class="form-group pb-3">
+                                                <label class="control-label col-md-3 col-sm-2 col-xs-12">
+                                                    अधिसूचना का विवरण  <code>*</code>
+                                                </label>
+                                                <div class="col-md-9 col-sm-9 col-xs-12">
+                                                    <textarea type="text" tabindex="3" 
+                                                    id="notificationDetails" 
+                                                    name="NotificationDetails"  
+                                                    #notificationDetails="ngModel" 
+                                                    [(ngModel)]="NotificationDetails" 
+                                                    [class.is-invalid]="((notificationDetails.dirty || notificationDetails.touched) && notificationDetails.errors?.required )"  
+                                                    class="ValidityCss form-control" 
+                                                    required>
+                                                    </textarea>
+                                                    <br>
+                                                    <span class="form-control-feedback text-danger" 
+                                                    *ngIf="((notificationDetails.dirty || notificationDetails.touched) && (notificationDetails.errors || notificationDetails.errors?.required)) " > 
+                                                    कृपया  अधिसूचना दिनांक  भरें|
+                                                    </span>                                               
+                                                </div>
+                                            </div>
+                                       
+                                    </div>    
+                                    <div class="card-body" *ngIf="MRoleId==2"> 
+                                        <div class="form-group pb-3">
+                                             
+                                            <label for="nomination" class="control-label col-md-4 col-sm-4 col-xs-12">अधिसूचना किसको भेजनी है </label>
+                                            <div class="col-md-8 col-sm-4 col-xs-12">
+                                            <div class="form-group clearfix ">                                               
+                                                <div class="icheck-primary d-inline ml-2">
+                                                  <input type="checkbox" 
+                                                         id="district"                                                         
+                                                         #district="ngModel"
+                                                         [(ngModel)]="District"  
+                                                         required
+                                                         [value]="2"
+                                                         required
+                                                         tabindex="10">
+                                                  <label for="district">&nbsp; जनपद      </label>
+                                                </div>
+                                                <div class="icheck-primary d-inline ml-2">
+                                                    <input type="checkbox" 
+                                                           id="block"                                                         
+                                                           #block="ngModel"
+                                                           [(ngModel)]="Block"  
+                                                           required
+                                                           [value]="3"
+                                                           required
+                                                           tabindex="10">
+                                                    <label for="block">&nbsp; ब्लाक </label>
+                                                  </div>
+                                                  <div class="icheck-primary d-inline ml-2">
+                                                    <input type="checkbox" 
+                                                           id="mangaldal"                                                         
+                                                           #mangaldal="ngModel"
+                                                           [(ngModel)]="Mangaldal"  
+                                                           required
+                                                           [value]="4"
+                                                           required
+                                                           tabindex="10">
+                                                    <label for="mangaldal">&nbsp; मंगल दल </label>
+                                                  </div>
+                                              </div>
+                                            </div>
+                                        </div>                         
+                                            <div class="form-group pb-3">
+                                                
+                                                <label class="control-label col-md-2 col-sm-2 col-xs-12">
+                                                    दिनांक से   <code>*</code>
+                                                </label>
+                                                <div class="col-md-4 col-sm-4 col-xs-12">
+                                                    <input type="text" tabindex="1" 
+                                                    id="fromDate" 
+                                                    name="FromDate"  
+                                                    #fromDate="ngModel" 
+                                                    [(ngModel)]="FromDate" 
+                                                    [class.is-invalid]="((fromDate.dirty || fromDate.touched) && fromDate.errors?.required )"  
+                                                    class="ValidityCss form-control" 
+                                                    bsDatepicker [bsConfig]="{dateInputFormat:'DD/MM/YYYY'}" 
+                                                    autocomplete="off"
+                                                    placeholder="dd/MM/yyyy"
+                                                    required>
+                                                    <br>
+                                                    <span class="form-control-feedback text-danger" 
+                                                        *ngIf="((fromDate.dirty || fromDate.touched) && (fromDate.errors || fromDate.errors?.required)) " > 
+                                                        कृपया  अधिसूचना दिनांक  भरें|
+                                                    </span>                                               
+                                                </div>
+                                                <label class="control-label col-md-2 col-sm-2 col-xs-12">दिनांक तक :&nbsp;<code>*</code></label>
+                                                <div class="col-md-4 col-sm-4 col-xs-12">
+                                                    <input type="text" tabindex="2" 
+                                                    id="toDate" 
+                                                    name="ToDate"  
+                                                    #toDate="ngModel" 
+                                                    [(ngModel)]="ToDate" 
+                                                    [class.is-invalid]="((toDate.dirty || toDate.touched) && toDate.errors?.required )"  
+                                                    class="ValidityCss form-control" 
+                                                    bsDatepicker [bsConfig]="{dateInputFormat:'DD/MM/YYYY'}" 
+                                                    placeholder="dd/MM/yyyy"
+                                                    required>
+                                                    <br>
+                                                    <span class="form-control-feedback text-danger" 
+                                                        *ngIf="((toDate.dirty || toDate.touched) && (toDate.errors || toDate.errors?.required)) " > 
+                                                        कृपया  अधिसूचना दिनांक भरें|
+                                                    </span>
+                                                </div>
+                                            </div> 
+                                              
+                                            <div  class="form-group pb-3">
+                                                <label class="control-label col-md-3 col-sm-2 col-xs-12">
+                                                    अधिसूचना का विवरण  <code>*</code>
+                                                </label>
+                                                <div class="col-md-9 col-sm-9 col-xs-12">
+                                                    <textarea type="text" tabindex="3" 
+                                                    id="notificationDetails" 
+                                                    name="NotificationDetails"  
+                                                    #notificationDetails="ngModel" 
+                                                    [(ngModel)]="NotificationDetails" 
+                                                    [class.is-invalid]="((notificationDetails.dirty || notificationDetails.touched) && notificationDetails.errors?.required )"  
+                                                    class="ValidityCss form-control" 
+                                                    required>
+                                                    </textarea>
+                                                    <br>
+                                                    <span class="form-control-feedback text-danger" 
+                                                    *ngIf="((notificationDetails.dirty || notificationDetails.touched) && (notificationDetails.errors || notificationDetails.errors?.required)) " > 
+                                                    कृपया  अधिसूचना दिनांक  भरें|
+                                                    </span>                                               
+                                                </div>
+                                            </div>
+                                       
+                                    </div>  
+                                    <div class="card-body" *ngIf="MRoleId==3"> 
+                                        <div class="form-group pb-3">
+                                             
+                                            <label for="nomination" class="control-label col-md-4 col-sm-4 col-xs-12">अधिसूचना किसको भेजनी है </label>
+                                            <div class="col-md-8 col-sm-4 col-xs-12">
+                                            <div class="form-group clearfix ">                                               
+                                               
+                                                <div class="icheck-primary d-inline ml-2">
+                                                    <input type="checkbox" 
+                                                           id="block"                                                         
+                                                           #block="ngModel"
+                                                           [(ngModel)]="Block"  
+                                                           required
+                                                           [value]="3"
+                                                           required
+                                                           tabindex="10">
+                                                    <label for="block">&nbsp; ब्लाक </label>
+                                                  </div>
+                                                  <div class="icheck-primary d-inline ml-2">
+                                                    <input type="checkbox" 
+                                                           id="mangaldal"                                                         
+                                                           #mangaldal="ngModel"
+                                                           [(ngModel)]="Mangaldal"  
+                                                           required
+                                                           [value]="4"
+                                                           required
+                                                           tabindex="10">
+                                                    <label for="mangaldal">&nbsp; मंगल दल </label>
+                                                  </div>
+                                              </div>
+                                            </div>
+                                        </div>                         
+                                            <div class="form-group pb-3">
+                                                
+                                                <label class="control-label col-md-2 col-sm-2 col-xs-12">
+                                                    दिनांक से   <code>*</code>
+                                                </label>
+                                                <div class="col-md-4 col-sm-4 col-xs-12">
+                                                    <input type="text" tabindex="1" 
+                                                    id="fromDate" 
+                                                    name="FromDate"  
+                                                    #fromDate="ngModel" 
+                                                    [(ngModel)]="FromDate" 
+                                                    [class.is-invalid]="((fromDate.dirty || fromDate.touched) && fromDate.errors?.required )"  
+                                                    class="ValidityCss form-control" 
+                                                    bsDatepicker [bsConfig]="{dateInputFormat:'DD/MM/YYYY'}" 
+                                                    autocomplete="off"
+                                                    placeholder="dd/MM/yyyy"
+                                                    required>
+                                                    <br>
+                                                    <span class="form-control-feedback text-danger" 
+                                                        *ngIf="((fromDate.dirty || fromDate.touched) && (fromDate.errors || fromDate.errors?.required)) " > 
+                                                        कृपया  अधिसूचना दिनांक  भरें|
+                                                    </span>                                               
+                                                </div>
+                                                <label class="control-label col-md-2 col-sm-2 col-xs-12">दिनांक तक :&nbsp;<code>*</code></label>
+                                                <div class="col-md-4 col-sm-4 col-xs-12">
+                                                    <input type="text" tabindex="2" 
+                                                    id="toDate" 
+                                                    name="ToDate"  
+                                                    #toDate="ngModel" 
+                                                    [(ngModel)]="ToDate" 
+                                                    [class.is-invalid]="((toDate.dirty || toDate.touched) && toDate.errors?.required )"  
+                                                    class="ValidityCss form-control" 
+                                                    bsDatepicker [bsConfig]="{dateInputFormat:'DD/MM/YYYY'}" 
+                                                    placeholder="dd/MM/yyyy"
+                                                    required>
+                                                    <br>
+                                                    <span class="form-control-feedback text-danger" 
+                                                        *ngIf="((toDate.dirty || toDate.touched) && (toDate.errors || toDate.errors?.required)) " > 
+                                                        कृपया  अधिसूचना दिनांक भरें|
+                                                    </span>
+                                                </div>
+                                            </div> 
+                                              
+                                            <div  class="form-group pb-3">
+                                                <label class="control-label col-md-3 col-sm-2 col-xs-12">
+                                                    अधिसूचना का विवरण  <code>*</code>
+                                                </label>
+                                                <div class="col-md-9 col-sm-9 col-xs-12">
+                                                    <textarea type="text" tabindex="3" 
+                                                    id="notificationDetails" 
+                                                    name="NotificationDetails"  
+                                                    #notificationDetails="ngModel" 
+                                                    [(ngModel)]="NotificationDetails" 
+                                                    [class.is-invalid]="((notificationDetails.dirty || notificationDetails.touched) && notificationDetails.errors?.required )"  
+                                                    class="ValidityCss form-control" 
+                                                    required>
+                                                    </textarea>
+                                                    <br>
+                                                    <span class="form-control-feedback text-danger" 
+                                                    *ngIf="((notificationDetails.dirty || notificationDetails.touched) && (notificationDetails.errors || notificationDetails.errors?.required)) " > 
+                                                    कृपया  अधिसूचना दिनांक  भरें|
+                                                    </span>                                               
+                                                </div>
+                                            </div>
+                                       
+                                    </div> 
+                                    <div class="card-body" *ngIf="MRoleId==4"> 
+                                        <div class="form-group pb-3">
+                                             
+                                            <label for="nomination" class="control-label col-md-4 col-sm-4 col-xs-12">अधिसूचना किसको भेजनी है </label>
+                                            <div class="col-md-8 col-sm-4 col-xs-12">
+                                            <div class="form-group clearfix ">   
+                                                  <div class="icheck-primary d-inline ml-2">
+                                                    <input type="checkbox" 
+                                                           id="mangaldal"                                                         
+                                                           #mangaldal="ngModel"
+                                                           [(ngModel)]="Mangaldal"  
+                                                           required
+                                                           [value]="4"
+                                                           required
+                                                           tabindex="10">
+                                                    <label for="mangaldal">&nbsp; मंगल दल </label>
+                                                  </div>
+                                              </div>
+                                            </div>
+                                        </div>                         
+                                            <div class="form-group pb-3">
+                                                
+                                                <label class="control-label col-md-2 col-sm-2 col-xs-12">
+                                                    दिनांक से   <code>*</code>
+                                                </label>
+                                                <div class="col-md-4 col-sm-4 col-xs-12">
+                                                    <input type="text" tabindex="1" 
+                                                    id="fromDate" 
+                                                    name="FromDate"  
+                                                    #fromDate="ngModel" 
+                                                    [(ngModel)]="FromDate" 
+                                                    [class.is-invalid]="((fromDate.dirty || fromDate.touched) && fromDate.errors?.required )"  
+                                                    class="ValidityCss form-control" 
+                                                    bsDatepicker [bsConfig]="{dateInputFormat:'DD/MM/YYYY'}" 
+                                                    autocomplete="off"
+                                                    placeholder="dd/MM/yyyy"
+                                                    required>
+                                                    <br>
+                                                    <span class="form-control-feedback text-danger" 
+                                                        *ngIf="((fromDate.dirty || fromDate.touched) && (fromDate.errors || fromDate.errors?.required)) " > 
+                                                        कृपया  अधिसूचना दिनांक  भरें|
+                                                    </span>                                               
+                                                </div>
+                                                <label class="control-label col-md-2 col-sm-2 col-xs-12">दिनांक तक :&nbsp;<code>*</code></label>
+                                                <div class="col-md-4 col-sm-4 col-xs-12">
+                                                    <input type="text" tabindex="2" 
+                                                    id="toDate" 
+                                                    name="ToDate"  
+                                                    #toDate="ngModel" 
+                                                    [(ngModel)]="ToDate" 
+                                                    [class.is-invalid]="((toDate.dirty || toDate.touched) && toDate.errors?.required )"  
+                                                    class="ValidityCss form-control" 
+                                                    bsDatepicker [bsConfig]="{dateInputFormat:'DD/MM/YYYY'}" 
+                                                    placeholder="dd/MM/yyyy"
+                                                    required>
+                                                    <br>
+                                                    <span class="form-control-feedback text-danger" 
+                                                        *ngIf="((toDate.dirty || toDate.touched) && (toDate.errors || toDate.errors?.required)) " > 
+                                                        कृपया  अधिसूचना दिनांक भरें|
+                                                    </span>
+                                                </div>
+                                            </div> 
+                                              
+                                            <div  class="form-group pb-3">
+                                                <label class="control-label col-md-3 col-sm-2 col-xs-12">
+                                                    अधिसूचना का विवरण  <code>*</code>
+                                                </label>
+                                                <div class="col-md-9 col-sm-9 col-xs-12">
+                                                    <textarea type="text" tabindex="3" 
+                                                    id="notificationDetails" 
+                                                    name="NotificationDetails"  
+                                                    #notificationDetails="ngModel" 
+                                                    [(ngModel)]="NotificationDetails" 
+                                                    [class.is-invalid]="((notificationDetails.dirty || notificationDetails.touched) && notificationDetails.errors?.required )"  
+                                                    class="ValidityCss form-control" 
+                                                    required>
+                                                    </textarea>
+                                                    <br>
+                                                    <span class="form-control-feedback text-danger" 
+                                                    *ngIf="((notificationDetails.dirty || notificationDetails.touched) && (notificationDetails.errors || notificationDetails.errors?.required)) " > 
+                                                    कृपया  अधिसूचना दिनांक  भरें|
+                                                    </span>                                               
+                                                </div>
+                                            </div>
+                                       
+                                    </div> 
+                                    <div class="form-group">
+                                        <div class="col-md-3 col-sm-6 col-xs-12" >
+                                            <input type="submit" id="submitbtn"  [disabled]="!notificationForm.valid"  class="buttonNext btn btn-info" value=save style="margin: 10px; width: 100%;">
+                                            </div>
+                                        <div class="col-md-3 col-sm-6 col-xs-12" >
+                                           <input type="button" (click)="Reset(notificationForm)" class="buttonNext btn btn-success" value="Reset" style="margin: 10px;width: 100%;">
+                                        </div>
+                                    </div>                                
+                                </div>                      
+                            </div>
+                    </div>
+                </div>
+            </form>
+          
+            </div>
+              <!--NGX SPINNER TAMPLETE-->
+                <ngx-spinner bdColor="rgba(51,51,51,0.8)"
+                    size="medium"
+                    color="#fff"
+                    type="ball-scale-multiple">
+                    <p style="font-size: 20px; color: white">Please Wait...</p>
+                </ngx-spinner>
+      <!-- /.NGX SPINNER TAMPLETE -->
+        </div>
+    </div>
+    </section>
+    </div> 

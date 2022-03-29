@@ -1,0 +1,12 @@
+
+@import url(https://fonts.googleapis.com/css?family=Poppins:300,400,400i,700,800,900);
+
+body , p{ font-family: 'Poppins';}
+
+.log-head{ font-size: 28px; font-family: 'Poppins';}
+.btnLogin{border-radius: 24px;background: #fd9c46;color: azure;}
+.loginimg{margin-top:25px;text-align: center;height: 100px;}
+.login-card-body { border-radius:24px;}
+.login-Copyright p{ font-size: 10px; margin-bottom: 0px;}
+.login-card-body .form-control { height: 34px !important;}
+.account-sec{ font-size: 14px;}

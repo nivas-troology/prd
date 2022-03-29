@@ -1,0 +1,1022 @@
+
+
+<div class="content-wrapper" style="min-height: 242px;">
+    <marquee>
+        <div>
+            <h5><strong><code>Please Use Google Chrome browser's Incognito Window</code></strong></h5>
+          </div>
+    </marquee>
+    <marquee>
+        <div>
+            <h5><strong><code>सभी स्टेप्स(Basic Details, Contact Details, Account Details, Training Details, Document Details) भरना अनिवार्य है|</code></strong></h5>
+          </div>
+    </marquee>
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+  
+          </div><!-- /.col -->
+    
+        </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <div class="card card-default">
+            <div class="card-header">
+                <h3>PRD Jawan Registration</h3>
+               
+            </div>
+            <div class="card-body">
+        <!-- Small boxes (Stat box) -->
+      
+                <mat-horizontal-stepper labelPosition="bottom">
+                    <mat-step>
+                      
+                        <form #BasicForm="ngForm" (ngSubmit)="SaveBasicDetails(BasicForm)"autocomplete="off">
+                        <ng-template matStepLabel>Basic Details</ng-template>
+                        <div class="card card-info">
+                           <div class="card-header">
+                             <h5>Basic Details</h5>
+                           </div>
+                           <!-- /.card-header -->
+                           <!-- form start -->
+                           
+                             <div class="card-body">
+
+                               <div class="row">
+                                                          
+                                                               
+                                   <div class="col-md-4">
+                                    <div class="form-group" [class.has-error]="EmpNameControl.invalid && EmpNameControl.touched" [class.has-success]="EmpNameControl.valid">
+                                        <label for="EmpName" class="control-label">स्वयंसेवक का नाम<span style="color:red;">*</span> :</label>
+                                        <input type="text" class="form-control" id="EmpName" name="EmpName" #EmpNameControl="ngModel" [(ngModel)]="employee.EmpName" required (ngModelChange)="employee.EmpName = $event.toUpperCase()">
+                                          </div>
+                                          <span class="help-block" *ngIf="EmpNameControl.invalid && EmpNameControl.touched">कृपया स्वयंसेवक का नाम भरें</span>
+                                    </div>
+                                  
+                                             <div class="col-md-4">
+                                                <div class="form-group" [class.has-error]="FatherNameControl.invalid && FatherNameControl.touched" [class.has-success]="FatherNameControl.valid">
+                                               <label class="control-label" for="FatherName">पिता का नाम<span style="color:red;">*</span> :</label>
+                                               <input type="text" class="form-control" id="FatherName" name="FatherName" #FatherNameControl="ngModel" [(ngModel)]="employee.FatherName" required (ngModelChange)="employee.FatherName = $event.toUpperCase()">
+                                               <span class="help-block" *ngIf="FatherNameControl.invalid && FatherNameControl.touched">कृपया स्वयंसेवक के पिता का नाम भरें </span>
+                                                 </div>
+                                                </div>   
+                                   <div class="col-md-4">
+                                    <div class="form-group">
+                                       <label class="control-label" for="MotherName">माता का नाम :</label>
+                                       <input type="text" class="form-control" id="MotherName" name="MotherName" #MotherNameControl="ngModel" [(ngModel)]="employee.MotherName"  (ngModelChange)="employee.MotherName = $event.toUpperCase()">
+                                     
+                                       
+                               </div>
+                            </div>
+                                   
+                              
+                                
+     
+                           </div>
+                           <div class="row">
+                         
+                               <div class="col-md-4">
+                                <div class="form-group" [class.has-error]="EmpDobControl.invalid && EmpDobControl.touched" [class.has-success]="EmpDobControl.valid">
+                                   <label class="control-label" for="EmpDob">जन्मतिथि<span style="color:red;">*</span> :</label>
+                                   <input type="text" class="form-control"  id="EmpDob" name="EmpDob" maxlength="10" bsDatepicker [bsConfig]="datePickerConfig" #EmpDobControl="ngModel" [disabled]="DOBReadonly" [(ngModel)]="employee.EmpDob" required placeholder="dd/mm/yyyy,eg:15/08/1947">
+                                   <span class="help-block" *ngIf="EmpDobControl.invalid && EmpDobControl.touched">कृपया जन्मतिथि भरें</span>
+                               </div>
+                            </div>
+                               <div class="col-md-4">
+                                <div class="form-group" [class.has-error]="EmpGenderControl.pristine && EmpGenderControl.touched" [class.has-success]="EmpGenderControl.dirty" >
+                                   <label class="control-label" for="EmpGender">लिंग<span style="color:red;">*</span> :</label>
+                                  <select id="EmpGender" name="EmpGender" class="form-control" #EmpGenderControl="ngModel" [(ngModel)]=employee.EmpGender required>
+                                   <option value="--Select--">--Select--</option>
+                                   <option value="MALE">MALE</option>
+                                   <option value="FEMALE">FEMALE</option>
+                                  </select>
+                                  <span class="help-block" *ngIf="EmpGenderControl.pristine && EmpGenderControl.touched">कृपया लिंग चुनें</span>
+                               </div>
+                            </div>
+                               <div class="col-md-4">
+                                <div class="form-group"   [class.has-error]="EmpCasteControl.pristine && EmpCasteControl.touched" [class.has-success]="EmpCasteControl.dirty">
+                                   <label class="control-label" for="EmpCaste">श्रेणी<span style="color:red;">*</span> :</label>
+                                   <select id="EmpCaste" name="EmpCaste" class="form-control" #EmpCasteControl="ngModel" [(ngModel)]="employee.EmpCaste" required >
+                                       <option value="--Select--">--Select--</option>
+                                       <option value="GENERAL">GENERAL</option>
+                                       <option value="OBC">OBC</option>
+                                       <option value="SC">SC</option>
+                                       <option value="ST">ST</option>
+                                     
+                                    
+                                   </select>
+                                   <span class="help-block" *ngIf="EmpCasteControl.pristine && EmpCasteControl.touched">कृपया श्रेणी चुनें</span>
+                               </div>
+                            </div>
+                           </div>
+                           <div class="row">
+                               <div class="col-md-4">
+                                <div class="form-group"  [class.has-error]="HeightControl.invalid && HeightControl.touched" [class.has-success]="HeightControl.valid">
+                                   <label class="control-label" for="Height">लम्बाई(सेमी0)<span style="color:red;">*</span> :</label>
+                                   <input type="text" class="form-control" id="Height" name="Height" #HeightControl="ngModel" [(ngModel)]="employee.Height" required  pattern="[0-9]+">
+                                   <span class="help-block" *ngIf="HeightControl.invalid && HeightControl.touched">कृपया लम्बाई नंबर में भरें</span>
+                                     </div>
+                                    </div>
+                                     <div class="col-md-4">
+                                        <div class="form-group"  [class.has-error]="ChestControl.invalid && ChestControl.touched" [class.has-success]="ChestControl.valid">
+                                       <label class="control-label" for="Chest">सीना(सेमी0)<span style="color:red;">*</span> :</label>
+                                       <input type="text" class="form-control" id="Chest" name="Chest" #ChestControl="ngModel" [(ngModel)]="employee.Chest" required  pattern="[0-9]+">
+                                       <span class="help-block" *ngIf="ChestControl.invalid && ChestControl.touched">कृपया सीना  नंबर में भरें</span>
+                                         </div>
+                                        </div>              
+                           <div class="col-md-4">
+                            <div class="form-group" [class.has-error]="EmpEduControl.pristine && EmpEduControl.touched" [class.has-success]="EmpEduControl.dirty">
+                               <label class="control-label" for="EmpEdu">शिक्षा<span style="color:red;">*</span> :</label>
+                              
+                               <select id="EmpEdu" name="EmpEdu" class="form-control" #EmpEduControl="ngModel" [(ngModel)]="employee.EmpEdu" required>
+                                   <option value="--Select--">--Select--</option>
+                                   <option value="5 PASS">5 PASS</option>
+                                   <option value="8 PASS">8 PASS</option>
+                                   <option value="10 PASS">10 PASS</option>
+                                   <option value="12 PASS">12 PASS</option>
+                                   <option value="GRADUATE">GRADUATE</option>
+                                   <option value="POST GRADUATE">POST GRADUATE</option>
+                                
+                               </select>
+                               <span class="help-block" *ngIf="EmpEduControl.pristine && EmpEduControl.touched">कृपया शिक्षा चुनें</span>
+                       </div>
+                    </div>
+                           </div>
+                           <div class="row">
+                               <div class="col-md-4">
+                                <div class="form-group">
+                                   <label class="control-label">विशेष योग्यता :</label>
+                                 
+                                   <select id="EmpSplSkill" name="EmpSplSkill" class="form-control" #EmpSplSkillControl="ngModel" [(ngModel)]="employee.EmpSplSkill">
+                                    <option value="--Select--">--Select--</option>
+                                    <option value="COMPUTOR OPERATOR">COMPUTOR OPERATOR</option>
+                                    <option value="DRIVER">DRIVER</option>
+                                    <option value="OTHER">OTHER</option>
+                                 
+                                </select>
+                                </div> 
+                           </div>
+                  <div class="col-md-4" *ngIf="employee.EmpSplSkill=='OTHER'">
+                    <div class="form-group">
+                        <label class="control-label">अन्य  विशेष  योग्यता</label>
+                        <input type="text" name="OtherSplSkill" class="form-control" #OtherSplSkillControl="ngModel" [(ngModel)]="employee.OtherSplSkill" (ngModelChange)="employee.OtherSplSkill = $event.toUpperCase()">
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group" [class.has-error]="EmpDesigIdControl.pristine && EmpDesigIdControl.touched" [class.has-success]="EmpDesigIdControl.dirty">
+                       <label class="control-label" for="EmpDesigId">पोस्ट<span style="color:red;">*</span> :</label>
+                       <select id="EmpDesigId" name="EmpDesigId" class="form-control" #EmpDesigIdControl="ngModel" [(ngModel)]="employee.EmpDesigId" required >
+                           <option value="--Select--">--Select--</option>
+                           <option *ngFor="let desg of designationLst" [value]="desg.desgnId">{{desg.desgnName}}</option>
+                        
+                       </select>
+                       <span class="help-block" *ngIf="EmpDesigIdControl.pristine && EmpDesigIdControl.touched">कृपया पोस्ट चुनें</span>
+                    </div>    
+                       
+               </div>
+               <div class="col-md-4">
+                <div class="form-group"  [class.has-error]="PanNoControl.invalid && PanNoControl.touched" [class.has-success]="PanNoControl.valid">
+                    <label class="control-label">नॉमिनल रोल रजिस्टर की क्रम संख्या<span style="color:red;">*</span> :</label>
+                    <input type="text" class="form-control" id="NominalRegNo" name="NominalRegNo" #PanNoControl="ngModel" [(ngModel)]="employee.NominalRegNo"   (ngModelChange)="employee.NominalRegNo = $event.toUpperCase()" required >
+                    <span class="help-block" *ngIf="PanNoControl.invalid && PanNoControl.touched">कृपया नॉमिनल रोल रजिस्टर की क्रम संख्या भरें</span>
+                      </div>
+                    </div>
+                           </div>
+                           <div class="row">
+                     
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="control-label">आधार नं0(Optional) :</label>
+                                    <input type="text" class="form-control" id="AadharNo" name="AadharNo" #AadharNoControl="ngModel" [(ngModel)]="employee.AadharNo" (ngModelChange)="employee.AadharNo = $event.toUpperCase()">
+                                  
+                                      </div>    
+                                   
+                           </div>
+                            <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="control-label">पैन नं0(Optional) :</label>
+                                <input type="text" class="form-control" id="PanNo" name="PanNo" #PanNoControl="ngModel" [(ngModel)]="employee.PanNo"   (ngModelChange)="employee.PanNo = $event.toUpperCase()">
+                              
+                                  </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="control-label"><input type="radio" id="rdOld" name="rdOld" value="Old" #rdOldControl="ngModel" [(ngModel)]="employee.Status">&nbsp;पुराना जवान<span style="color:red;">*</span>&nbsp;<input type="radio" id="rdNew" name="rdNew" #rdNewControl="ngModel" value="New" [(ngModel)]="employee.Status">&nbsp;नया जवान<span style="color:red;">*</span></label>
+                                    <div class="form-group" *ngIf="employee.Status=='Old'" [class.has-error]="OldServiceNoControl.invalid && OldServiceNoControl.touched" [class.has-success]="OldServiceNoControl.valid">
+                                 
+                                       
+                                        <input type="text" class="form-control" id="OldServiceNo" name="OldServiceNo" #OldServiceNoControl="ngModel" [(ngModel)]="employee.OldServiceNo"   (ngModelChange)="employee.OldServiceNo = $event.toUpperCase()" placeholder="पुराना सर्विस नं0" required>
+                                        <span class="help-block" *ngIf="OldServiceNoControl.invalid && OldServiceNoControl.touched">कृपया पुराना सर्विस नं0 भरें</span>
+                                          </div>
+                                          <div class="form-group" *ngIf="employee.Status=='New'" [class.has-error]="NewJawanStatusControl.pristine && NewJawanStatusControl.touched" [class.has-success]="NewJawanStatusControl.dirty">
+                                 
+                                       
+                                            <select class="form-control" id="NewJawanStatus" name="NewJawanStatus" #NewJawanStatusControl="ngModel" [(ngModel)]="employee.NewJawanStatus" required>
+                                                <option value="null">--Select--</option>
+                                                <option value="TRANSFERRED">TRANSFERRED</option>
+                                                <option value="NEW RECRUITMENT">NEW RECRUITMENT</option>
+                                            </select>
+                                            <span class="help-block" *ngIf="NewJawanStatusControl.pristine && NewJawanStatusControl.touched">कृपया नए जवान की स्थिति चुनें</span>
+                                              </div>
+                                        </div>
+                           </div>
+                           <div class="row">
+                               <div class="col-md-4">
+
+                               </div>
+                               <div class="col-md-4">
+                                   
+                            </div>
+                            <div class="col-md-2">
+                           
+                                    <label class="control-label"><strong>क्या जवान आर्म प्रशिक्षित है?</strong></label>
+                                    <!-- radio -->
+                                    <div class="form-group clearfix mt-2  text-center">
+                                     <label></label>
+                                      <div class="icheck-primary d-inline">
+                                        <input type="radio" [(ngModel)]="IsTrained" value="Yes" name="rbnYes" id="rbnYes">
+                                    
+                                        <label for="rbnYes">
+                                            Yes
+                                        </label>
+                                      </div>
+                                      <div class="icheck-primary d-inline ml-2">
+                                        <input type="radio" [(ngModel)]="IsTrained" id="rbnNo" name="rbnNo" value="No">
+                                        <label for="rbnNo">
+                                            No
+                                        </label>
+                                      </div>
+                                     
+                                    </div>
+                               
+                             
+                                  
+                                
+                            </div>
+                           </div>
+                              <div class="row">
+                                  <div class="col-md-4">
+                                      <input type="submit" class="btn btn-success" value="Save Basic Details"  *ngIf="btnSaveBasicDetails" [disabled]="employee.EmpName==null || employee.FatherName==null  || employee.EmpDob==null || employee.EmpGender=='--Select--' || employee.EmpCaste=='--Select--' && employee.Height==null || employee.Chest==null || employee.EmpEdu=='--Select--' || employee.EmpDesigId=='--Select--' || employee.NominalRegNo==null">
+                                      <input type="button" class="btn btn-primary" value="Update Basic Details"  *ngIf="btnUpdateBasicDetails" (click)="UpdateBasicDetails(employee)">
+                                  </div>
+                              </div>
+                             </div>
+                             <!-- /.card-body -->
+               
+                           
+                           
+                         </div>
+                        </form>
+                      <div style="text-align: center;">
+                        <button mat-button matStepperNext class="btn btn-warning" *ngIf="ContactNext">Next</button>
+                      </div>
+                     
+                       
+                    </mat-step>
+                    <mat-step>
+                     
+                       <form #ContactForm="ngForm" (ngSubmit)="SaveContactForm(ContactForm)" autocomplete="off">
+                        <ng-template matStepLabel>Contact Details</ng-template>
+                        <div class="card card-info">
+                            <div class="card-header">
+                              <h3 class="card-title">Contact Details</h3>
+                            </div>
+                            <!-- /.card-header -->
+                            <!-- form start -->
+                           
+                              <div class="card-body">
+                               
+                                  <div class="row">
+                                      <div class="col-md-4">
+<div class="row">
+    <div class="col-md-12">
+        <input type="radio" id="rdCurrentUrban"  name="radioCurrentUrban" #residanceTypeCurrentControl="ngModel" [(ngModel)]="empcontact.residanceTypeCurrent" value="Urban" (click)="ClickUrbanRuralCurrent()">
+        <label class="control-label">शहरी</label>&nbsp;&nbsp;
+        <input type="radio" id="rdCurrentRural" name="radioCurrentRural" #residanceTypeCurrentControl="ngModel" [(ngModel)]="empcontact.residanceTypeCurrent" value="Rural" (click)="getBlock(empcontact.CurrentDistId)" >
+        <label class="control-label">ग्रामीण</label>
+    </div>
+  
+</div>
+<div class="row">
+    <div class="col-md-12">
+    <div class="form-group" [class.has-error]="CurrentAddressControl.invalid && CurrentAddressControl.touched" [class.has-success]="CurrentAddressControl.valid">
+        <label class="control-label" for="CurrentAddress">वर्तमान पता<span style="color:red;">*</span> :</label>
+        <!-- <input type="text" class="form-control" id="CurrentAddress" name="CurrentAddress" #CurrentAddressControl="ngModel" [(ngModel)]="empcontact.CurrentAddress" required (ngModelChange)="empcontact.CurrentAddress = $event.toUpperCase()" > -->
+        <textarea class="form-control" id="CurrentAddress" name="CurrentAddress" #CurrentAddressControl="ngModel" [(ngModel)]="empcontact.CurrentAddress" required (ngModelChange)="empcontact.CurrentAddress = $event.toUpperCase()" ></textarea>
+        <span class="help-block" *ngIf="CurrentAddressControl.invalid && CurrentAddressControl.touched">कृपया वर्तमान पता भरें </span>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+    <div class="form-group">
+        <label class="control-label" for="CurrentZoneId">मण्डल :</label>
+        <select class="form-control" id="CurrentZoneId" name="CurrentZoneId" #CurrentZoneIdControl="ngModel" [(ngModel)]="empcontact.CurrentZoneId" required (change)="getdistrict(empcontact.CurrentZoneId,'')">
+            <option value="--Select--">--Select--</option>
+            <option [value]="zone.zoneId" *ngFor="let zone of currentZonelist">{{zone.zoneName}}</option>
+        </select>
+
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+    <div class="form-group">
+        <label class="control-label" for="CurrentDistId">जिला :</label>
+        <select class="form-control" id="CurrentDistId" name="CurrentDistId" #CurrentDistIdControl="ngModel" [(ngModel)]="empcontact.CurrentDistId" required >
+            <option value="--Select--">--Select--</option>
+            <option [value]="district.distId" *ngFor="let district of currentdistlist">{{district.distName}}</option>
+        </select>
+
+    </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+    <div class="form-group" [class.has-error]="CurrentBlockIdControl.pristine && CurrentBlockIdControl.touched" [class.has-success]="CurrentBlockIdControl.dirty" *ngIf="empcontact.residanceTypeCurrent=='Rural'">
+                            
+        <label class="control-label" for="CurrentBlockId">ब्लॉक/विकास खंड<span style="color:red;">*</span> :</label>
+        <select class="form-control" id="CurrentBlockId" name="CurrentBlockId" #CurrentBlockIdControl="ngModel" [(ngModel)]="empcontact.CurrentBlockId" (change)="getCompany(empcontact.CurrentDistId,empcontact.CurrentBlockId)"required >
+            <option value="--Select--">--Select--</option>
+            
+            <option [value]="block.blockId" *ngFor="let block of blocklst">{{block.blockName}}</option>
+        </select>
+        <span class="help-block" *ngIf="CurrentBlockIdControl.pristine && CurrentBlockIdControl.touched">ब्लॉक/विकास खंड  </span>
+        </div>
+        <div class="form-group" [class.has-error]="CurrentCompanyIdControl.pristine && CurrentCompanyIdControl.touched" [class.has-success]="CurrentCompanyIdControl.dirty">
+    
+            <label class="control-label" for="CurrentCompanyId">कंपनी का नाम<span style="color:red;">*</span> :</label>
+          
+            <select class="form-control" id="CurrentCompanyId" name="CurrentCompanyId" #CurrentCompanyIdControl="ngModel" [(ngModel)]="empcontact.CurrentCompanyId" required >
+                <option value="--Select--">--Select--</option>
+                <option [value]="company.compId" *ngFor="let company of companylst">{{company.compName}}</option>
+                
+            </select>
+            <span class="help-block" *ngIf="CurrentCompanyIdControl.pristine && CurrentCompanyIdControl.touched">कृपया कंपनी चुनें  </span>
+            </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+    <div class="form-group" [class.has-error]="CurrentThanaIdControl.pristine && CurrentThanaIdControl.touched" [class.has-success]="CurrentThanaIdControl.dirty">
+                            
+        <label class="control-label" for="CurrentThanaId">थाना<span style="color:red;">*</span> :</label>
+        <select class="form-control" id="CurrentThanaId" name="CurrentThanaId" #CurrentThanaIdControl="ngModel" [(ngModel)]="empcontact.CurrentThanaId" required >
+            <option value="--Select--">--Select--</option>
+            
+            <option [value]="thana.thanaId" *ngFor="let thana of thanalist">{{thana.thanaName}}</option>
+        </select>
+        <span class="help-block" *ngIf="CurrentThanaIdControl.pristine && CurrentThanaIdControl.touched">कृपया थाना चुनें  </span>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+    <div class="form-group" [class.has-error]="CurrentPincodeControl.invalid && CurrentPincodeControl.touched" [class.has-success]="CurrentPincodeControl.valid">
+                            
+        <label class="control-label" for="CurrentPincode">पिनकोड<span style="color:red;">*</span> :</label>
+        <input type="text" class="form-control" id="CurrentPincode" name="CurrentPincode" maxlength="6"      #CurrentPincodeControl="ngModel" [(ngModel)]="empcontact.CurrentPincode" required>
+        <span class="help-block" *ngIf="CurrentPincodeControl.invalid && CurrentPincodeControl.touched">कृपया पिनकोड भरें   </span>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+    <div class="form-group">
+        <div class="form-group" [class.has-error]="CurrentMobile1Control.invalid && CurrentMobile1Control.touched" [class.has-success]="CurrentMobile1Control.valid">
+    <label class="control-label" for="CurrentMobile1">मोबाइल<span style="color:red;">*</span> :</label>
+    <input type="text" class="form-control" id="CurrentMobile1" name="CurrentMobile1" [pattern]="mobNumberPattern" maxlength="10" #CurrentMobile1Control="ngModel" [(ngModel)]="empcontact.CurrentMobile1" required>
+    <span class="help-block" *ngIf="CurrentMobile1Control.invalid && CurrentMobile1Control.touched">कृपया मोबाइल नंबर भरें </span>
+    <div *ngIf="CurrentMobile1Control.errors && ContactForm.submitted && !isValidFormSubmitted" [ngClass] = "'error'">  
+<div *ngIf="CurrentMobile1Control.errors.pattern">  
+मोबाइल नंबर सही भरिये 
+</div>   
+</div> 
+    </div>
+</div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+    <div class="form-group" [class.has-error]="CurrentEmpEmailControl.errors?.email && CurrentEmpEmailControl.touched" [class.has-success]="CurrentEmpEmailControl.valid">
+        <label class="control-label" for="CurrentEmpEmail">ईमेल  :</label>
+        <input type="text" class="form-control" id="CurrentEmpEmail" name="CurrentEmpEmail" [email]="empcontact.CurrentEmpEmail!==''" #CurrentEmpEmailControl="ngModel" [(ngModel)]=empcontact.CurrentEmpEmail  (ngModelChange)="empcontact.CurrentEmpEmail = $event.toUpperCase()">
+    
+        <span class="help-block" *ngIf="CurrentEmpEmailControl.errors?.email && CurrentEmpEmailControl.touched">कृपया सही ईमेल भरिये</span>
+  
+</div>
+    </div>
+</div>
+
+
+                                      </div>
+                                      <div class="col-md-4">
+                                        
+                                            <label class="control-label">क्या वर्तमान पता  और स्थायी पता एक है? : <input type="checkbox" id="empChkAddress"  (click)="ChkAddress()" ></label>    
+                                   
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                            <input type="radio" id="rdPermUrban" name="radioPermUrban" #residanceTypePermControl="ngModel" [(ngModel)]="empcontact.residanceTypePerm" value="Urban" (click)="ClickUrbanRuralResidance()">
+                                            <label class="control-label">शहरी</label>&nbsp;&nbsp;
+                                            <input type="radio" id="rdPermRural" name="radioPermRural" #residanceTypePermControl="ngModel" [(ngModel)]="empcontact.residanceTypePerm" value="Rural" >
+                                            <label class="control-label">ग्रामीण</label>
+                                            
+                                        </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                            <div class="form-group" [class.has-error]="ResidanceAddressControl.invalid && ResidanceAddressControl.touched" [class.has-success]="ResidanceAddressControl.valid">
+                                                <label class="control-label" for="ResidanceAddress">स्थायी पता<span style="color:red;">*</span> :</label>
+                                                <!-- <input type="text" class="form-control" id="ResidanceAddress" name="ResidanceAddress" #ResidanceAddressControl="ngModel" [(ngModel)]="empcontact.ResidanceAddress" required (ngModelChange)="empcontact.ResidanceAddress = $event.toUpperCase()" > -->
+                                                <textarea class="form-control" id="ResidanceAddress" name="ResidanceAddress" #ResidanceAddressControl="ngModel" [(ngModel)]="empcontact.ResidanceAddress" required (ngModelChange)="empcontact.ResidanceAddress = $event.toUpperCase()"></textarea>
+                                                <span class="help-block" *ngIf="ResidanceAddressControl.invalid && ResidanceAddressControl.touched">कृपया स्थायी पता भरें </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                            <div class="form-group" [class.has-error]="ResidanceZoneIdControl.pristine && ResidanceZoneIdControl.touched" [class.has-success]="ResidanceZoneIdControl.dirty">
+                                                <label class="control-label" for="ResidanceZoneId">मण्डल<span style="color:red;">*</span> :</label>
+                                                <select class="form-control" id="ResidanceZoneId" name="ResidanceZoneId" #ResidanceZoneIdControl="ngModel" [(ngModel)]="empcontact.ResidanceZoneId" required (change)="getresdistrict(empcontact.ResidanceZoneId)" >
+                                                    <option value="--Select--">--Select--</option>
+                                                    <option [value]="zone.zoneId" *ngFor="let zone of resZonelist">{{zone.zoneName}}</option>
+                                                
+                                                </select>
+                                                <span class="help-block" *ngIf="ResidanceZoneIdControl.pristine && ResidanceZoneIdControl.touched">कृपया मण्डल चुनें </span>
+                                                    </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                            <div class="form-group" [class.has-error]="ResidanceDistIdControl.pristine && ResidanceDistIdControl.touched" [class.has-success]="ResidanceDistIdControl.dirty">
+                                                <label class="control-label" for="ResidanceDistId">जिला<span style="color:red;">*</span> :</label>
+                                                <select class="form-control" id="ResidanceDistId" name="ResidanceDistId" #ResidanceDistIdControl="ngModel" [(ngModel)]="empcontact.ResidanceDistId" required (change)="reggetThana(empcontact.ResidanceDistId);getregCompany(empcontact.ResidanceDistId,'');getregBlock(empcontact.ResidanceDistId)" >
+                                                    <option value="--Select--">--Select--</option>
+                                                    <option [value]="district.distId" *ngFor="let district of resdistlist">{{district.distName}}</option>
+                                                    
+                                                </select>
+                                                <span class="help-block" *ngIf="ResidanceDistIdControl.pristine && ResidanceDistIdControl.touched">कृपया जिला चुनें  </span>
+                                                    </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                            <div class="form-group" [class.has-error]="ResidanceBlockIdControl.pristine && ResidanceBlockIdControl.touched" [class.has-success]="ResidanceBlockIdControl.dirty" *ngIf="empcontact.residanceTypePerm=='Rural'">
+                            
+                                                <label class="control-label" for="ResidanceBlockId">ब्लॉक/विकास खंड<span style="color:red;">*</span> :</label>
+                                                <select class="form-control" id="ResidanceBlockId" name="ResidanceBlockId" #ResidanceBlockIdControl="ngModel" [(ngModel)]="empcontact.ResidanceBlockId" required [(ngModel)]="empcontact.ResidanceBlockId" (change)="getregCompany(empcontact.ResidanceDistId,empcontact.ResidanceBlockId)">
+                                                    <option value="--Select--">--Select--</option>
+                                                    <option [value]="block.blockId" *ngFor="let block of regblocklst">{{block.blockName}}</option>
+                                                </select>
+                                                <span class="help-block" *ngIf="ResidanceBlockIdControl.pristine && ResidanceBlockIdControl.touched">कृपया ब्लॉक/विकास चुनें  </span>
+                                            </div>
+                                            <div class="form-group" [class.has-error]="ResidanceCompanyIdControl.pristine && ResidanceCompanyIdControl.touched" [class.has-success]="ResidanceCompanyIdControl.dirty">
+                                        
+                                                <label class="control-label" for="ResidanceCompanyId">कंपनी का नाम<span style="color:red;">*</span>  :</label>
+                                               
+                                                <select class="form-control" id="ResidanceCompanyId" name="ResidanceCompanyId" #ResidanceCompanyIdControl="ngModel" [(ngModel)]="empcontact.ResidanceCompanyId" required>
+                                                    <option value="--Select--">--Select--</option>
+                                                    <option [value]="company.compId" *ngFor="let company of regcompanylst">{{company.compName}}</option>
+                                                </select>
+                                                <span class="help-block" *ngIf="ResidanceCompanyIdControl.pristine && ResidanceCompanyIdControl.touched">कृपया कंपनी चुनें  </span>
+                                                    </div>
+                                            </div>
+                                        </div>
+                                  
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                            <div class="form-group" [class.has-error]="ResidanceThanaIdControl.pristine && ResidanceThanaIdControl.touched" [class.has-success]="ResidanceThanaIdControl.dirty">
+                            
+                                                <label class="control-label" for="ResidanceThanaId">थाना<span style="color:red;">*</span> :</label>
+                                                <select class="form-control" id="ResidanceThanaId" name="ResidanceThanaId" #ResidanceThanaIdControl="ngModel" [(ngModel)]="empcontact.ResidanceThanaId" required >
+                                                    <option value="--Select--">--Select--</option>
+                                                    <option [value]="thana.thanaId" *ngFor="let thana of regthanalst">{{thana.thanaName}}</option>
+                                                </select>
+                                                <span class="help-block" *ngIf="ResidanceThanaIdControl.pristine && ResidanceThanaIdControl.touched">कृपया थाना चुनें  </span>
+                                                    </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                            <div class="form-group" [class.has-error]="ResidancePincodeControl.invalid && ResidancePincodeControl.touched" [class.has-success]="ResidancePincodeControl.valid">
+                            
+                                                <label class="control-label" for="ResidancePincode">पिनकोड<span style="color:red;">*</span> :</label>
+                                                <input type="text" class="form-control" id="ResidancePincode"  maxlength="6" name="ResidancePincode" #ResidancePincodeControl="ngModel" [(ngModel)]="empcontact.ResidancePincode" required >
+                                                <span class="help-block" *ngIf="ResidancePincodeControl.invalid && ResidancePincodeControl.touched">कृपया पिनकोड भरें   </span>
+                                                    </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                            <div class="form-group" [class.has-error]="ResidanceMobile1Control.invalid && ResidanceMobile1Control.touched" [class.has-success]="ResidanceMobile1Control.valid">
+                            
+                                                <label class="control-label" for="ResidanceMobile1">मोबाइल<span style="color:red;">*</span> :</label>
+                                                <input type="text" class="form-control" id="ResidanceMobile1" name="ResidanceMobile1" [pattern]="mobNumberPattern" maxlength="10"  #ResidanceMobile1Control="ngModel" [(ngModel)]="empcontact.ResidanceMobile1" required>
+                                                <span class="help-block" *ngIf="ResidanceMobile1Control.invalid && ResidanceMobile1Control.touched">कृपया मोबाइल नंबर भरें   </span>
+                                                <div *ngIf="ResidanceMobile1Control.errors && ContactForm.submitted && !isValidFormSubmitted" [ngClass] = "'error'">  
+                      <div *ngIf="ResidanceMobile1Control.errors.pattern">  
+                    
+                      </div>   
+                    </div> 
+                                            </div>
+                                                    </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                <div class="form-group" [class.has-error]="ResidanceEmpEmailControl.errors?.email && ResidanceEmpEmailControl.touched" [class.has-success]="ResidanceEmpEmailControl.valid">
+                            
+                                    <label class="control-label" for="ResidanceEmpEmail">ईमेल :</label>
+                                    <input type="text" class="form-control" id="ResidanceEmpEmail" name="ResidanceEmpEmail" [email]="empcontact.ResidanceEmpEmail!==''" #ResidanceEmpEmailControl="ngModel" [(ngModel)]="empcontact.ResidanceEmpEmail" required (ngModelChange)="empcontact.ResidanceEmpEmail = $event.toUpperCase()" >
+          
+                                        <span class="help-block" *ngIf="ResidanceEmpEmailControl.errors?.email && ResidanceEmpEmailControl.touched">कृपया सही ईमेल भरिये</span>
+                                  
+                                        </div>
+                                        </div>
+                                        </div>
+                                    </div>
+                                  
+                            
+                               <div class="row">
+                                   <div class="col-md-4" *ngIf="empcontact.residanceTypeCurrent=='Urban'">
+
+                                       <input type="submit" class="btn btn-success" value="Save Contact Details" *ngIf="btnSaveContactDetails" [disabled]="empcontact.CurrentZoneId=='--Select--'||empcontact.CurrentDistId=='--Select--'||empcontact.CurrentCompanyId=='--Select--'||empcontact.CurrentThanaId=='--Select--'||empcontact.CurrentMobile1==null||empcontact.CurrentPincode==null||empcontact.ResidanceZoneId=='--Select--'||empcontact.ResidanceDistId=='--Select--'||empcontact.ResidanceCompanyId=='--Select--'||empcontact.ResidanceThanaId=='--Select--'||empcontact.ResidanceMobile1==null||empcontact.ResidancePincode==null">
+                                       <input type="button" class="btn btn-primary" value="Update Contact Details"  *ngIf="btnUpdateContactDetails" (click)="UpdateContactDetails(empcontact)">
+                                   </div>
+                                   <div class="col-md-4" *ngIf="empcontact.residanceTypeCurrent=='Rural'">
+
+                                    <input type="submit" class="btn btn-success" value="Save Contact Details" *ngIf="btnSaveContactDetails" [disabled]="empcontact.CurrentZoneId=='--Select--'||empcontact.CurrentDistId=='--Select--'||empcontact.CurrentBlockId=='--Select--'||empcontact.CurrentCompanyId=='--Select--'||empcontact.CurrentThanaId=='--Select--'||empcontact.CurrentMobile1==null||empcontact.CurrentPincode==null||empcontact.ResidanceZoneId=='--Select--'||empcontact.ResidanceDistId=='--Select--'||empcontact.ResidanceCompanyId=='--Select--'||empcontact.ResidanceThanaId=='--Select--'||empcontact.ResidanceMobile1==null||empcontact.ResidancePincode==null">
+                                    <input type="button" class="btn btn-primary" value="Update Contact Details"  *ngIf="btnUpdateContactDetails" (click)="UpdateContactDetails(empcontact)">
+                                </div>
+                               </div>
+                          
+                              <!-- /.card-body -->
+                
+                            
+                         
+                          </div>
+                        </div>
+                    </div>
+                       </form>
+                      
+                       <div style="text-align:center;">
+                        <button mat-button matStepperPrevious class="btn btn-primary">Back</button>&nbsp;
+                        <button mat-button matStepperNext class="btn btn-warning" *ngIf="AccountNext">Next</button>
+                       </div>
+                      
+                     
+                    </mat-step>
+                    <mat-step>
+                        <form #AccForm="ngForm" (ngSubmit)="SaveAccountDetails(AccForm)" autocomplete="off">
+                            <ng-template matStepLabel>Account Details</ng-template>
+                            <div class="card card-info">
+                                <div class="card-header">
+                                  <h3 class="card-title">Bank Account Details</h3>
+                                </div>
+                                <!-- /.card-header -->
+                                <!-- form start -->
+                              
+                                  <div class="card-body">
+                                  
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group" [class.has-error]="AccNoControl.invalid && AccNoControl.touched" [class.has-success]="AccNoControl.valid">
+                                        <label class="control-label" for="AccNo">खाता संख्या<span style="color:red;">*</span> :</label>
+                                        <input type="text" class="form-control" id="AccNo" name="AccNo" #AccNoControl="ngModel" [(ngModel)]="empAcc.AccNo" required (ngModelChange)="empAcc.AccNo = $event.toUpperCase()">
+                                        <span class="help-block" *ngIf="AccNoControl.invalid && AccNoControl.touched">कृपया खाता संख्या भरें </span>
+                                            </div>
+                                        </div>
+                                   
+                                    <div class="col-md-4">
+                                        <div class="form-group" [class.has-error]="BranchControl.invalid && BranchControl.touched" [class.has-success]="BranchControl.valid">
+                                
+                                        <label class="control-label" for="Branch">शाखा<span style="color:red;">*</span> :</label>
+                                        <input type="text" class="form-control" id="Branch" name="Branch" #BranchControl="ngModel" [(ngModel)]="empAcc.Branch" required (ngModelChange)="empAcc.Branch = $event.toUpperCase()">
+                                        <span class="help-block" *ngIf="BranchControl.invalid && BranchControl.touched">कृपया शाखा भरें </span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group" [class.has-error]="AccNameControl.invalid && AccNameControl.touched" [class.has-success]="AccNameControl.valid">
+                                
+                                        <label class="control-label" for="AccName">खाताधारक का नाम<span style="color:red;">*</span> :</label>
+                                        <input type="text" class="form-control" id="AccName" name="AccName" #AccNameControl="ngModel" [(ngModel)]="empAcc.AccName" required (ngModelChange)="empAcc.AccName = $event.toUpperCase()" >
+                                        <span class="help-block" *ngIf="AccNameControl.invalid && AccNameControl.touched">कृपया खाताधारक का नाम भरें </span>
+                                        </div>
+                                    </div>
+                                       </div>
+                                
+                                       <div class="row">
+                                        <div class="col-md-4">
+                                        
+                                                <div class="form-group" [class.has-error]="IfscControl.invalid && IfscControl.touched" [class.has-success]="IfscControl.valid">
+                                        <label class="control-label" for="Ifsc">IFSC<span style="color:red;">*</span> :</label>
+                                        <input type="text" class="form-control" id="Ifsc" name="Ifsc" #IfscControl="ngModel" [(ngModel)]="empAcc.Ifsc" required (ngModelChange)="empAcc.Ifsc = $event.toUpperCase()">
+                                        <span class="help-block" *ngIf="IfscControl.invalid && IfscControl.touched">कृपया IFSC भरें </span>
+                                            </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group" [class.has-error]="BankControl.invalid && BankControl.touched" [class.has-success]="BankControl.valid">
+                                
+                                        <label class="control-label" for="Bank">बैंक का नाम<span style="color:red;">*</span> :</label>
+                                        <input type="text" class="form-control" id="Bank" name="Bank" #BankControl="ngModel" [(ngModel)]="empAcc.Bank" required (ngModelChange)="empAcc.Bank = $event.toUpperCase()">
+                                        <span class="help-block" *ngIf="BankControl.invalid && BankControl.touched">कृपया बैंक का नाम भरें </span>
+                                        </div>
+                                    </div>
+                                   
+                                    
+                                       </div>
+                                   <div class="row">
+                                       <div class="col-md-4">
+                                           <input type="submit" class="btn btn-success" value="Save Account Details" *ngIf="btnSaveAccountDetails" [disabled]="empAcc.AccNo==null||empAcc.Branch==null||empAcc.AccName==null||empAcc.Ifsc==null||empAcc.Bank==null">
+                                           <input type="button" class="btn btn-primary" value="Update Account Details"  *ngIf="btnUpdateAccountDetails" (click)="UpdateAccountDetails(empAcc)">
+                                       </div>
+                                   </div>
+                                  </div>
+                                  <!-- /.card-body -->
+                    
+                                
+                               
+                             
+                            </div>
+                        </form>
+                       
+                        <div style="text-align: center;">
+                            <button mat-button matStepperPrevious class="btn btn-primary">Back</button>&nbsp;
+                            <button mat-button matStepperNext class="btn btn-warning" *ngIf="TrainingNext">Next</button>
+                           </div>
+                       
+                    </mat-step>
+                    <mat-step>
+                        <form #TrainingForm="ngForm" (ngSubmit)="SaveTrainingDetails(TrainingForm)" autocomplete="off">
+                            <ng-template matStepLabel>Training Details</ng-template>
+                            <div class="card card-info">
+                                <div class="card-header">
+                                  <h3 class="card-title">Training Details</h3>
+                                </div>
+                                <!-- /.card-header -->
+                                <!-- form start -->
+                               
+                                  <div class="card-body">
+                                    
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                          
+                                
+                                        <label class="control-label">पी आर डी प्रारंभिक प्रशिक्षण का वर्ष<span style="color:red;">*</span> :</label>
+                                        <input type="text" class="form-control" id="TrainingSession" name="TrainingSession" #TrainingSessionControl="ngModel" [(ngModel)]="emptraining.TrainingSession" placeholder="eg: 2020">
+                                      
+                                            </div>
+                                   
+                                   
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                
+                                        <label class="control-label">दिनांक से<span style="color:red;">*</span> :</label>
+                                        <input type="text" class="form-control" id="DateFrom" name="DateFrom" #DateFromControl="ngModel" [(ngModel)]="emptraining.DateFrom" bsDatepicker [bsConfig]="datePickerConfig" placeholder="dd/mm/yyyy,eg:15/08/1947">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                        <label class="control-label">दिनांक तक<span style="color:red;">*</span> :</label>
+                                        <input type="text" class="form-control" id="DateTo" name="DateTo" #DateToControl="ngModel" [(ngModel)]="emptraining.DateTo" bsDatepicker [bsConfig]="datePickerConfig" placeholder="dd/mm/yyyy,eg:15/08/1947">
+                                        </div>
+                                    </div>
+                                       </div>
+                                       <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                
+                                        <label class="control-label">प्रशिक्षण केंद्र का नाम<span style="color:red;">*</span>  :</label>
+                                        <!-- <input type="text" class="form-control" id="CompId" name="CompId" #CompIdControl="ngModel" [(ngModel)]="emptraining.CompId" " (ngModelChange)="emptraining.CompId = $event.toUpperCase()"> -->
+                                        <input type="text" class="form-control" id="CompId" name="CompId" #CompIdControl="ngModel" [(ngModel)]="emptraining.CompId" (ngModelChange)="emptraining.CompId = $event.toUpperCase()">
+                                            </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group" [class.has-error]="emptraining.TrainingCertificate==null"[class.has-success]="emptraining.TrainingCertificate!=''">
+                                
+                                        <label class="control-label">प्रशिक्षण प्रमाण पत्र<span style="color:red;">*</span> :</label>
+                                        <input type="file" class="form-control"
+                                        id="TrainingCertificate"
+                                        name="TrainingCertificate" #TrainingCertificateControl="ngModel"
+                                       [(ngModel)]="emptraining.TrainingCertificate" (change)="UploadCertificate($event)" >
+                                       <span class="help-block" *ngIf="emptraining.TrainingCertificate==null">कृपया प्रशिक्षण प्रमाण पत्र की फोटो अपलोड करें </span>
+                                       <h6 style="color:red">Supported format .jpg/.pdf/.png,Maxsize:500kb-1MB</h6>
+
+                                        </div>
+                                    </div>
+                                  
+                                       </div>
+                                   <div class="row">
+                                       <div class="col-md-4">
+                                           <input type="submit" value="Add" class="btn btn-primary" *ngIf="btnAddTraining" [disabled]="emptraining.TrainingCertificate==null" >
+                                           <input type="button" value="Update" class="btn btn-success" *ngIf="btnUpdateTraining" (click)="UpdateTraining()">
+                                       </div>
+                                   </div>
+                                   <br/>
+                                   <br/>
+                                   <table class="table table-responsive table-condensed table-bordered table-striped" *ngIf="traininglst!=null">
+                                    <thead>
+                                        <tr>
+                                            <th>क्रम संख्या </th>
+                                            <th>पी आर डी प्रारंभिक प्रशिक्षण/पुर्नप्रशिक्षण का वर्ष </th>
+                                            <th>दिनांक से</th>
+                                            <th>दिनांक तक</th>
+                                            <th>कंपनी का नाम</th>
+                                            <th>प्रमाण पत्र</th>
+                                            <th>कार्यवाही</th>
+                                           
+                                        </tr>
+                                     </thead>
+                                        <tbody>
+                                            <tr *ngFor="let training of traininglst;let i=index">
+                                                <td>{{i+1}}</td>
+                                                <td>{{training.trainingSession}}</td>
+                                                <td>{{training.dateFrom}}</td>
+                                                <td>{{training.dateTo}}</td>
+                                                <td>{{training.compId}}</td>
+                                                <td *ngIf="training.trainingCertificate!=null" class="text text-success" style="font-weight: bold;">Uploaded</td>
+                                                <td><a class="btn btn-warning btn-xs" (click)="EditTraining(training.empTrainingId)"><i class="fa fa-edit" style="color:white"></i></a>&nbsp;<a class="btn btn-danger btn-xs" (click)="DeleteTraining(training.empTrainingId)"><i class="fa fa-trash" style="color:white"></i></a></td>
+                                            </tr>
+                                        </tbody>
+                                
+                                </table>
+                                  </div>
+                                  <!-- /.card-body -->
+                    
+                                
+                                </div>
+                        </form>
+                       
+                     
+                        <div style="text-align: center;">
+                            <button mat-button matStepperPrevious class="btn btn-primary">Back</button>&nbsp;
+                            <button mat-button matStepperNext class="btn btn-warning" *ngIf="FinalSaveNext">Next</button>
+                           </div>
+                      
+                    </mat-step>
+                    <mat-step>
+                        <form #IdProofForm="ngForm" (ngSubmit)="SaveIdProofDetails(IdProofForm)" autocomplete="off">
+                            <ng-template matStepLabel>Document Details</ng-template>
+                            <div class="card card-info">
+                                <div class="card-header">
+                                  <h3 class="card-title">Document Details</h3>
+                                </div>
+                                <!-- /.card-header -->
+                                <!-- form start -->
+                               
+                                  <div class="card-body">
+                                 
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <!-- <div class="form-group" [class.has-error]="IdProof1TypeControl.invalid && IdProof1TypeControl.touched" [class.has-success]="IdProof1TypeControl.valid">
+                                
+                                        <label class="control-label" for="IdProof1Type">विभागीय पहचान पत्र का प्रकार<span style="color:red;">*</span> :</label>
+                                        <input type="text" class="form-control" id="IdProof1Type" name="IdProof1Type" #IdProof1TypeControl="ngModel" [(ngModel)]="employee.IdProof1Type" required (ngModelChange)="employee.IdProof1Type= $event.toUpperCase()">
+                                        <span class="help-block" *ngIf="IdProof1TypeControl.invalid && IdProof1TypeControl.touched">कृपया विभागीय पहचान पत्र का प्रकार भरें</span>
+                                            </div> -->
+                                            <div class="form-group" >
+                                
+                                                <label class="control-label" for="IdProof1Type">विभागीय पहचान पत्र का प्रकार :</label>
+                                                <input type="text" class="form-control" id="IdProof1Type" name="IdProof1Type" #IdProof1TypeControl="ngModel" [(ngModel)]="employee.IdProof1Type"  (ngModelChange)="employee.IdProof1Type= $event.toUpperCase()">
+
+                                                    </div>
+                                    </div>
+                                   
+                                    <div class="col-md-4">
+                                        <!-- <div class="form-group" [class.has-error]="IdProof1NoControl.invalid && IdProof1NoControl.touched" [class.has-success]="IdProof1NoControl.valid">
+                                
+                                        <label class="control-label" for="IdProof1No">विभागीय पहचान पत्र संख्या<span style="color:red;">*</span> :</label>
+                                        <input type="text" class="form-control" id="IdProof1No" name="IdProof1No" #IdProof1NoControl="ngModel" [(ngModel)]="employee.IdProof1No" required (ngModelChange)="employee.IdProof1No = $event.toUpperCase()">
+                                        <span class="help-block" *ngIf="IdProof1NoControl.invalid && IdProof1NoControl.touched">कृपया विभागीय पहचान पत्र संख्या भरें</span>
+                                        </div> -->
+                                        <div class="form-group">
+                                
+                                            <label class="control-label" for="IdProof1No">विभागीय पहचान पत्र संख्या :</label>
+                                            <input type="text" class="form-control" id="IdProof1No" name="IdProof1No" #IdProof1NoControl="ngModel" [(ngModel)]="employee.IdProof1No"  (ngModelChange)="employee.IdProof1No = $event.toUpperCase()">
+                                        
+                                            </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <!-- <div class="form-group" [class.has-success]="employee.IdProof1Pic!=''">
+                                
+                                        <label class="control-label" for="IdProof1Pic">विभागीय पहचान पत्र की फोटो<span style="color:red;">*</span>  :</label>
+                                        <input type="file" class="form-control" id="IdProof1Pic" name="IdProof1Pic" #IdProof1PicControl="ngModel" [(ngModel)]="employee.IdProof1Pic"
+                                        (change)="UploadIDProof1($event)" required>
+                                     
+                                       <h6 style="color:red">Supported format .jpg/.pdf/.png,Maxsize:500kb-1MB</h6>
+                                        </div> -->
+                                        <div class="form-group">
+                                
+                                            <label class="control-label" for="IdProof1Pic">विभागीय पहचान पत्र की फोटो  :</label>
+                                            <input type="file" class="form-control" id="IdProof1Pic" name="IdProof1Pic" #IdProof1PicControl="ngModel" [(ngModel)]="employee.IdProof1Pic"
+                                            (change)="UploadIDProof1($event)" >
+                                         
+                                           <h6 style="color:red">Supported format .jpg/.pdf/.png,Maxsize:500kb-1MB</h6>
+                                            </div>
+                                    </div>
+                                       </div>
+                                       <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                
+                                        <label class="control-label" for="IdProof2Type">अन्य पहचान पत्र का प्रकार :</label>
+                                        <input type="text" class="form-control" id="IdProof2Type" name="IdProof2Type" #IdProof2TypeControl="ngModel"[(ngModel)]="employee.IdProof2Type" required (ngModelChange)="employee.IdProof2Type = $event.toUpperCase()">
+                                            </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                
+                                        <label class="control-label" for="IdProof2No">अन्य  पहचान पत्र संख्या  :</label>
+                                        <input type="text" class="form-control" id="IdProof2No" name="IdProof2No" #IdProof2NoControl="ngModel"[(ngModel)]="employee.IdProof2No" required (ngModelChange)="employee.IdProof2No = $event.toUpperCase()">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                
+                                        <label class="control-label" for="IdProof2Pic">अन्य पहचान पत्र की फोटो :</label>
+                                        <input type="file" class="form-control"
+                                        id="IdProof2Pic"
+                                        name="IdProof2Pic"
+                                        #IdProof2PicControl="ngModel" [(ngModel)]="employee.IdProof2Pic"
+                                        (change)="UploadIDProof2($event)" required>
+                                        <h6 style="color:red">Supported format .jpg/.pdf/.png,Maxsize:500kb-1MB</h6>
+                                        </div>
+
+                                    </div>
+                                   
+                                    
+                                       </div>
+                                       <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group" [class.has-error]="IdProof3TypeControl.invalid && IdProof3TypeControl.touched" [class.has-success]="IdProof3TypeControl.valid">
+                                
+                                        <label class="control-label" for="IdProof2Type">शैक्षिक प्रमाण पत्र का नाम<span style="color:red;">*</span>  :</label>
+                                        <input type="text" class="form-control" id="IdProof3Type" name="IdProof3Type" #IdProof3TypeControl="ngModel"[(ngModel)]="employee.IdProof3Type" required (ngModelChange)="employee.IdProof3Type = $event.toUpperCase()">
+                                        <span class="help-block" *ngIf="IdProof3TypeControl.invalid && IdProof3TypeControl.touched">कृपया शैक्षिक प्रमाण पत्र का नाम भरें</span>
+                                            </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group" [class.has-error]="IdProof3NoControl.invalid && IdProof3NoControl.touched" [class.has-success]="IdProof3NoControl.valid">
+                                
+                                        <label class="control-label" for="IdProof2No" >शैक्षिक प्रमाण पत्र संख्या<span style="color:red;">*</span>  :</label>
+                                        <input type="text" class="form-control" id="IdProof3No" name="IdProof3No" #IdProof3NoControl="ngModel"[(ngModel)]="employee.IdProof3No" required (ngModelChange)="employee.IdProof3No = $event.toUpperCase()">
+                                        <span class="help-block" *ngIf="IdProof3NoControl.invalid && IdProof3NoControl.touched">कृपया शैक्षिक प्रमाण पत्र संख्या भरें</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group" [class.has-success]="employee.IdProof3Pic!=''">
+                                
+                                        <label class="control-label" for="IdProof3Pic">शैक्षिक प्रमाण पत्र की फोटो<span style="color:red;">*</span> :</label>
+                                        <input type="file" class="form-control"
+                                        id="IdProof3Pic"
+                                        name="IdProof3Pic"
+                                        #IdProof2PicControl="ngModel" [(ngModel)]="employee.IdProof3Pic"
+                                        (change)="UploadEduCer($event)" required>
+                                     
+                                        <h6 style="color:red">Supported format .jpg/.pdf/.png,Maxsize:500kb-1MB</h6>
+                                        </div>
+
+                                    </div>
+                                   
+                                    
+                                       </div>
+                                       <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group" [class.has-error]="BirthCerNameControl.invalid && BirthCerNameControl.touched" [class.has-success]="BirthCerNameControl.valid">
+                                
+                                        <label class="control-label" for="BirthCerName">जन्म प्रमाण पत्र का नाम<span style="color:red;">*</span> :</label>
+                                        <input type="text" class="form-control" id="BirthCerName" name="BirthCerName" #BirthCerNameControl="ngModel"[(ngModel)]="employee.BirthCerName" required (ngModelChange)="employee.BirthCerName = $event.toUpperCase()">
+                                        <span class="help-block" *ngIf="BirthCerNameControl.invalid && BirthCerNameControl.touched">कृपया जन्म प्रमाण पत्र का नाम भरें</span>
+                                            </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group" [class.has-error]="BirthCerNoControl.invalid && BirthCerNoControl.touched" [class.has-success]="BirthCerNoControl.valid">
+                                
+                                        <label class="control-label" for="BirthCerNo" >जन्म प्रमाण पत्र संख्या<span style="color:red;">*</span>  :</label>
+                                        <input type="text" class="form-control" id="BirthCerNo" name="BirthCerNo" #BirthCerNoControl="ngModel"[(ngModel)]="employee.BirthCerNo" required (ngModelChange)="employee.BirthCerNo = $event.toUpperCase()">
+                                        <span class="help-block" *ngIf="BirthCerNoControl.invalid && BirthCerNoControl.touched">कृपया जन्म प्रमाण पत्र संख्या भरें</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group" [class.has-success]="employee.BirthCerPic!=''">
+                                
+                                        <label class="control-label" for="BirthCerPic">जन्म प्रमाण पत्र की फोटो<span style="color:red;">*</span> :</label>
+                                        <input type="file" class="form-control"
+                                        id="BirthCerPic"
+                                        name="BirthCerPic"
+                                        #BirthCerPicControl="ngModel" [(ngModel)]="employee.BirthCerPic"
+                                        (change)="UploadBirthCer($event)" required>
+                                  
+                                        <h6 style="color:red">Supported format .jpg/.pdf/.png,Maxsize:500kb-1MB</h6>
+                                        </div>
+
+                                    </div>
+                                   
+                                    
+                                       </div>
+                                       <div class="row">
+                                        <div class="col-md-4" *ngIf="employee.NewJawanStatus=='TRANSFERABLE'">
+                                            <div class="form-group"   [class.has-success]="employee.TransCert!=''">
+                                    
+                                            <label class="control-label" for="TransCert">स्थानांतरण प्रमाण पत्र<span style="color:red;">*</span> :</label>
+                                            <input type="file" class="form-control"
+                                            id="TransCert"
+                                            name="TransCert"
+                                            #TransCertControl="ngModel" [(ngModel)]="employee.TransCert"
+                                            (change)="UploadTrnsCer($event)" required>
+                                         
+                                           <h6 style="color:red">Supported format .jpg/.pdf/.png,Maxsize:500kb-1MB</h6>
+                                            </div>
+                                        </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group" [class.has-success]="employee.EmpPic!=''">
+                                
+                                        <label class="control-label" for="EmpPic">स्वयंसेवक की फोटो<span style="color:red;">*</span> :</label>
+                                        <input type="file" class="form-control"
+                                        id="EmpPic"
+                                        name="EmpPic"
+                                        #EmpPicControl="ngModel"[(ngModel)]="employee.EmpPic"
+                                        (change)="UploadEmpPic($event)" required>
+                                    
+                                       <h6 style="color:red">Supported format .jpg/.jpeg/.png,Maxsize:500kb-1MB</h6>
+                                        </div>
+                                    </div>
+                                  
+                                    <div class="col-md-4">
+                                        <img [src]="url"class="border border-success" height="200" width="200" *ngIf="employee.EmpPic!=''">
+                                    </div>
+                                   
+                                    
+                                       </div>
+                                   <div class="row">
+                                    <div class="col-md-4"> 
+                                        <label class="control-label"></label>
+                                        <!-- <input type="submit"  class="form-control" class="btn btn-success" value="Save Finally" *ngIf="btnSaveFinalDetails" [disabled]="employee.IdProof1Type==null||employee.IdProof1No==null||employee.IdProof3Type==null||employee.IdProof3No==null||employee.BirthCerName==null||employee.BirthCerNo==null"> -->
+                                        <input type="submit"  class="form-control" class="btn btn-success" value="Save Finally" *ngIf="btnSaveFinalDetails" [disabled]="employee.IdProof3Type==null||employee.IdProof3No==null||employee.BirthCerName==null||employee.BirthCerNo==null">
+                                        <input type="button"  class="form-control" class="btn btn-primary" value="Update Document Details" *ngIf="btnUpdateDocumentDetails" (click)="UpdateDocumentDetails(employee)">
+                                    </div>
+                                       
+                                   </div>
+                                  </div>
+                                  <!-- /.card-body -->
+                    
+                                
+                              
+                              </div>
+                        </form>
+                        <div style="text-align: center;">
+                            <button mat-button matStepperPrevious class="btn btn-primary">Back</button>&nbsp; 
+                            <button mat-button matStepperNext class="btn btn-warning"  *ngIf="BioDataNext" (click)="GetBioData()">Next</button>
+                           </div>
+                     
+                     
+                        
+                    </mat-step>
+ <mat-step>
+    <ng-template matStepLabel>Bio Data</ng-template>
+    <div class="card card-info">
+        <div class="card-header">
+          <h3 class="card-title">Bio Data</h3>
+        </div>
+        <!-- /.card-header -->
+        <!-- form start -->
+       
+          <!-- <div class="card-body" *ngIf="biodatadivshow"> -->
+            <div class="card-body" *ngIf="biodatadivshow">
+             
+              <app-biodata [data]="data" id="print-section"></app-biodata>
+              <div class=row>
+                  <div class="col-md-12">
+                    <button class="btn btn-primary" style="float:right;"  [useExistingCss]="true" printSectionId="print-section" ngxPrint>Print Biodata</button>
+                    <!-- <button class="btn btn-primary" style="float:right;" onclick="print()">Print Biodata</button> -->
+                  </div>
+              </div>
+          </div> 
+        </div> 
+        <!-- <a  class="btn btn-warning" style="float:right;" (click)="GotoBasicPage()">Next</a> -->
+ </mat-step>
+ 
+                </mat-horizontal-stepper>
+                <ngx-spinner bdColor="rgba(51, 51, 51, 0.8)" size="default" type="ball-spin-clockwise">  
+            <p style="color: white">Please Wait. </p>  
+            </ngx-spinner>
+            <h5>नोट- सभी &nbsp;<span style="color:red;">*</span>&nbsp; जानकारी भरना अनिवार्य है|</h5>
+            </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+  </div>
+
+
+
+  
+
+

@@ -1,0 +1,210 @@
+
+<style>
+    @media print and (min-width: 768px)
+    {
+table,th,td {
+    border:1px solid black;
+};
+table{
+    border-collapse:collapse;
+}
+.row
+{
+    margin-left: 400px;
+}
+.col-md-8, .bordersolid
+{
+    border-style: solid;
+}
+} 
+</style>
+<div class="content-wrapper" style="min-height: 242px; padding-bottom: 40px; ">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+  
+          </div><!-- /.col -->
+    
+        </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <div class="card card-default">
+            <div class="card-header">
+                <h3 *ngIf="MRoleId==1||MRoleId==2||MRoleId==3">Jawan Delete Death Details</h3>
+            </div>
+        
+            <div class="card-body" >
+                      
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="control-label" for="CurrentZoneId">मण्डल :</label>
+                            <select class="form-control" id="CurrentZoneId" name="CurrentZoneId" #CurrentZoneIdControl="ngModel" [(ngModel)]="empcontact.CurrentZoneId" required (change)="getdistrict(empcontact.CurrentZoneId,'')" [disabled]="disabledrpDivision">
+                                <option value="--Select--">--Select--</option>
+                                <option [value]="zone.zoneId" *ngFor="let zone of currentZonelist">{{zone.zoneName}}</option>
+                            </select>
+       
+                            </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="control-label" for="CurrentDistId">जिला :</label>
+                            <select class="form-control" id="CurrentDistId" name="CurrentDistId" #CurrentDistIdControl="ngModel" [(ngModel)]="empcontact.CurrentDistId" (change)="getBlock(empcontact.CurrentDistId);getCompany(empcontact.CurrentDistId,'')" [disabled]="disabledrpDistrict">
+                                <option value="--Select--">--Select--</option>
+                                <option [value]="district.distId" *ngFor="let district of currentdistlist">{{district.distName}}</option>
+                            </select>
+    
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <label></label>
+                            <!-- radio -->
+                            <div class="form-group clearfix mt-2  text-center">
+                             <label></label>
+                              <div class="icheck-primary d-inline">
+                                <input type="radio" [(ngModel)]="empcontact.residanceTypeCurrent" value="Urban" id="rbnCity"  (click)="ClickUrbanRuralCurrent()">
+                            
+                                <label for="rbnCity">
+                                    शहरी
+                                </label>
+                              </div>
+                              <div class="icheck-primary d-inline ml-2">
+                                <input type="radio" [(ngModel)]="empcontact.residanceTypeCurrent" id="rbnVillage" value="Rural" (click)="ClickUrbanRuralCurrent()"
+                               >
+                                <label for="rbnVillage">
+                                    ग्रामीण
+                                </label>
+                              </div>
+                             
+                            </div>
+                          
+                        
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4" *ngIf="empcontact.residanceTypeCurrent=='Rural'">
+                        <div class="form-group" >
+                                
+                          <label class="control-label" for="CurrentBlockId">कंपनी का नाम/विकास खंड  :</label>
+                            <select class="form-control" id="CurrentBlockId" name="CurrentBlockId" #CurrentBlockIdControl="ngModel" [(ngModel)]="empcontact.CurrentBlockId" (change)="getCompany(empcontact.CurrentDistId,empcontact.CurrentBlockId)">
+                                <option value="--Select--">--Select--</option>
+                                
+                                <option [value]="block.blockId" *ngFor="let block of blocklst">{{block.blockName}}</option>
+                            </select>
+                         
+                            </div>
+                      
+                    </div>
+                    <div class="col-md-4"  *ngIf="empcontact.residanceTypeCurrent=='Urban'">
+                        <div class="form-group">
+    
+                          <label class="control-label" for="CurrentBlockId">कंपनी का नाम/विकास खंड  :</label>
+                          
+                            <select class="form-control" id="CurrentCompanyId" name="CurrentCompanyId" #CurrentCompanyIdControl="ngModel" [(ngModel)]="empcontact.CurrentCompanyId" required >
+                                <option value="--Select--">--Select--</option>
+                                <option [value]="company.compId" *ngFor="let company of companylst">{{company.compName}}</option>
+                            </select>
+                            </div>
+                    </div>
+                    <div class="col-md-4"> 
+                        <div class="form-group text-center">
+           <br>
+                            <input type="submit" value="Search" class="btn btn-info form-control  mt-2 d-inline" (click)="GetDeleteDeathJawanDetail(empcontact.CurrentZoneId,empcontact.CurrentDistId,empcontact.CurrentCompanyId,empcontact.residanceTypeCurrent)" >
+                        </div>
+                    </div>
+                    
+                    </div>
+
+
+                
+                  <br/>
+                  <hr>
+            <div class="row">
+                <div class="col-md-12">
+                    <table id="tbl1" datatable class="table table-responsive table-hover" [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
+                        <thead>
+                            <tr>
+                                <th>क्रम संख्या</th>
+                                <th>सर्विस नं0</th>
+                                <th>जवान नाम </th>
+                               <th>पिता  का नाम</th>
+                               <th>जिला</th>
+                                <th>कम्पनी का नाम </th>
+                                <th>कारण </th>
+                                <th> Download Certificate </th>
+                             </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let jawan of PunishJawanlist;let i=index" >
+                            <td>{{i+1}}</td>
+                            <td>{{jawan.serviceNo}}</td>
+                            <td>{{jawan.jawanName}}</td>
+                            <td>{{jawan.fatherName}}</td>
+                            <td>{{jawan.district}}</td>
+                            <td>{{jawan.company}}</td>
+                            <td>{{jawan.deathRemark}}</td>
+                            <td><a class="btn btn-info btn-xs" (click)="DownloadDocument(jawan.empId)" data-toggle="modal" data-target="#DocumentModal"><i class="fa fa-download" style="color:white"></i></a>
+                                
+                
+                       
+                        </tr>
+                        
+                        </tbody>
+                    </table>
+           
+                </div>
+            </div>
+                
+              
+            </div>
+           
+        </div>
+        <div class="col-md-4" *ngIf="DocModal">
+            <div class="modal fade" id="DocumentModal" tabindex="-1" role="dialog" aria-labelledby="DocumentModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="DocumentModalLabel">Download Document</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <!-- <label class="control-label">टिप्पणी</label> -->
+                          <table class="table table-bordered table-responsive">
+                              <tbody>
+                                  <tr><td><a class="btn btn-warning" style="color: white;" href="{{JawanPic}}" target="_blank">Jawan Death Certificate&nbsp;<i class="fa fa-download"></i></a></td>
+                                   
+                                </tr>
+                    
+                                 
+                              </tbody>
+                          </table>
+                           
+                             </div>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  
+                    </div>
+                  </div>
+                </div>
+              </div>
+        </div>
+        <ngx-spinner bdColor="rgba(51, 51, 51, 0.8)" size="default" type="ball-spin-clockwise">  
+            <p style="color: white">Please Wait. </p>  
+            </ngx-spinner>
+    </div><!-- /.container-fluid -->
+  </section>
+  <!-- /.content -->
+</div>
+
+

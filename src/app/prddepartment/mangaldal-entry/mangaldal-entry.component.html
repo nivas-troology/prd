@@ -1,0 +1,358 @@
+<div class="content-wrapper" style="min-height: 242px; padding-bottom: 30px;" *ngIf="teamDiv">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+  
+          </div><!-- /.col -->
+    
+        </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </div>
+
+<section class="content">
+    
+    <div class="row RegForm">
+        <div class="col-md-12">
+           <div class="card card-default">
+      
+               <div class="card-header"><h4>मंगल दल रजिस्ट्रेशन</h4>
+                <button type="button" class="btn btn-tool" data-card-widget="collapse" style="float: right;"><i class="fas fa-minus"></i></button>
+            </div>
+               <div class="card-body">
+                   <form #OrgRegForm="ngForm" (ngSubmit)="OrgRegistration(OrgRegForm)" autocomplete="off">
+
+                
+                   <div class="row">
+                       <div class="col-md-4">
+                           <div class="form-group" >
+                               <label class="control-label">जिला:&nbsp;<code>*</code></label>
+                               <select class="form-control" id="District" name="District" #District="ngModel" [class.is-invalid] ="District.pristine && District.touched" [(ngModel)]="Team.DistId" (change)="getBlock(Team.DistId)" required>
+                                   <option value="0" disabled>--Select--</option>
+                                   <option [value]="dist.distId" *ngFor="let dist of distlist">{{dist.distName}}</option>
+                               </select>
+                               <span class="help-block" *ngIf="District.pristine && District.touched">कृपया जिला चुनें </span>
+                           </div>
+                       </div>
+                       <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="control-label">विकासखंड:&nbsp;<code>*</code></label>
+                            <select class="form-control" id="Block" name="Block" #Block="ngModel" [class.is-invalid] ="Block.pristine && Block.touched" [(ngModel)]="Team.BlockId" (change)="getGP(Team.BlockId)" required>
+                                <option value="0"disabled>--Select--</option>
+                                <option [value]="block.blockId" *ngFor="let block of blocklst">{{block.blockName}}</option>
+                            </select>
+                            <span class="help-block" *ngIf="Block.pristine && Block.touched">कृपया विकासखंड चुनें</span>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group" >
+                            <label class="control-label">ग्रामपंचायत:&nbsp;<code>*</code></label>
+                            <select class="form-control" id="GP" name="GP" #GP="ngModel"  [class.is-invalid] ="GP.pristine && GP.touched" [(ngModel)]="Team.Gpid" required>
+                                <option value="0"disabled>--Select--</option>
+                                <option [value]="gp.gramPId" *ngFor="let gp of Gplst">{{gp.gramPName}}</option>
+                            </select>
+                            <span class="help-block" *ngIf="GP.pristine && GP.touched">कृपया ग्रामपंचायत चुनें </span>
+                        </div>
+                    </div>
+                    
+                   </div>
+                   <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group" >
+                            <label class="control-label">संस्था का प्रकार:&nbsp;<code>*</code></label>
+                            <select class="form-control" id="TeamType" name="TeamType" [class.is-invalid] ="TeamType.pristine && TeamType.touched" #TeamType="ngModel" [(ngModel)]="Team.TeamTypeId"  required>
+                                <option value="0"disabled>--Select--</option>
+                                <option [value]="teamtype.teamTypeId" *ngFor="let teamtype of TeamTypelst">{{teamtype.teamType1}}</option>
+                            </select>
+                            <span class="help-block" *ngIf="TeamType.pristine && TeamType.touched">कृपया संस्था का प्रकारचुनें</span>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                     <div class="form-group" >
+                        <label class="control-label">संस्था का नाम:&nbsp;<code>*</code></label>
+                        <input class="form-control" id="TeamName" name="TeamName" #TeamName="ngModel"  [class.is-invalid] ="TeamName.invalid && TeamName.touched" [(ngModel)]="Team.TeamName" (ngModelChange)="Team.TeamName=$event.toUpperCase()" required >
+                        <span class="help-block" *ngIf="TeamName.invalid && TeamName.touched">कृपया संस्था का नाम भरें</span>
+                     </div>
+                 </div>
+                 <div class="col-md-4">
+                    <div class="form-group">
+                       <label class="control-label">सर्टिफिकेट नं० :&nbsp;<code>*</code></label>
+                       <input class="form-control" id="CertificateNo" name="CertificateNo"  [class.is-invalid] ="CertificateNo.invalid && CertificateNo.touched" #CertificateNo="ngModel" [(ngModel)]="Team.CertificateNo" (ngModelChange)="Team.CertificateNo=$event.toUpperCase()" required>
+                       <span class="help-block" *ngIf="CertificateNo.invalid && CertificateNo.touched">कृपया सर्टिफिकेट नं० भरें</span>
+                    </div>
+                </div>
+                 
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                    <div class="form-group">
+                        <label class="control-label">दिनांक से :</label>
+                         <input type="text" class="form-control" id="ValidFrom" bsDatepicker #ValidFrom="ngModel" [class.is-invalid] ="ValidFrom.invalid && ValidFrom.touched"  [bsConfig]="{dateInputFormat:'DD/MM/YYYY'}" name="ValidFrom" [(ngModel)]="Team.ValidFrom"   autocomplete="off" placeholder="dd/MM/yyyy,15/08/1947" required>
+                         <span class="help-block" *ngIf="ValidFrom.invalid && ValidFrom.touched">कृपया दिनांक भरें</span>
+                         </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="control-label">दिनांक तक :</label>
+                                <input type="text" class="form-control" id="ValidTo" #ValidTo="ngModel" [(ngModel)]="Team.ValidTo" [class.is-invalid] ="ValidTo.invalid && ValidTo.touched" bsDatepicker [bsConfig]="{dateInputFormat:'DD/MM/YYYY'}" name="ValidTo" autocomplete="off" placeholder="dd/MM/yyyy,15/08/1947" required>
+                                <span class="help-block" *ngIf="ValidTo.invalid && ValidTo.touched">कृपया दिनांक भरें</span>
+                                 </div>
+                                </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="control-label"><span style="color: white;">;;;;;</span></label>
+                          <input type="submit" class="btn btn-success form-control" value="Save" *ngIf="btnSave" [disabled]="OrgRegForm.invalid">
+                          <input type="submit" class="btn btn-primary form-control" value="Update" *ngIf="btnUpdate">
+                        </div>
+                         
+                       </div>
+                </div>
+            </form>
+            <div class="card card-default">
+            
+                <div class="card-header"><h5>मंगल दल का विविरण</h5>
+                    <button type="button" class="btn btn-tool" data-card-widget="collapse" style="float: right;"><i class="fas fa-minus"></i></button>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                         <table class="table  table-responsive table-bordered" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
+                             <thead class="table table-primary">
+                                 <tr>
+                               <th>क्रम संख्या</th>
+                               <th style="width:10%;">Edit</th>
+                               <th style="width:10%;">Delete</th>
+                               <th style="width:10%;">सदस्यों का रजिस्ट्रेशन</th>
+                               <th style="width:10%;">जिला</th>
+                               <th style="width:10%;">विकासखंड </th>
+                               <th style="width:10%;">ग्रामपंचायत</th>
+                               <th style="width:10%;">संस्था का प्रकार</th>
+                               <th style="width:10%;">संस्था का नाम </th>
+                               <th style="width:10%;">सर्टिफिकेट नं० </th>
+                               <th style="width:10%;">दिनांक से </th>
+                               <th style="width:10%;">दिनांक तक </th>
+                            
+                                 </tr>
+                             </thead>
+                             <tbody>
+                                 <tr *ngFor="let org of Orglst;let i=index" >
+                                    <td>{{i+1}}</td>
+                                    <td><a class="btn btn-warning text-white" (click)="Edit(org.teamId)"><i class="fa fa-edit"></i></a></td>
+                                    <td><a class="btn btn-danger text-white" (click)="DeleteTeam(org.teamId)"><i class="fa fa-trash"></i></a></td>
+                                    <td><a class="btn btn-primary text-white" (click)="getMemberRegDiv(org.teamId)"><i class="fa fa-arrow-alt-circle-right"></i></a></td>
+                                   <td>{{org.district}}</td>
+                                   <td>{{org.block}}</td>
+                                   <td>{{org.gpanchayat}}</td>
+                                   <td>{{org.teamType}}</td>
+                                   <td>{{org.teamName}}</td>
+                                   <td>{{org.certificateNo}}</td>
+                                   <td>{{org.validFrom}}</td>
+                                   <td>{{org.validTo}}</td>
+                                 
+
+                                 </tr>
+                             </tbody>
+                         </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+               </div>
+         
+           </div>
+          
+        </div>
+   
+ 
+       
+  
+      
+    
+    </div>
+
+</section>
+
+</div>
+<div class="content-wrapper" style="min-height: 242px; padding-bottom: 30px;" *ngIf="memberDiv">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+  
+          </div><!-- /.col -->
+    
+        </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </div>
+    <section class="content">
+    
+        <div class="row RegForm">
+            <div class="col-md-12">
+               <div class="card card-default">
+               
+                   <div class="card-header"><a class="btn btn-primary text-white" (click)="Back()"><i class="fa fa-arrow-alt-circle-left"></i></a><h4>सदस्यों का रजिस्ट्रेशन<span class="text text-success">(संस्था का नाम: {{TeamNameHeader}})</span></h4>
+                    <button type="button" class="btn btn-tool" data-card-widget="collapse" style="float: right;"><i class="fas fa-minus"></i></button>
+                </div>
+                   <div class="card-body">
+                       <form autocomplete="off" #MemberForm="ngForm" (ngSubmit)="MemberRegister(MemberForm)">
+                           <div class="row">
+                               <div class="col-md-4">
+                                   <div class="form-group">
+                                       <label class="control-label">सदस्य का नाम:&nbsp;<code>*</code></label>
+                                       <input type="text" class="form-control" id="MemberName" name="MemberName" [class.is-invalid]="MemberName.invalid && MemberName.touched" #MemberName="ngModel" [(ngModel)]="Member.MemberName" required (ngModelChange)="Member.MemberName=$event.toUpperCase()">
+                                       <span class="help-block"  *ngIf="MemberName.invalid && MemberName.touched">कृपया  सदस्य का नाम भरें</span>
+                                   </div>
+                               </div>
+                               <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="control-label">पिता का नाम:&nbsp;<code>*</code></label>
+                                    <input type="text" class="form-control" id="FatherName" name="FatherName" #FatherName="ngModel" [class.is-invalid]="FatherName.invalid && FatherName.touched" [(ngModel)]="Member.FatherName" required (ngModelChange)="Member.FatherName=$event.toUpperCase()">
+                                    <span class="help-block"  *ngIf="FatherName.invalid && FatherName.touched">कृपया  पिता का नाम भरें </span>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="control-label">माता का नाम:&nbsp;<code>*</code></label>
+                                    <input type="text" class="form-control" id="MotherName" name="MotherName" #MotherName="ngModel" [class.is-invalid]="MotherName.invalid && MotherName.touched" [(ngModel)]="Member.MotherName" required (ngModelChange)="Member.MotherName=$event.toUpperCase()">
+                                    <span class="help-block"  *ngIf="MotherName.invalid && MotherName.touched">कृपया  माता का नाम भरें</span>
+                                </div>
+                            </div>
+                      
+                           </div>
+                           <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="control-label">जन्मतिथि:&nbsp;<code>*</code></label>
+                                    <input type="text" class="form-control" id="Dob" bsDatepicker [bsConfig]="{dateInputFormat:'DD/MM/YYYY'}" [class.is-invalid]="Dob.invalid && Dob.touched" placeholder="eg:15/08/1947" name="Dob" #Dob="ngModel" [(ngModel)]="Member.Dob" required>
+                                    <span class="help-block"  *ngIf="Dob.invalid && Dob.touched">कृपया  जन्मतिथि भरें </span>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="control-label">लिंग:&nbsp;<code>*</code></label>
+                                    <select class="form-control" id="Gender" name="Gender" #Gender="ngModel" [(ngModel)]="Member.Gender" [class.is-invalid]="Gender.pristine && Gender.touched" required disabled>
+                                      
+                                        <option value="0">--Select--</option>
+                                        <option value="MALE">MALE</option>
+                                        <option value="FEMALE">FEMALE</option>
+                                    </select>
+                                    <span class="help-block"  *ngIf="Gender.pristine && Gender.touched">कृपया  लिंग चुनें</span>
+                                </div>
+                            </div>
+                    
+                         <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="control-label">पद:&nbsp;<code>*</code></label>
+                                <select class="form-control" id="Designation" name="Designation" #Designation="ngModel" [class.is-invalid]="Designation.pristine && Designation.touched" [(ngModel)]="Member.MemberDesignationId" required>
+                                    <option value=0>--Select--</option>
+                                    <option [value]="desg.memberDesigId" *ngFor="let desg of Desglst">{{desg.memberDesigName}}</option>
+                                </select>
+                                <span class="help-block"  *ngIf="Designation.pristine && Designation.touched">कृपया  पद चुनें</span>
+                            </div>
+                        </div>
+                         <!-- <div class="col-md-3">
+                             <div class="form-group">
+                                 <label class="control-label">लम्बाई(सेमी0 में):&nbsp;<code>*</code></label>
+                                 <input type="text" class="form-control" id="Height" name="Height" #Height="ngModel" pattern="[0-9]+" [class.is-invalid]="Height.invalid && Height.touched" [(ngModel)]="Member.Height" required>
+                                 <span class="help-block"  *ngIf="Height.invalid && Height.touched">कृपया  लम्बाई(सेमी0 में) भरें</span>
+                             </div>
+                         </div>
+                         <div class="col-md-3">
+                             <div class="form-group">
+                                 <label class="control-label">सीना(सेमी0 में):&nbsp;<code>*</code></label>
+                                 <input type="text" class="form-control" id="Chest" name="Chest" #Chest="ngModel" pattern="[0-9]+" [class.is-invalid]="Chest.invalid && Chest.touched" [(ngModel)]="Member.Chest" required>
+                                 <span class="help-block"  *ngIf="Chest.invalid && Chest.touched">कृपया  सीना(सेमी0 में) भरें</span>
+                             </div>
+                         </div> -->
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="control-label">मोबाइल नं0:&nbsp;<code>*</code></label>
+                                    <input type="text" class="form-control" id="ContactNo" name="ContactNo" maxlength="10" pattern="^((\\+91-?)|0)?[0-9]{10}$" #ContactNo="ngModel" [class.is-invalid]="ContactNo.invalid && ContactNo.touched" [(ngModel)]="Member.ContactNo" required (ngModelChange)="Member.ContactNo==$event.toUpperCase()">
+                                    <span class="help-block"  *ngIf="ContactNo.invalid && ContactNo.touched">कृपया  मोबाइल नं0 भरें</span>
+                                </div>
+                            </div>
+                       
+                     
+               
+                        </div>
+                   
+                        <div class="row">
+                     
+                            <div class="col-md-4" style="float: right;">
+                                <label class="control-label" style="color: white;">फोटो:&nbsp;</label>
+                                <div class="form-group">
+                                    <input type="submit" class="btn btn-success" value="Add Member Finally" *ngIf="btnMemberSave"[disabled]="MemberForm.invalid">
+                                    <input type="button" class="btn btn-primary" value="Update Member" *ngIf="btnMemberUpdate" (click)="UpdateMember(Member)">
+                                </div>
+                             
+                            </div>
+                        </div>
+                </form>
+              
+                   </div>
+             
+               </div>
+               <div class="card card-default">
+            
+                <div class="card-header"><h4>सदस्यों का विवरण</h4>
+                    <button type="button" class="btn btn-tool" data-card-widget="collapse" style="float: right;"><i class="fas fa-minus"></i></button>
+                </div>
+                <div class="card-body">
+                   <div class="row">
+                       <div class="col-md-12">
+                           <table class="table table-bordered table-responsive">
+                               <thead class="table table-primary">
+                                   <tr>
+                                    <th>क्रम संख्या0</th>
+                                    <th style="width:13%">Action</th>
+                                    <th style="width:13%">सदस्य का नाम</th>
+                                    <th style="width:13%">पिता का नाम</th>
+                                    <th style="width:13%">माता का नाम</th>
+                                    <th style="width:13%">जन्मतिथि</th>
+                                    <th style="width:13%">लिंग</th>
+                                    <th style="width:13%">पद</th>
+                                    <th style="width:13%">मोबाइल नं0</th>
+                              
+                                  
+                                   </tr>
+                               </thead>
+                               <tbody>
+                                   <tr *ngFor="let member of Memberlst;let i=index;">
+                                       <td>{{i+1}}</td>
+                        
+                                       <td><a class="btn btn-warning" (click)="EditMember(member.memberId)"><i class="fa fa-edit"></i></a>&nbsp;<a class="btn btn-danger" (click)="DeleteMember(member.memberId)"><i class="fa fa-trash"></i></a></td>
+                                       <td>{{member.memberName}}</td>
+                                       <td>{{member.fatherName}}</td>
+                                       <td>{{member.motherName}}</td>
+                                       <td>{{member.dob|date:"dd/MM/yyyy"}}</td>
+                                       <td>{{member.gender}}</td>
+                                       <td>{{member.desgName}}</td>
+                                       <!-- <td>{{member.height}}</td>
+                                       <td>{{member.chest}}</td> -->
+                                       <td>{{member.contactNo}}</td>
+                       
+
+                                   </tr>
+                               </tbody>
+                           </table>
+                       </div>
+                   </div>
+                </div>
+          
+            </div>
+            </div>
+       
+     
+           
+      
+          
+        
+        </div>
+  
+</section>
+</div>
+

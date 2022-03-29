@@ -1,0 +1,222 @@
+
+
+<main>
+
+  
+    <!-- About Law End-->
+    <!--? Brand Area Start -->
+    <section class="team-area pt-180 pb-100 section-bg" style="background-image: url('../../../assets/MangalDal/img/gallery/section_bg02.png');">
+    
+            <div class="row RegForm">
+                <div class="col-md-12">
+                   <div class="card card-default">
+                   
+                       <div class="card-header"><h4>सदस्यों का रजिस्ट्रेशन</h4>
+                        <button type="button" class="btn btn-tool" data-card-widget="collapse" style="float: right;"><i class="fas fa-minus"></i></button>
+                    </div>
+                       <div class="card-body">
+                           <form autocomplete="off" #MemberForm="ngForm" (ngSubmit)="MemberRegister(MemberForm)">
+                               <div class="row">
+                                   <div class="col-md-4">
+                                       <div class="form-group">
+                                           <label class="control-label">सदस्य का नाम:&nbsp;<code>*</code></label>
+                                           <input type="text" class="form-control" id="MemberName" name="MemberName" [class.is-invalid]="MemberName.invalid && MemberName.touched" #MemberName="ngModel" [(ngModel)]="Member.MemberName" required (ngModelChange)="Member.MemberName=$event.toUpperCase()">
+                                           <span class="help-block"  *ngIf="MemberName.invalid && MemberName.touched">कृपया  सदस्य का नाम भरें</span>
+                                       </div>
+                                   </div>
+                                   <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="control-label">पिता का नाम:&nbsp;<code>*</code></label>
+                                        <input type="text" class="form-control" id="FatherName" name="FatherName" #FatherName="ngModel" [class.is-invalid]="FatherName.invalid && FatherName.touched" [(ngModel)]="Member.FatherName" required (ngModelChange)="Member.FatherName=$event.toUpperCase()">
+                                        <span class="help-block"  *ngIf="FatherName.invalid && FatherName.touched">कृपया  पिता का नाम भरें </span>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="control-label">माता का नाम:&nbsp;<code>*</code></label>
+                                        <input type="text" class="form-control" id="MotherName" name="MotherName" #MotherName="ngModel" [class.is-invalid]="MotherName.invalid && MotherName.touched" [(ngModel)]="Member.MotherName" required (ngModelChange)="Member.MotherName=$event.toUpperCase()">
+                                        <span class="help-block"  *ngIf="MotherName.invalid && MotherName.touched">कृपया  माता का नाम भरें</span>
+                                    </div>
+                                </div>
+                          
+                               </div>
+                               <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="control-label">जन्मतिथि:&nbsp;<code>*</code></label>
+                                        <input type="text" class="form-control" id="Dob" bsDatepicker [bsConfig]="{dateInputFormat:'DD/MM/YYYY'}" [class.is-invalid]="Dob.invalid && Dob.touched" placeholder="eg:15/08/1947" name="Dob" #Dob="ngModel" [(ngModel)]="Member.Dob" required>
+                                        <span class="help-block"  *ngIf="Dob.invalid && Dob.touched">कृपया  जन्मतिथि भरें </span>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="control-label">लिंग:&nbsp;<code>*</code></label>
+                                        <select class="form-control" id="Gender" name="Gender" #Gender="ngModel" [(ngModel)]="Member.Gender" [class.is-invalid]="Gender.pristine && Gender.touched" required disabled>
+                                          
+                                            <option value="0">--Select--</option>
+                                            <option value="MALE">MALE</option>
+                                            <option value="FEMALE">FEMALE</option>
+                                        </select>
+                                        <span class="help-block"  *ngIf="Gender.pristine && Gender.touched">कृपया  लिंग चुनें</span>
+                                    </div>
+                                </div>
+                        
+                             <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="control-label">पद:&nbsp;<code>*</code></label>
+                                    <select class="form-control" id="Designation" name="Designation" #Designation="ngModel" [class.is-invalid]="Designation.pristine && Designation.touched" [(ngModel)]="Member.MemberDesignationId" required>
+                                        <option value=0>--Select--</option>
+                                        <option [value]="desg.memberDesigId" *ngFor="let desg of Desglst">{{desg.memberDesigName}}</option>
+                                    </select>
+                                    <span class="help-block"  *ngIf="Designation.pristine && Designation.touched">कृपया  पद चुनें</span>
+                                </div>
+                            </div>
+                             <!-- <div class="col-md-3">
+                                 <div class="form-group">
+                                     <label class="control-label">लम्बाई(सेमी0 में):&nbsp;<code>*</code></label>
+                                     <input type="text" class="form-control" id="Height" name="Height" #Height="ngModel" pattern="[0-9]+" [class.is-invalid]="Height.invalid && Height.touched" [(ngModel)]="Member.Height" required>
+                                     <span class="help-block"  *ngIf="Height.invalid && Height.touched">कृपया  लम्बाई(सेमी0 में) भरें</span>
+                                 </div>
+                             </div>
+                             <div class="col-md-3">
+                                 <div class="form-group">
+                                     <label class="control-label">सीना(सेमी0 में):&nbsp;<code>*</code></label>
+                                     <input type="text" class="form-control" id="Chest" name="Chest" #Chest="ngModel" pattern="[0-9]+" [class.is-invalid]="Chest.invalid && Chest.touched" [(ngModel)]="Member.Chest" required>
+                                     <span class="help-block"  *ngIf="Chest.invalid && Chest.touched">कृपया  सीना(सेमी0 में) भरें</span>
+                                 </div>
+                             </div> -->
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="control-label">मोबाइल नं0:&nbsp;<code>*</code></label>
+                                        <input type="text" class="form-control" id="ContactNo" name="ContactNo" maxlength="10" pattern="^((\\+91-?)|0)?[0-9]{10}$" #ContactNo="ngModel" [class.is-invalid]="ContactNo.invalid && ContactNo.touched" [(ngModel)]="Member.ContactNo" required (ngModelChange)="Member.ContactNo==$event.toUpperCase()">
+                                        <span class="help-block"  *ngIf="ContactNo.invalid && ContactNo.touched">कृपया  मोबाइल नं0 भरें</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="control-label">शैक्षिक योग्यता प्रमाण पत्र:</label>
+                                        <input type="file" class="form-control"
+                    id="EduCert"
+                    name="EduCert"
+                    #EduCert="ngModel"
+                    [(ngModel)]="Member.EduCert"
+                    (change)="UploadEduCert($event)">
+                    <h6 style="color:red">Supported format .jpg/.jpeg/.png/.pdf,Maxsize:500kb-1MB</h6>
+                 
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                 <div class="form-group">
+                                     <label class="control-label">पहचान पत्र:&nbsp;<code>*</code></label>
+                                     <input type="file" class="form-control"
+                                     id="IdCard"
+                                     name="IdCard"
+                                     #IdCard="ngModel"
+                                     [(ngModel)]="Member.IdCard"
+                                     (change)="UploadIdCard($event)" required [class.is-invalid]="IdCard.invalid && IdCard.touched">
+                                     <h6 style="color:red">Supported format .jpg/.jpeg/.png/.pdf,Maxsize:500kb-1MB</h6>
+                                     <span class="help-block"  *ngIf="IdCard.invalid && IdCard.touched">कृपया  पहचान पत्र अपलोड करें</span>
+                                 </div>
+                             </div>
+                         
+                   
+                            </div>
+                       
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="control-label">फोटो:&nbsp;<code>*</code></label>
+                                        <input type="file" class="form-control"
+                                        id="MemberPic"
+                                        name="MemberPic"
+                                        #MemberPic="ngModel"
+                                        [(ngModel)]="Member.MemberPic"
+                                        (change)="UploadMemberPic($event)" required [class.is-invalid]="MemberPic.invalid && MemberPic.touched">
+                                        <h6 style="color:red">Supported format .jpg/.jpeg/.png,Maxsize:500kb-1MB</h6>
+                                        <span class="help-block"  *ngIf="MemberPic.invalid && MemberPic.touched">कृपया फोटो अपलोड करें </span>
+                                    </div>
+                                </div>
+                                <div class="col-md-4" style="float: right;">
+                                    <label class="control-label" style="color: white;">फोटो:&nbsp;</label>
+                                    <div class="form-group">
+                                        <input type="submit" class="btn btn-success" value="Add Member Finally" *ngIf="btnSave"[disabled]="MemberForm.invalid">
+                                        <input type="button" class="btn btn-primary" value="Update Member" *ngIf="btnUpdate" (click)="UpdateMember(Member)">
+                                    </div>
+                                 
+                                </div>
+                            </div>
+                    </form>
+                  
+                       </div>
+                 
+                   </div>
+                   <div class="card card-default">
+                
+                    <div class="card-header"><h4>सदस्यों का विवरण</h4>
+                        <button type="button" class="btn btn-tool" data-card-widget="collapse" style="float: right;"><i class="fas fa-minus"></i></button>
+                    </div>
+                    <div class="card-body">
+                       <div class="row">
+                           <div class="col-md-12">
+                               <table class="table table-bordered table-responsive">
+                                   <thead class="table table-primary">
+                                       <tr>
+                                        <th>क्रम संख्या0</th>
+                                        <th>Action</th>
+                                        <th>सदस्य का नाम</th>
+                                        <th>पिता का नाम</th>
+                                        <th>माता का नाम</th>
+                                        <th>जन्मतिथि</th>
+                                        <th>लिंग</th>
+                                        <th>पद</th>
+                                        <!-- <th>लम्बाई(सेमी0 में)</th>
+                                        <th>सीना(सेमी0 में)</th> -->
+                                        <th>मोबाइल नं0</th>
+                                        <th>शैक्षिक योग्यता प्रमाण पत्र</th>
+                                        <th>पहचान पत्र</th>
+                                        <th>फोटो</th>
+                                      
+                                       </tr>
+                                   </thead>
+                                   <tbody>
+                                       <tr *ngFor="let member of Memberlst;let i=index;">
+                                           <td>{{i+1}}</td>
+                            
+                                           <td><a class="btn btn-warning" (click)="EditMember(member.memberId)"><i class="fa fa-edit"></i></a>&nbsp;<a class="btn btn-danger" (click)="DeleteMember(member.memberId)"><i class="fa fa-trash"></i></a></td>
+                                           <td>{{member.memberName}}</td>
+                                           <td>{{member.fatherName}}</td>
+                                           <td>{{member.motherName}}</td>
+                                           <td>{{member.dob|date:"dd/MM/yyyy"}}</td>
+                                           <td>{{member.gender}}</td>
+                                           <td>{{member.desgName}}</td>
+                                           <!-- <td>{{member.height}}</td>
+                                           <td>{{member.chest}}</td> -->
+                                           <td>{{member.contactNo}}</td>
+                                           <td><a class="btn btn-warning" (click)="DownloadEduCert(member.eduCert)" *ngIf="member.eduCert!=null"><i class="fa fa-download"></i></a></td>
+                                           <td><a class="btn btn-warning" (click)="DownloadIdCard(member.idCard)"><i class="fa fa-download"></i></a></td>
+                                           <td><img [src]="MemDocUrl+member.memberPic" height="100px" width="100px"/></td>
+
+                                       </tr>
+                                   </tbody>
+                               </table>
+                           </div>
+                       </div>
+                    </div>
+              
+                </div>
+                </div>
+           
+         
+               
+          
+              
+            
+            </div>
+      
+    </section>
+  
+    </main>
+   
+  

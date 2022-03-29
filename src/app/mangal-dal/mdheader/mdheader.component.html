@@ -1,0 +1,46 @@
+<header>
+ <!--? Header Start -->
+ <div class="header-area">
+    <div class="main-header header-sticky">
+        <div class="container-fluid">
+            <div class="row align-items-center">
+                <!-- Logo -->
+                <div class="col-xl-1 col-lg-1 col-md-1">
+                    <div class="logo">
+                        <img src="../../../assets/img/Mangaldallogo.jpeg" alt="" class="img-fluid">
+                      
+                    </div>
+                   
+                </div>
+                <div class="col-xl-4 col-lg-4 col-md-1">
+                    <h3>Yuva Kalyan & Prantiya Rakshak Dal Vibhag,</h3>
+                    <p>Government of Uttar Pradesh</p>
+                </div>
+                <div class="col-xl-6 col-lg-6 col-md-6">
+                    <div class="menu-main d-flex align-items-center justify-content-end">
+                        <!-- Main-menu -->
+                        <div class="main-menu f-right d-none d-lg-block">
+                            <nav>
+                                <ul id="navigation">
+                                    <li><a routerLink="/MangalDal/MangalDalRegistration">Mangal Dal Registration</a></li>
+                                    <li *ngIf="CertificateMenu"><a routerLink="/MangalDal/Certificate">Download Certificate</a></li>
+                                    
+                                </ul>
+                            </nav>
+                        </div>
+                        <div class="header-right-btn f-right d-none d-lg-block ml-30">
+                            <button  class="btn header-btn" (click)="LogOut()">LogOut</button>
+                        </div>
+                    </div>
+                </div>   
+                <!-- Mobile Menu -->
+                <div class="col-12">
+                    <div class="mobile_menu d-block d-lg-none"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Header End -->
+
+</header>

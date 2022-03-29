@@ -1,0 +1,460 @@
+<aside class="main-sidebar sidebar-dark-primary elevation-4">
+  <!-- Brand Logo -->
+  <a class="brand-link">
+    <img src="assets/homeimg/prd-logo.jpg" class="brand-image img-circle elevation-3" style="opacity: .8">
+    <span>YK & PRD</span>
+  </a>
+
+  <!-- Sidebar -->
+  <div class="sidebar os-host os-theme-light os-host-overflow os-host-overflow-y os-host-resize-disabled os-host-scrollbar-horizontal-hidden os-host-transition">
+    <div class="os-resize-observer-host"><div class="os-resize-observer observed" style="left: 0px; right: auto;"></div></div><div class="os-size-auto-observer" style="height: calc(100% + 1px); float: left;"><div class="os-resize-observer observed"></div></div><div class="os-content-glue" style="margin: 0px -8px;"></div><div class="os-padding"><div class="os-viewport os-viewport-native-scrollbars-invisible" style="overflow-y: scroll; right: 0px; bottom: 0px;"><div class="os-content" style="padding: 0px 8px; height: 100%; width: 100%;">
+    <!-- Sidebar user panel (optional) -->
+    <!-- <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+      <div class="image">
+        <img src="assets/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+      </div>
+      <div class="info">
+        <a href="#" class="d-block">Alexander Pierce</a>
+      </div>
+    </div> -->
+
+    <!-- Sidebar Menu -->
+    <nav class="mt-2">
+      <ul class="nav nav-pills nav-sidebar flex-column"  data-widget="treeview" role="menu" data-accordion="false">
+        <!-- Add icons to the links using the .nav-icon class
+             with font-awesome or any other icon font library -->
+        <li class="nav-item has-treeview menu-open">
+          <a routerLink="/PRDDepartment/Dashboard" class="nav-link active">
+            <i class="nav-icon fas fa-tachometer-alt"></i>
+            <p>
+              Dashboard
+              <i class="right fas fa-angle-left"></i>
+            </p>
+          </a>
+         
+        </li>
+       
+        <li class="nav-item has-treeview menu-open" *ngIf="MRoleId==1">
+          <a href="" class="nav-link">
+            <i class="nav-icon fas fa-copy"></i>
+            <p>
+              Masters
+              <i class="fas fa-angle-left right"></i>
+           
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a routerLink="/PRDDepartment/PoliceStation" class="nav-link">
+                <i class="fa fa-university nav-icon" aria-hidden="true"></i>
+                
+                <p>Police Station</p>
+              </a>
+            </li>
+            <li class="nav-item" *ngIf="MRoleId==1">
+              <a routerLink="/PRDDepartment/BlockMaster" class="nav-link">
+                <div class="nav-icon   fa-fw nav-icon">
+                  <span class="fa fa-flag" ></span>
+                <p> &nbsp; Block Master </p>
+                </div>
+              </a>
+            </li>
+          </ul>
+        </li>
+        <li class="nav-item has-treeview" *ngIf="MRoleId==1">
+          <a href="" class="nav-link">
+            <i class="nav-icon far fa-id-badge fa-5x" style="font-size: 22px;" ></i>
+            <p>
+             User Management
+              <i class="fas fa-angle-left right"></i>
+           
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a routerLink="/PRDDepartment/UserManagement" class="nav-link">
+                <i class="fas fa-user-plus nav-icon"></i>
+                <p>User</p>
+              </a>
+            </li>
+           
+          </ul>
+        </li>
+        <li class="nav-item has-treeview" *ngIf="MRoleId==1||MRoleId==2||MRoleId==3">
+          <a href=""  class="nav-link">
+            <i class="nav-icon  fas fa-id-card-alt"></i>
+            <p>
+              PRD Jawan Registration
+              <i class="fas fa-angle-left right"></i>
+           
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+      
+            <li class="nav-item" *ngIf="MRoleId==3" >
+              <a *ngIf="isEnabled" routerLink="/PRDDepartment/Registration" class="nav-link" >
+                <i class="fas fa-address-card nav-icon"></i>
+                <p>New Registration</p>
+              </a>
+              <div *ngIf="!isEnabled" class="nav-link-disbtn" > 
+                <i class="fas fa-address-card nav-icon-disbtn"></i>
+                <p>New Registration (Closed)</p></div>
+            </li>
+            <li class="nav-item" *ngIf="MRoleId==3">
+              <a routerLink="/PRDDepartment/JawanDetails" class="nav-link">
+                <i class="fas fa-user-edit nav-icon"></i>
+               
+                <p>Registration Edit</p>
+              </a>
+            </li>
+            <li class="nav-item" *ngIf="MRoleId==1||MRoleId==2">
+              <a routerLink="/PRDDepartment/HoJawanList" class="nav-link">
+                <i class="fas fa-user-edit nav-icon"></i>
+               
+                <p>Registration Edit</p>
+              </a>
+            </li>
+            <li class="nav-item" *ngIf="MRoleId==1||MRoleId==2">
+              <a routerLink="/PRDDepartment/JawanApproval" class="nav-link">
+                <i class=" fas fa-user-check nav-icon"></i> 
+                <p>Jawan Approval</p>
+              </a>
+            </li>
+            <li class="nav-item" *ngIf="MRoleId==3">
+              <a routerLink="/PRDDepartment/JawanApproval" class="nav-link">
+                <div class="fa-layers  fa-fw nav-icon" >
+                  <span class="fas fa-user" ></span>
+                  <span class=" fas fa-stamp" style="font-size: 10px;" ></span>&nbsp;
+                <p> View Jawan<br/> Approval Status</p>
+                </div>
+              </a>
+            </li>
+            <li class="nav-item" *ngIf="MRoleId==1||MRoleId==3">
+              <a routerLink="/PRDDepartment/JawanTransfer" class="nav-link">
+                <div class="fa-layers  fa-fw nav-icon">
+                  <span class="fas fa-user" ></span>
+                  <span class="fas fa-exchange-alt " style="font-size: 12px;" ></span>&nbsp;
+                  <p> PRD Jawan Transfer</p>
+                </div>
+                
+               
+              </a>
+            </li>
+            <li class="nav-item" *ngIf="MRoleId==1||MRoleId==3">
+              <a routerLink="/PRDDepartment/JawanPunishment" class="nav-link">
+                <div class="fa-layers  fa-fw nav-icon">
+                  <span class="fas fa-user" ></span>
+                  <span class="fas fa-gavel " style="font-size: 12px;" ></span>&nbsp;
+                  <p>PRD Jawan Punishment</p>
+               
+                </div>
+               
+              </a>
+            </li>
+            <li class="nav-item" *ngIf="MRoleId==3">
+              <a routerLink="/PRDDepartment/DeleteDeathJawan" class="nav-link">
+                <i class="fas fa-user-edit nav-icon"></i>
+               
+                  <p> Jawan Death Details</p>                
+              </a>
+            </li>
+            <li class="nav-item" *ngIf="MRoleId==3||MRoleId==1||MRoleId==2">
+              <a routerLink="/PRDDepartment/DeleteDeathJawanList" class="nav-link">
+                <div class="fa-layers  fa-fw nav-icon">
+                  <span class="fas fa-user" ></span>
+                  <span class="fas fa-cross " style="font-size: 12px;" ></span>&nbsp;
+                  <p> Jawan Death Details List</p>               
+                </div>               
+              </a>
+            </li>
+          </ul>
+        </li>
+       
+        <li class="nav-item has-treeview" *ngIf="MRoleId==1||MRoleId==3">
+          <a href="" class="nav-link">
+            
+            <i class="fas fa-id-card nav-icon "></i>
+            <p>
+            Duty & Payment <br> Management
+              <i class="fas fa-angle-left right"></i>
+           
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+      
+            <li class="nav-item" *ngIf="MRoleId==3">
+              <a routerLink="/PRDDepartment/JawanAvailability" class="nav-link">
+                <div class="fa-layers  fa-fw nav-icon">
+                  <span class="fas fa-user" ></span>
+                  <span class=" fa  fa-calendar-alt" style="font-size: 10px;" ></span>&nbsp;
+                <p>PRD Jawan Availability</p>
+                </div>
+              </a>
+            </li>
+            <li class="nav-item" *ngIf="MRoleId==3">
+              <a routerLink="/PRDDepartment/DutyAllocation" class="nav-link">
+                <div class="fa-layers  fa-fw nav-icon">
+                  <span class="fas fa-user" ></span>
+                  <span class=" fa  fa-calendar-alt" style="font-size: 10px;" ></span>&nbsp;
+                <p>Duty Allocation</p>
+                </div>
+              </a>
+            </li>
+            <li class="nav-item" *ngIf="MRoleId==1">
+              <a routerLink="/PRDDepartment/DutySwapping" class="nav-link">
+                <div class="fa-layers  fa-fw nav-icon">
+                  <span class="fas fa-user" ></span>
+                  <span class="fas fa-exchange-alt " style="font-size: 12px;" ></span>&nbsp;
+                  <p>Duty Swapping</p>
+                </div>
+               
+              </a>
+            </li>
+            <li class="nav-item" *ngIf="MRoleId==3">
+              <a routerLink="/PRDDepartment/Attendance" class="nav-link">
+                <div class="fa-layers  fa-fw nav-icon">
+                  <span class="fas fa-user" ></span>
+                  <span class=" fa  fa-calendar-alt" style="font-size: 10px;" ></span>&nbsp;
+                <p>PRD Jawan Attendance</p>
+                </div>
+              </a>
+            </li>
+            <li class="nav-item" *ngIf="MRoleId==3">
+              <a routerLink="/PRDDepartment/WageCalculation" class="nav-link">
+                <div class="fa-layers  fa-fw nav-icon">
+                  <span class="fas fa-user" ></span>
+                  <span class=" fa  fa-calendar-alt" style="font-size: 10px;" ></span>&nbsp;
+                
+                <p> PRD Jawan <br/>Wages Calculation</p>
+                </div>
+              </a>
+           
+            </li>
+            <li class="nav-item" *ngIf="MRoleId==3">
+              <a routerLink="/PRDDepartment/WageSettlement" class="nav-link">
+                <div class="fa-layers  fa-fw nav-icon">
+                  <span class="fas fa-user" ></span>
+                  <span class=" fa fa-credit-card" style="font-size: 10px;" ></span>&nbsp;
+                <p>PRD Jawan <br/>Payment Settlement</p>
+                </div>
+              </a>
+              
+            </li>
+            <li class="nav-item " >
+              <a routerLink="/PRDDepartment/ManualDutyAllocation" class="nav-link">
+                <div class="fa-layers nav-icon">
+                  <span class="fas fa-user" ></span>
+                  <span class=" fas fa-tasks" style="font-size: 10px;" ></span>&nbsp;
+                 
+               
+                  <p> Manual Duty Allocation </p>
+                </div>
+              </a>
+             
+            </li>
+          </ul>
+        </li>
+        <li class="nav-item has-treeview" *ngIf="MRoleId==1||MRoleId==2||MRoleId==3">
+          <a href="" class="nav-link">
+            <i class="nav-icon fa fa-book"></i>
+            
+            <p>
+            Reports
+              <i class="fas fa-angle-left right"></i>
+       
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+      
+            <li class="nav-item">
+              <a routerLink="/PRDDepartment/RegisteredJawanReport" class="nav-link">
+                <div class="fa-layers  fa-fw nav-icon">
+                  <span class="fas fa-user" ></span>
+                  <span class="fa fa-list " style="font-size: 12px;" ></span>&nbsp;
+                  <p>PRD Jawan Registered List</p>
+               
+                </div>
+                
+              </a>
+            </li>
+            <li class="nav-item" *ngIf="MRoleId==3">
+              <a routerLink="/PRDDepartment/DutyAllocationReport" class="nav-link">
+                <div class="fa-layers  fa-fw nav-icon">
+                  <span class="fas fa-user" ></span>
+                  <span class=" fa  fa-calendar-alt" style="font-size: 10px;" ></span>&nbsp;
+                <p>PRD Jawan Duty <br/>Allocation Report</p>
+                </div>
+              </a>
+             
+            </li>
+            <li class="nav-item">
+              <a routerLink="/PRDDepartment/WagesDetailsReport" class="nav-link">
+                <div class="fa-layers  fa-fw nav-icon">
+                  <span class="fas fa-user" ></span>
+                  <span class=" fa fa-credit-card" style="font-size: 10px;" ></span>&nbsp;
+                  <p>PRD Jawan Duty <br/>Payment Report</p>
+               
+                </div>
+               
+            
+              </a>
+             
+            </li>
+       
+            <li class="nav-item">
+              <a routerLink="/PRDDepartment/PunishmentReport" class="nav-link">
+                <div class="fa-layers  fa-fw nav-icon">
+                  <span class="fas fa-user" ></span>
+                  <span class="fas fa-gavel " style="font-size: 12px;" ></span>&nbsp;
+                <p>Punishment Report</p>
+                </div>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a routerLink="/PRDDepartment/RetirementReport" class="nav-link">
+                <i class="fa fa-blind fa-2px nav-icon"></i>&nbsp;
+                <p>Retirement Report</p>
+              </a>
+            </li>
+            <li class="nav-item" >
+              <a routerLink="/PRDDepartment/AttendanceReport" class="nav-link">
+                <div class="fa-layers  fa-fw nav-icon">
+                  <span class="fas fa-user" ></span>
+                  <span class=" fa  fa-calendar-alt" style="font-size: 10px;" ></span>&nbsp;
+                <p>Attendance Report</p>
+                </div>
+              </a>
+             
+            </li>
+            <li class="nav-item " >
+              <a routerLink="/PRDDepartment/WagesDetailsReport" class="nav-link">
+                <div class="fa-layers nav-item">
+                  <span class="fas fa-hand-holding"></span>
+                  <span class="fas fa-rupee-sign"  style="font-size: 10px;"  data-fa-transform="up-2 shrink-10"></span>&nbsp;
+                  <p> Wages Report</p>
+                </div>
+              </a>
+             
+            </li>
+            <li class="nav-item " >
+              <a routerLink="/PRDDepartment/DutyLogReport" class="nav-link">
+                <div class="fa-layers nav-icon">
+                  <span class="fas fa-user" ></span>
+                  <span class=" fa  fas fa-newspaper" style="font-size: 10px;" ></span>&nbsp;
+               
+                  <p> Duty Log Report</p>
+                </div>
+              </a>
+             
+            </li>
+            <li class="nav-item " >
+              <a routerLink="/PRDDepartment/BioDataReport" class="nav-link">
+                <div class="fa-layers nav-icon">
+                  <span class="fas fa-user" ></span>
+                  <span class=" fa  fas fa-newspaper" style="font-size: 10px;" ></span>&nbsp;
+               
+                  <p> Bio Data Report </p>
+                </div>
+              </a>
+             
+            </li>
+            
+            <li class="nav-item " *ngIf="MRoleId==1">
+              <a routerLink="/PRDDepartment/JawanRegistrationSummary" class="nav-link">
+                <div class="fa-layers nav-icon">
+                  <span class="fas fa-user" ></span>
+                  <span class=" fa  fas fa-newspaper" style="font-size: 10px;" ></span>&nbsp;               
+                  <p>Jawan Reg Summary</p>
+                </div>
+              </a>
+             
+            </li>
+            <li class="nav-item " *ngIf="MRoleId==1||MRoleId==2||MRoleId==3">
+              <a routerLink="/PRDDepartment/PendingReport" class="nav-link">
+                <div class="fa-layers nav-icon">
+                  <span class="fas fa-user" ></span>
+                  <span class=" fa  fas fa-newspaper" style="font-size: 10px;" ></span>&nbsp;               
+                  <p>Pending Report </p>
+                </div>
+              </a>
+             
+            </li>
+            <li class="nav-item " >
+              <a routerLink="/PRDDepartment/ProcessJawanRegistrationReport" class="nav-link">
+                <div class="fa-layers nav-icon">
+                  <span class="fas fa-user" ></span>
+                  <span class=" fa  fas fa-newspaper" style="font-size: 10px;" ></span>&nbsp;
+               
+                  <p>Registration Report </p>
+                </div>
+              </a>
+             
+            </li>
+          </ul>
+        </li>
+        <li class="nav-item has-treeview" *ngIf="MRoleId==1||MRoleId==3||MRoleId==4">
+          <a href="" class="nav-link">
+            <i class="nav-icon  fas fa-house-user"></i>
+            <p>
+            Mangal Dal
+              <i class="fas fa-angle-left right"></i>
+           
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+      
+            <li class="nav-item"  *ngIf="MRoleId==3||MRoleId==4">
+              <a routerLink="/PRDDepartment/MangalDalApproval" class="nav-link">
+                <div class="fa-layers  fa-fw nav-icon" >
+                  <span class="fas fa-user" ></span>
+                  <span class=" fas fa-stamp" style="font-size: 10px;" ></span>&nbsp;
+                <p>Mangal Dal Approval</p>
+                </div>
+              </a>
+         
+            </li>
+            <li class="nav-item" *ngIf="MRoleId==1">
+              <a routerLink="/PRDDepartment/MangalDalEntry" class="nav-link">
+                <div class="fa-layers  fa-fw nav-icon" >
+                  <span class="fas fa-user" ></span>
+                  <span class=" fas fa-stamp" style="font-size: 10px;" ></span>&nbsp;
+                <p>Mangal Dal Entry</p>
+            
+                </div>
+              </a>
+         
+            </li>
+            <li class="nav-item" *ngIf="MRoleId==3||MRoleId==4||MRoleId==1">
+              <a routerLink="/PRDDepartment/MDActivities" class="nav-link">
+                <div class="fa-layers  fa-fw nav-icon" >
+                  <span class="fas fa-user" ></span>
+                  <span class=" fas fa-stamp" style="font-size: 10px;" ></span>&nbsp;
+                <p>Mangal Dal Activity</p>
+            
+                </div>
+              </a>
+         
+            </li>
+         <!--    <li class="nav-item" >
+              <a routerLink="/PRDDepartment/Notification" class="nav-link">
+                <div class="fa-layers  fa-fw nav-icon" >
+                  <span class="fas fa-user" ></span>
+                  <span class=" fas fa-stamp" style="font-size: 10px;" ></span>&nbsp;
+                <p>Notification</p>
+            
+                </div>
+              </a>
+         
+            </li> -->
+          </ul>
+        </li>
+      </ul>
+   
+      
+    </nav>
+   
+    <!-- /.sidebar-menu -->
+  </div></div></div></div>
+  <!-- /.sidebar -->
+</aside>
+

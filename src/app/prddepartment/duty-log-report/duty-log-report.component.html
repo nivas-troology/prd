@@ -1,0 +1,96 @@
+
+
+<div class="content-wrapper" style="min-height: auto; padding-bottom: 20px;">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+  
+          </div><!-- /.col -->
+    
+        </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <div class="card card-default">
+            <div class="card-header">
+                <h3>Duty Log Report</h3>
+            </div>
+        
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group" [class.has-error]="ServiceNoControl.invalid && ServiceNoControl.touched" [class.has-success]="ServiceNoControl.valid">
+                            <label class="control-label" for="ServiceNo">सर्विस नं0</label>
+                            <input type="text" class="form-control" id="ServiceNo" name="ServiceNo" #ServiceNoControl="ngModel" [(ngModel)]="ServiceNo" required autocomplete="off" (ngModelChange)="ServiceNo=$event.toUpperCase()">
+                            <span class="help-block" *ngIf="ServiceNoControl.invalid && ServiceNoControl.touched">कृपया सर्विस नं0 डालिये</span>
+                        </div>
+                
+                    </div>
+               
+                    <div class="col-md-3">
+                        <input type="button" id="btnSearch" name="btnSearch" value="Search" class="btn btn-success" style="margin-top: 32px;" (click)="getJawanDutyLogStatus(ServiceNo)">
+                    </div>
+                </div>
+                <br>
+                <hr>
+               
+                <div class="row">
+                    <div class=col-md-12>
+                        <h3 >Duty Log  Status</h3>
+                    </div>
+                    <div class="col-md-12">
+                        <table id="tbl1" datatable class="table table-responsive table-hover" [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
+                            <thead>
+                                <tr>
+                                    <th>क्रम संख्या</th>
+                                    <th>सर्विस नं0</th>
+                                    <th>जवान नाम </th>
+                                    <th>पिता  का नाम</th>
+                                    <th>तैनातिक स्थल </th>
+                                    <th>दिनांक से </th>
+                                    <th>दिनांक तक  </th>
+                                    <th>अवधि  </th>
+                                   
+                                 
+                                 </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let jawan of JawanDutyLoglist;let i=index" >
+                                <td>{{i+1}}</td>
+                                <td>{{jawan.serviceNo}}</td>
+                                <td>{{jawan.empName}}</td>
+                                <td>{{jawan.fatherName}}</td>
+                                <td>{{jawan.site}}</td>
+                                <td>{{jawan.fromDate}}</td>
+                                <td>{{jawan.toDate}}</td>
+                                <td>{{jawan.duration}}</td>
+                                
+                               
+                           
+                            </tr>
+                            
+                            </tbody>
+                        </table>
+               
+                    </div>
+                </div>
+               
+            </div>
+       
+        </div>
+ 
+        <ngx-spinner bdColor="rgba(51, 51, 51, 0.8)" size="default" type="ball-spin-clockwise">  
+            <p style="color: white">Please Wait. </p>  
+            </ngx-spinner>
+    </div><!-- /.container-fluid -->
+  </section>
+  <!-- /.content -->
+</div>
+
+

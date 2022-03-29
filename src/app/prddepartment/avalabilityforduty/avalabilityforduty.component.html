@@ -1,0 +1,179 @@
+
+<style>
+    @media print and (min-width: 768px)
+    {
+table,th,td {
+    border:1px solid black;
+};
+table{
+    border-collapse:collapse;
+}
+.row
+{
+    margin-left: 400px;
+}
+.col-md-8, .bordersolid
+{
+    border-style: solid;
+}
+} 
+</style>
+<div class="content-wrapper" style="min-height: 242px; padding-bottom: 50px;">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+  
+          </div><!-- /.col -->
+    
+        </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <div class="card card-default">
+            <div class="card-header">
+                <h3>Jawan Availability</h3>
+            </div>
+        
+            <div class="card-body" *ngIf="MRoleId==3">
+                      
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="control-label" for="CurrentZoneId">मण्डल :</label>
+                            <select class="form-control" id="CurrentZoneId" name="CurrentZoneId" #CurrentZoneIdControl="ngModel" [(ngModel)]="empcontact.CurrentZoneId" required (change)="getdistrict(empcontact.CurrentZoneId,'')" disabled>
+                                <option value="--Select--">--Select--</option>
+                                <option [value]="zone.zoneId" *ngFor="let zone of currentZonelist">{{zone.zoneName}}</option>
+                            </select>
+       
+                            </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="control-label" for="CurrentDistId">जिला :</label>
+                            <select class="form-control" id="CurrentDistId" name="CurrentDistId" #CurrentDistIdControl="ngModel" [(ngModel)]="empcontact.CurrentDistId" (click)="getBlock(empcontact.CurrentDistId);getCompany(empcontact.CurrentDistId,'')" disabled>
+                                <option value="--Select--">--Select--</option>
+                                <option [value]="district.distId" *ngFor="let district of currentdistlist">{{district.distName}}</option>
+                            </select>
+    
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group" >
+                                
+                            <label class="control-label" for="CurrentBlockId">ब्लॉक/विकास खंड :</label>
+                            <select class="form-control" id="CurrentBlockId" name="CurrentBlockId" #CurrentBlockIdControl="ngModel" [(ngModel)]="empcontact.CurrentBlockId" (click)="getCompany(empcontact.CurrentDistId,empcontact.CurrentBlockId)">
+                                <option value="--Select--">--Select--</option>
+                                
+                                <option [value]="block.blockId" *ngFor="let block of blocklst">{{block.blockName}}</option>
+                            </select>
+                         
+                            </div>
+                    </div>
+                    <div class="col-md-3">
+                    <div class="form-group">
+    
+                        <label class="control-label" for="CurrentCompanyId">कंपनी का नाम :</label>
+                      
+                        <select class="form-control" id="CurrentCompanyId" name="CurrentCompanyId" #CompanyIdControl="ngModel" [(ngModel)]="empcontact.CurrentCompanyId">
+                            <option value="--Select--">--Select--</option>
+                            <option [value]="company.compId" *ngFor="let company of companylst">{{company.compName}}</option>
+                            
+                        </select>
+                        </div>
+                    </div>
+      
+                    </div>
+                  <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="control-label">सर्विस नं0 :</label>
+                            <input type="text" class="form-control" [(ngModel)]="ServiceNo">
+                        </div>
+                        </div>
+                      <div class="col-md-3">
+                          <input type="submit" value="Search" class="btn btn-success" style="border-radius:24px;width:100px;margin-top:30px" (click)="getJawanForAvailability(empcontact.CurrentZoneId,empcontact.CurrentDistId,empcontact.CurrentBlockId,empcontact.CurrentCompanyId,ServiceNo)">
+                      </div>
+                  </div>
+                  <br/>
+                  <table class="table table-responsive table-bordered table-striped">
+                    <thead>
+                        <th><input type="checkbox" [checked]="rowCheck" (click)=bulkCheck($event)></th>
+                        <th>क्रम संख्या</th>
+                        <th>उपलब्धता  की स्थिति</th>
+                        <th>मण्डल का नाम</th>
+                        <th>जनपद का नाम</th>
+                        <th>विकास खंड/ कम्पनी का नाम</th>
+                        <th>स्वयंसेवक का नाम</th>
+                        <th>पिता का नाम</th>
+                        <th>पता </th>
+                        <th>थाना </th>
+                        <th>शैक्षिक योग्यता </th>
+                        <th>विशेष योग्यता</th>
+                        <th>जन्मतिथि</th>
+                        <th>श्रेणी</th>
+                        <th>लम्बाई(सेमी0)</th>
+                        <th>सीना(सेमी0)</th>
+                        <th>आवंटित कोड संख्या/सर्विस नं0</th>
+                        <th>पुराना सर्विस नं0</th>
+                        <th>नॉमिनल रोल रजिस्टर की क्रम संख्या: </th>
+                        <th>सर्विस कोड</th>  
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let jawan of Jawanlist | paginate:{id:'list',
+                        itemsPerPage:10,
+                        currentPage:page,
+                        totalItems:totalReords
+                        
+                        
+                        };let i=index">
+                        <td><input type="checkbox" id="empCheck_{{jawan.empId}}"[checked]="rowCheck" (click)="PushDataForAvailability(jawan.empId)"></td>
+                        <td>{{i+1}}</td>
+                       <td><a class="btn btn-success btn-sm" *ngIf="jawan.availabilityStatus=='AVAILABLE'" style="color:white;">{{jawan.availabilityStatus}}</a><a class="btn btn-danger btn-sm" *ngIf="jawan.availabilityStatus=='UNAVAILABLE'" style="color:white;">{{jawan.availabilityStatus}}</a></td>
+                        <td>{{jawan.zone}}</td>
+                        <td>{{jawan.dist}}</td>
+                        <td>{{jawan.company}}</td>
+                        <td>{{jawan.empName}}</td>
+                        <td>{{jawan.fatherName}}</td>
+                        <td>{{jawan.currAddress}}</td>
+                        <td>{{jawan.thana}}</td>
+                        <td>{{jawan.empEdu}}</td>
+                        <td>{{jawan.empSplSkill}}</td>
+                        <td>{{jawan.empDob}}</td>
+                        <td>{{jawan.empCaste}}</td>
+                        <td>{{jawan.height}}</td>
+                        <td>{{jawan.chest}}</td>
+                        <td>{{jawan.empOfficialId}}</td>
+                        <td>{{jawan.oldServiceNo}}</td>
+                        <td>{{jawan.nominalRegNo}}</td>
+                        <td>{{jawan.serialCode}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+                <pagination-controls id="list" maxSize="5" directionLinks="true" (pageChange)="page=$event"></pagination-controls>
+          <footer>
+              <div class="row">
+                  <div class="col-md-3">
+<input type="button" class="btn btn-success" value="Submit" (click)="MakeJawanAvailableUnavailble()">
+                  </div>
+            
+              </div>
+          </footer>
+              
+            </div>
+       
+        </div>
+ 
+        <ngx-spinner bdColor="rgba(51, 51, 51, 0.8)" size="default" type="ball-spin-clockwise">  
+            <p style="color: white">Please Wait. </p>  
+            </ngx-spinner>
+    </div><!-- /.container-fluid -->
+  </section>
+  <!-- /.content -->
+</div>
+

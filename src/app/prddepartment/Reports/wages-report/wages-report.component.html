@@ -1,0 +1,195 @@
+
+<style>
+    @media print and (min-width: 768px)
+    {
+table,th,td {
+    border:1px solid black;
+};
+table{
+    border-collapse:collapse;
+}
+.row
+{
+    margin-left: 400px;
+}
+.col-md-8, .bordersolid
+{
+    border-style: solid;
+}
+} 
+</style>
+<div class="content-wrapper" style="min-height: 242px;">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+  
+          </div><!-- /.col -->
+    
+        </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <div class="card card-default">
+            <div class="card-header">
+                <h3>Wages Detail Report</h3>
+            </div>
+        
+            <div class="card-body">
+           
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="control-label" for="CurrentZoneId">मण्डल :</label>
+                            <select class="form-control" id="CurrentZoneId" name="CurrentZoneId" #CurrentZoneIdControl="ngModel" [(ngModel)]="empcontact.CurrentZoneId" required (change)="getdistrict(empcontact.CurrentZoneId,'')" [disabled]="drpZone">
+                                <option value="--Select--">--Select--</option>
+                                <option [value]="zone.zoneId" *ngFor="let zone of currentZonelist">{{zone.zoneName}}</option>
+                            </select>
+       
+                            </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="control-label" for="CurrentDistId">जिला :</label>
+                            <select class="form-control" id="CurrentDistId" name="CurrentDistId" #CurrentDistIdControl="ngModel" [(ngModel)]="empcontact.CurrentDistId" (click)="getBlock(empcontact.CurrentDistId);getCompany(empcontact.CurrentDistId,'')" [disabled]="drpDistrict">
+                                <option value="--Select--">--Select--</option>
+                                <option [value]="district.distId" *ngFor="let district of currentdistlist">{{district.distName}}</option>
+                            </select>
+    
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <label></label>
+                        <!-- radio -->
+                        <div class="form-group clearfix mt-2  text-center">
+                         <label></label>
+                          <div class="icheck-primary d-inline">
+                            <input type="radio" [(ngModel)]="empcontact.residanceTypeCurrent" value="Urban"id="rbnCity" (click)="ClickUrbanRuralCurrent()">
+                           
+                        
+                            <label for="rbnCity">
+                                शहरी
+                            </label>
+                          </div>
+                          <div class="icheck-primary d-inline ml-2">
+                            <input type="radio" [(ngModel)]="empcontact.residanceTypeCurrent" id="rbnVillage" value="Rural"  (click)="ClickUrbanRuralCurrent()">
+                        
+                            <label for="rbnVillage">
+                                ग्रामीण
+                            </label>
+                          </div>
+                         
+                        </div>
+                        
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group" >                                
+                            <label class="control-label" for="CurrentBlockId">कंपनी का नाम/विकास खंड :</label>
+                            <select class="form-control" id="CurrentBlockId" name="CurrentBlockId" #CurrentBlockIdControl="ngModel" [(ngModel)]="empcontact.CurrentBlockId" (change)="getCompany(empcontact.CurrentDistId,empcontact.CurrentBlockId)">
+                                <option value="--Select--">--Select--</option>                                
+                                <option [value]="block.blockId" *ngFor="let block of blocklst">{{block.blockName}}</option>
+                            </select>                         
+                        </div>
+                    </div>
+                  
+                
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group" [class.has-error]="YearControl.pristine && YearControl.touched" [class.has-success]="YearControl.dirty">
+                              <label class="control-label" for="Month">वर्ष<span style="color:red;">*</span> :</label>
+                        
+                              <select class="form-control" id="Year" name="Year" #YearControl="ngModel" [(ngModel)]="Year.YearId" (change)="GetMonth(Year.YearId)" required>
+                                  <option value=-1>--Select--</option>
+                                  <option [value]="year.yearId" *ngFor="let year of Years">{{year.year1}}</option>
+                                  
+                              </select>
+                              <span class="help-block" *ngIf="YearControl.pristine && YearControl.touched">कृपया वर्ष चुनें</span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group" [class.has-error]="MonthControl.pristine && MonthControl.touched" [class.has-success]="MonthControl.dirty">
+                              <label class="control-label" for="Month">माह<span style="color:red;">*</span> :</label>
+                        
+                              <select class="form-control" id="Month" name="Month" #MonthControl="ngModel" [(ngModel)]="Month.MonthId" required>
+                                  <option value=-1>--Select--</option>
+                                  <option [value]="month.monthId" *ngFor="let month of Months">{{month.month1}}</option>
+                                  
+                              </select>
+                              <span class="help-block" *ngIf="MonthControl.pristine && MonthControl.touched">कृपया माह चुनें</span>
+                            </div>
+                        </div>
+                    </div>
+               
+                    <div class="row">
+                        <div class="col-md-3">  </div>
+                        <div class="col-md-3">  </div>
+                        <div class="col-md-3">  </div>
+                        <div class="col-md-3">
+                            <div class="form-group" >
+                                <input type="submit" value="View Report" class="btn btn-success" style="border-radius:24px;width:100%;" (click)="GetWagesDetail(Year.YearId,Month.MonthId,empcontact.CurrentCompanyId,empcontact.residanceTypeCurrent)">
+                        </div>
+                        </div>
+                      </div>
+                  <br/>
+         
+          <div class="card card-danger">
+              <div class="card-header"><h5>Wages Detail</h5></div>
+              <div class="card-body">
+                  <div class="row">
+                      <div class="col-md-12">
+                          <table id="tbl1" datatable class="table table-responsive table-hover" [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
+<thead>
+    <tr>
+        <th>क्रम सं0</th>
+        <th>सर्विस नं0</th>
+        <th>स्वयंसेवक का नाम</th>
+        <th>पोस्ट</th>
+        <th>थाना</th>
+        <th>तैनाती स्थल</th>
+        <th>कार्यरत दिनों की संख्या </th>
+        <th>मासिक ड्यूटी भत्ता</th>
+        <th>अतिरिक्त भत्ता </th>
+        <th>कुल ड्यूटी भत्ता  </th>
+        
+
+    </tr>
+</thead>
+<tbody>
+    <tr *ngFor="let wage of GetWageReportlst;let i=index">
+<td>{{i+1}}</td>
+<td>{{wage.serviceno}}</td>
+<td>{{wage.name}}</td>
+<td>{{wage.designation}}</td>
+<td>{{wage.thana}}</td>
+<td>{{wage.site}}</td>
+<td>{{wage.workingdays}}</td>
+<td>{{wage.basic}}</td>
+<td>{{wage.allowance}}</td>
+<td>{{wage.totalWage}}</td>
+    </tr>
+</tbody>
+                          </table>
+                      </div>
+                  </div>
+              </div>
+          </div>
+              
+            </div>
+     
+        </div>
+ 
+        <ngx-spinner bdColor="rgba(51, 51, 51, 0.8)" size="default" type="ball-spin-clockwise">  
+            <p style="color: white">Please Wait. </p>  
+            </ngx-spinner>
+    </div><!-- /.container-fluid -->
+  </section>
+  <!-- /.content -->
+</div>
+
+

@@ -1,0 +1,94 @@
+
+<div class="content-wrapper" style="min-height: 242px;">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+      <div class="container-fluid">
+        <input type="button" class="btn btn-warning" value="Back" style="float: right;" routerLink="/PRDDepartment/RegReportLevelWise">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 class="m-0 text-dark">Level Wise Report</h1>
+          </div><!-- /.col -->
+    
+        </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+     
+      <div class="row">
+          <div class="col-md-12">
+<div>
+
+  <!-- <app-report-detail [data]="Jawanlist"></app-report-detail> -->
+  <div class="card card-default">
+    <div class="card-header"><h3>Jawan Detail</h3></div>
+    <div class="card-body">
+      <div class="row">
+        <div class="col-md-12">
+          <table  datatable class="table  table-responsive table-hover cell-border stripe" [dtOptions]="dtOptions"  [dtTrigger]="dtTrigger" id="example1">
+            <thead> 
+                <tr>
+                <th>क्रम संख्या</th>
+                <th>मण्डल का नाम</th>
+                <th>जनपद का नाम</th>
+                <th>विकास खंड/ कम्पनी का नाम</th>
+                <th>स्वयंसेवक का नाम</th>
+                <th>पिता का नाम</th>
+                <th>पता </th>
+                <th>थाना </th>
+                <th>शैक्षिक योग्यता </th>
+                <th>विशेष योग्यता</th>
+                <th>जन्मतिथि</th>
+                <th>आयु</th>
+                <th>श्रेणी</th>
+                <th>लम्बाई(सेमी0)</th>
+                <th>सीना(सेमी0)</th>
+                <th>आवंटित कोड संख्या/सर्विस नं0</th>
+                <th>पुराना सर्विस नं0</th>
+                <th>नॉमिनल रोल रजिस्टर की क्रम संख्या: </th>
+                <th>सर्विस कोड</th>  
+            </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let jawan of Jawanlist let i=index">
+                <td>{{i+1}}</td>
+                <td>{{jawan.zone}}</td>
+                <td>{{jawan.dist}}</td>
+                <td>{{jawan.company}}</td>
+                <td>{{jawan.empName}}</td>
+                <td>{{jawan.fatherName}}</td>
+                <td>{{jawan.currAddress}}</td>
+                <td>{{jawan.thana}}</td>
+                <td>{{jawan.empEdu}}</td>
+                <td>{{jawan.empSplSkill}}</td>
+                <td>{{jawan.empDob}}</td>
+                <td>{{jawan.age}}</td>
+                <td>{{jawan.empCaste}}</td>
+                <td>{{jawan.height}}</td>
+                <td>{{jawan.chest}}</td>
+                <td>{{jawan.empOfficialId}}</td>
+                <td>{{jawan.oldServiceNo}}</td>
+                <td>{{jawan.nominalRegNo}}</td>
+                <td>{{jawan.serialCode}}</td>
+            </tr>
+            </tbody>
+        </table>
+        </div>
+      </div>
+ 
+    </div>
+  </div>
+</div>
+         
+          </div>
+      </div>
+     
+       
+        <!-- /.row (main row) -->
+      </div><!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+  </div>

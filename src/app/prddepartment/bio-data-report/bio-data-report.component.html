@@ -1,0 +1,253 @@
+<div class="content-wrapper" style="min-height: auto; padding-bottom: 20px;">
+    <div class="content-header">
+        <div class="container-fluid">
+          <div class="row mb-2">
+            <div class="col-sm-6">
+    
+            </div><!-- /.col -->
+      
+          </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+      </div>
+      <section class="content">
+        <div class="container-fluid">
+            <div class="card card-default">
+                <div class="card-header">
+                 <h3>Bio Data Report</h3>
+                </div>
+                <div class="card-body">
+            <div class="row">
+               
+                    <div class="col-md-4">
+                        <div class="form-group" [class.has-error]="ServiceNoControl.invalid && ServiceNoControl.touched" [class.has-success]="ServiceNoControl.valid">
+                            <label class="control-label" for="ServiceNo">सर्विस नं0</label>
+                            <input type="text" class="form-control" id="ServiceNo" name="ServiceNo" #ServiceNoControl="ngModel" [(ngModel)]="ServiceNo" required autocomplete="off" (ngModelChange)="ServiceNo=$event.toUpperCase()">
+                            <span class="help-block" *ngIf="ServiceNoControl.invalid && ServiceNoControl.touched">कृपया सर्विस नं0 डालिये</span>
+                        </div>
+                
+                    </div>
+               
+                    <div class="col-md-3">
+                        <input type="button" id="btnSearch" name="btnSearch" value="Search" class="btn btn-success" style="margin-top: 32px;" (click)="GetBioDataResult(ServiceNo)">
+                    </div>
+               
+            </div>
+       </div>
+            </div>
+           <div class="row">
+
+    <div class="col-md-12" *ngIf="MainDiv">
+        <div class="card card-default">
+           
+            <div class="card-body">
+                <div class="row text-center">
+                    <div class="col-md-3">
+                        <img src="assets/img/logo1.png" class="logo">
+                       
+                    </div>
+                    <div class="col-md-6   " >
+                        <h3 class="text-center mt-5"><strong> Yuva Kalyan & Prantiya Rakshak Dal</strong></h3>
+                    </div>
+                    <div class="col-md-3">
+                        <img [src]="data.Employee.EmpPic" class="border border-success" height="150" width="150" style="float:right ;margin-right:70px;">
+                    </div>
+                </div>
+        
+              <hr class="bg-black">
+              
+                <br>
+                <div class="row" class="logodiv">
+                    <h4>एप्लीकेशन नं0 :{{data.Employee.regNo}} </h4>
+                </div>
+                <br/>
+                <div class="row">
+                    <div class="col-md-12">
+                   <div class="card card-secondary">
+                       <div class="card-header"><h4>Basic & Contact Details</h4></div>
+                       <div class="card-body">
+                        <div class="container">
+                            <table class="table table-bordered table-responsive table-striped">
+                                <tbody>
+                                    <tr>
+ <td>सर्विस नं0: </td><td>{{data.Employee.empOfficialId}}</td>
+ <td>सर्विस कोड: </td><td>{{data.Employee.serialCode}}</td>
+
+ 
+                                    </tr>
+                                    <tr>
+                                        <td>स्वयंसेवक का नाम: </td><td>{{data.Employee.empName}}</td><td>पिता का नाम: </td><td>{{data.Employee.fatherName}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>माता का नाम: </td><td>{{data.Employee.motherName}}</td><td>जन्मतिथि: </td><td>{{data.Employee.empDob}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>लिंग: </td><td>{{data.Employee.empGender}}</td><td>श्रेणी: </td><td>{{data.Employee.empCaste}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>लम्बाई: </td><td>{{data.Employee.height}}</td><td>सीना: </td><td>{{data.Employee.chest}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>शिक्षा: </td><td>{{data.Employee.empEdu}}</td><td>विशेष योग्यता: </td><td>{{data.Employee.empSplSkill}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>पोस्ट: </td><td>{{data.Employee.desgnName}}</td><td>आधार नं0: </td><td>{{data.Employee.aadharNo}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>पैन नं0: </td><td>{{data.Employee.panNo}}</td><td>कंपनी का नाम: </td><td>{{data.EmployeeContact.currentCompName}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>वर्त्तमान पता: </td><td>{{data.EmployeeContact.currentAddress}},&nbsp;{{data.EmployeeContact.currentDistName}},&nbsp;<span *ngIf="data.EmployeeContact.currentBlockName!=null">{{data.EmployeeContact.currentBlockName}},</span>&nbsp;{{data.EmployeeContact.currentThanaName}}-&nbsp;{{data.EmployeeContact.currentPincode}}</td><td>स्थायी पता: </td><td>{{data.EmployeeContact.residanceAddress}},&nbsp;{{data.EmployeeContact.residanceDistName}},&nbsp;<span *ngIf="data.EmployeeContact.residanceBlockName!=null">{{data.EmployeeContact.residanceBlockName}},</span>&nbsp;{{data.EmployeeContact.residanceThanaName}}-&nbsp;{{data.EmployeeContact.residancePincode}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>मोबाइल: </td><td>{{data.EmployeeContact.currentMobile1}},&nbsp;<span *ngIf="data.EmployeeContact.residanceMobile1!=null">{{data.EmployeeContact.residanceMobile1}}</span></td><td>ईमेल:</td><td>{{data.EmployeeContact.currentEmpEmail}},&nbsp;<span *ngIf="data.EmployeeContact.residanceEmpEmail!=null">{{data.EmployeeContact.residanceEmpEmail}}</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>नॉमिनल रोल रजिस्टर की क्रम संख्या: </td><td>{{data.Employee.nominalRegNo}}</td> <td>पुराना सर्विस नं0:: </td><td>{{data.Employee.oldServiceNo}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                           </div>
+                          
+                       </div>
+                   </div>
+                   <br/>
+                   <div class="card card-secondary">
+                    <div class="card-header"><h4>Account Details</h4></div>
+                    <div class="card-body">
+                        <div class="container">
+                         <table class="table table-responsive  table-bordered table-striped">
+                             <tbody>
+                                 <tr>
+<td>खाता संख्या: </td><td>{{data.EmployeeAccount.accNo}}</td>
+<td>शाखा: </td><td>{{data.EmployeeAccount.branch}}</td>
+
+
+                                 </tr>
+                                 <tr>
+                                     <td>खाताधारक का नाम: </td><td>{{data.EmployeeAccount.accName}}</td><td>IFSC: </td><td>{{data.EmployeeAccount.ifsc}}</td>
+                                 </tr>
+                                 <tr>
+                                     <td>बैंक का नाम: </td><td>{{data.EmployeeAccount.bank}}</td>
+                                 </tr>
+                              
+                              
+                             </tbody>
+                         </table>
+                        </div>
+                       
+                    </div>
+                </div>
+                <br/>
+                <div class="card card-secondary">
+                    <div class="card-header"><h4>Training Details</h4></div>
+                    <div class="card-body">
+                        <div class="container">
+                            <table class="table table-responsive  table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>क्रम संख्या </th>
+                                        <th>पी आर डी प्रारंभिक शिक्षा का वर्ष </th>
+                                        <th>दिनांक से</th>
+                                        <th>दिनांक तक</th>
+                                        <th>कंपनी का नाम</th>
+                                      
+                                       
+                                    </tr>
+                                 </thead>
+                                    <tbody>
+                                        <tr *ngFor="let training of data.EmpTraining;let i=index">
+                                            <td>{{i+1}}</td>
+                                            <td>{{training.trainingSession}}</td>
+                                            <td>{{training.dateFrom}}</td>
+                                            <td>{{training.dateTo}}</td>
+                                            <td>{{training.compId}}</td>
+                                         
+                                        </tr>
+                                    </tbody>
+                            
+                            </table>
+                        </div>
+                       
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-1"></div>
+                    <div class="col-md-10">
+                        <div class="col-md-6 pull-left text-center " ><input type="button" id="btnCertificate" name="btnCertificate" value="View Certificate" class="btn btn-primary"  (click)="GetCertificateDetails()"></div>
+                        <div class="col-md-6 pull-right text-center " >   <input type="button" id="btnViewDuty" name="btnViewDuty" value="View Duty Log" class="btn btn-success"  (click)="getJawanDutyLogStatus(ServiceNo)"></div>
+                    </div>
+                    <div class="col-md-1"></div>
+                   
+                </div>
+                <br>
+                <div class="card card-secondary"  *ngIf="DutyLogDiv">
+                    <div class="card-header"><h4>Duty log  Details</h4></div>
+                    <div class="card-body">
+                        <div class="container">
+                            <table    class="table table-responsive  table-bordered table-striped" >
+                                <thead>
+                                    <tr>
+                                        <th>क्रम संख्या</th>
+                                        <th>सर्विस नं0</th>
+                                        <th>जवान नाम </th>
+                                        <th>पिता  का नाम</th>
+                                        <th>तैनातिक स्थल </th>
+                                        <th>दिनांक से </th>
+                                        <th>दिनांक तक  </th>
+                                        <th>अवधि  </th>
+                                       
+                                     
+                                     </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let jawan of JawanDutyLoglist;let i=index" >
+                                    <td>{{i+1}}</td>
+                                    <td>{{jawan.serviceNo}}</td>
+                                    <td>{{jawan.empName}}</td>
+                                    <td>{{jawan.fatherName}}</td>
+                                    <td>{{jawan.site}}</td>
+                                    <td>{{jawan.fromDate}}</td>
+                                    <td>{{jawan.toDate}}</td>
+                                    <td>{{jawan.duration}}</td>
+                                    
+                                   
+                               
+                                </tr>
+                                
+                                </tbody>
+                            </table>
+
+                        </div> 
+                    </div>
+                 </div> 
+                 <div class="card card-secondary" *ngIf="ReportDiv" >
+                     <div class="card-header"><h3>Document Details</h3></div>
+                     <div class="card-body">
+                         <div class="container">
+                            <table class="table table-bordered table-responsive">
+                                <tbody>
+                                    <tr><td><a class="btn btn-warning" style="color: white;" href="{{JawanPic}}" target="_blank">स्वयंसेवक की फोटो&nbsp;<i class="fa fa-download"></i></a></td>
+                                      <td><a class="btn btn-warning" style="color: white;" href="{{DepartmentalId}}" target="_blank"> विभागीय पहचान पत्र&nbsp;<i class="fa fa-download"></i></a></td>
+                                      <td *ngIf="data.Employee.idProof2Pic!=null"><a class="btn btn-warning" style="color: white;" href="{{OtherId}}" target="_blank">अन्य पहचान पत्र&nbsp;<i class="fa fa-download"></i></a></td>
+                                      <td><a class="btn btn-warning" style="color: white;" href="{{Educer}}" target="_blank">शिक्षा प्रमाण पत्र&nbsp;<i class="fa fa-download"></i></a></td>
+                                      <td><a class="btn btn-warning" style="color: white;"href="{{BirthCer}}" target="_blank">जन्म प्रमाण पत्र&nbsp;<i class="fa fa-download"></i></a></td>
+                                      <td *ngIf="data.Employee.TransCert"><a class="btn btn-warning" style="color: white;" href="{{transCer}}" target="_blank">स्थानांतरित प्रमाण पत्र &nbsp;<i class="fa fa-download"></i></a></td>
+                                  </tr>
+                      
+                                    <tr><td *ngFor="let training of TrainingCer let i=index"><a class="btn btn-warning" style="color: white;" href="{{training}}" target="_blank">प्रशिक्षण प्रमाण पत्र&nbsp;{{i+1}}&nbsp;<i class="fa fa-download"></i></a></td></tr>
+                                </tbody>
+                            </table>
+                         </div>
+                     </div>
+                 </div>
+                </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+          </div>
+      </div>
+   
+</section>
+</div>

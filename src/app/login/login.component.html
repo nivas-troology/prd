@@ -1,0 +1,65 @@
+<section class="login-sec vh-100" style="background: url('assets/img/Login-PRD.jpg') center; background-repeat: no-repeat;
+   background-size: contain;">
+   <div class="container" >
+      <div class="login-logo">
+         <img _ngcontent-aua-c95="" class="img-fluid" src="assets/homeimg/prd-logo.jpg" class="loginimg">
+         <h5 _ngcontent-aua-c95="" class="text-dark text-center"><span class="font-weight-bold log-head">Online Services of Web Based Application for</span><br> Yuva Kalyan & Prantiya Rakshak Dal Vibhag, GoUP</h5>
+      </div>
+      <div class="row justify-content-center">
+         <div class="col-md-5">
+            <div class="card bg-white mt-3 login-card-body shadow-lg">
+               <div class="card-body">
+                  <h3 class="login-box-msg text-dark" >Department Login </h3>
+                  <form #LoginForm="ngForm">
+                     <div class="form-group">
+                        <label>User Type :</label>
+                        <select class="form-control">
+                           <option>HQ</option>
+                           <option>DIVISION</option>
+                           <option>DISTRICT</option>
+                           <option>BLOCK</option>
+                        </select>
+                     </div>
+                     <div class="form-group  mb-3" [class.has-error]="UserNameControl.invalid && UserNameControl.touched " [class.has-success]="UserNameControl.valid" >
+                     <input type="text" id="UserName" name="UserName" #UserNameControl="ngModel" class="form-control" placeholder="User Name" [(ngModel)]="UserName"  autocomplete="off" required>
+                     <span class="help-block" *ngIf="UserNameControl.invalid && UserNameControl.touched">Please Enter User Name </span>
+               </div>
+               <div class="input-group mb-3" [class.has-error]="UserPasswordControl.invalid && UserPasswordControl.touched " [class.has-success]="UserPasswordControl.valid">
+               <input type="password" class="form-control" id="Password" name="Password" #UserPasswordControl="ngModel" placeholder="Password" [(ngModel)]="Password" (keydown)="keydownFunction($event)"  autocomplete="off" required>
+               <div class="input-group-append">
+               <div class="input-group-text">
+               <span class="fas fa-lock"></span>
+               </div>
+               </div>
+            </div>
+            </form>
+            <div class="input-group  mb-3">
+               <div class="col-md-12">
+                  <input type="submit" class="btnLogin btn btn-warning btn-block" id="btnLogin" value="Login"  (click)="Login(UserName,Password)" [disabled]="LoginForm.invalid">
+               </div>
+            </div>
+            <div class="mt-2 account-sec">
+               <div class="d-flex justify-content-center links">
+                  Don't have an account? <a routerLink="/MangalDalRegistration" class="ml-2">Sign Up</a>
+               </div>
+               <div class="d-flex justify-content-center links">
+                  <a routerLink="/ChangePassword">Forgot your password?</a>
+               </div>
+               <div class="d-flex ustify-content-center links">
+                  <a routerLink="/Home"><i class="fas fa-arrow-left"></i> &nbsp; Back To Home</a>
+               </div>
+            </div>
+         </div>
+         <!-- /.login-card-body -->
+      </div>
+   </div>
+   </div>
+   <div class="login-Copyright text-dark text-center">
+      <p>Copyright &#169;Yuva Kalyan & Prantiya Rakshak Dal,Government Of Uttar Pradesh | All Rights Reserved</p>
+      <p>Design And Developed By Margsoft Technologies (P) Limited</p>
+   </div>
+   <ngx-spinner bdColor="rgba(51, 51, 51, 0.8)" size="default" type="ball-spin-clockwise">  
+      <p style="color: white">Please Wait. </p>  
+      </ngx-spinner>
+   </div>
+</section>

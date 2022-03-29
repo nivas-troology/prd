@@ -1,0 +1,100 @@
+
+<div class="content-wrapper" style="min-height: 242px;">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 class="m-0 text-dark">Level Wise Report</h1>
+          </div><!-- /.col -->
+    
+        </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+     
+      <div class="row">
+          <div class="col-md-12">
+              <div class="card card-default" *ngIf="divZoneCount">
+                  <div class="card-header">
+                      <h3>Division Wise Registered Jawan Count</h3>
+                  </div>
+                  <div class="card-body">
+                      <div class="row">
+                          <div class="col-md-12">
+                              <table class="table table-bordered">
+<tbody>
+ <tr *ngFor="let ZoneCount of JawanByZonelist">
+     <td>{{ZoneCount.zone}}</td>
+     <td><a class="btn btn-warning" data-toggle="modal" data-target="#DistJawanCountModal" (click)="GetJawanCountByDistrict(ZoneCount.zoneId)">{{ZoneCount.count}}</a></td>
+ </tr>   
+</tbody>
+                              </table>
+                     
+
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              <div class="card card-default" *ngIf="divDistCount">
+                <div class="card-header">
+                    <h3>District Wise Registered Jawan Count</h3>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                          <table class="table table-bordered">
+                            <tbody>
+                             <tr *ngFor="let distCount of JawanByDistrictlist">
+                                 <td>{{distCount.dist}}</td>
+                                 <td><a class="btn btn-warning"  (click)="GetJawanCountByCompany(distCount.distId)">{{distCount.count}}</a></td>
+                             </tr>   
+                            </tbody>
+                                                          </table>
+                   
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card card-default" *ngIf="divCompanyCount">
+              <div class="card-header">
+                  <h3>Company Wise Registered Jawan Count</h3>
+              </div>
+              <div class="card-body">
+                  <div class="row">
+                      <div class="col-md-12">
+                        <table class="table table-bordered">
+                          <tbody>
+                           <tr *ngFor="let companyCount of countbyCompanylst">
+                               <td>{{companyCount.comp}}</td>
+                               <td><a class="btn btn-warning"  (click)="GetJawansByDistrict(companyCount.compId)">{{companyCount.count}}</a></td>
+                           </tr>   
+                          </tbody>
+                        </table>
+                 
+
+                      </div>
+                  </div>
+              </div>
+          </div>
+
+<div>
+  
+  <!-- <app-report-detail [data]="Jawanlist"></app-report-detail> -->
+
+</div>
+         
+          </div>
+      </div>
+     
+       
+        <!-- /.row (main row) -->
+      </div><!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+  </div>

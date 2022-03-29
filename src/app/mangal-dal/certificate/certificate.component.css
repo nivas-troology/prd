@@ -1,0 +1,276 @@
+@import url('../../../assets/MangalDal/css/style.css');
+
+/* .text-center {
+    text-align: center;
+}
+h3, .h3 {
+    font-size: 24px;
+}
+h1, .h1, h2, .h2, h3, .h3 {
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+    font-family: inherit;
+    font-weight: 500;
+    line-height: 1.1;
+    color: black;
+}
+
+#Parentdiv,#Childdiv
+{
+    padding: 20px;text-align:center;border: 5px solid #787878;
+}
+
+
+.img-fluid ,.mt-5 ,.center
+{
+    height:100px; width:100px;
+}
+.modal-content:hover {
+    box-shadow: 0 8px 16px 0 rgba(0.24, 0.24, 0.24, 0.24);
+}
+label {
+    display: inline-block;
+    max-width: 100%;
+    margin-bottom: 5px;
+   text-align: center;
+}
+.btn-success {
+    color: #fff;
+    background-color: #28a745;
+    border-color: #28a745;
+  }
+  .btn-warning {
+    color: #fff;
+    background-color: #ffcc00;
+    border-color:#ffcc00;
+  }
+  .btn-primary {
+    color: #fff;
+    background-color: #002080;
+    border-color:#002080;
+  }
+  .btn-danger {
+    color: #fff;
+    background-color:#e60000;
+    border-color:#e60000;
+  }
+  @page { size: A4 portrait }
+@media only print { 
+    .text-center {
+        text-align: center;
+    }
+    h3, .h3 {
+        font-size: 24px;
+    }
+    h1, .h1, h2, .h2, h3, .h3 {
+        margin-top: 20px;
+        margin-bottom: 10px;
+    }
+    h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+        font-family: inherit;
+        font-weight: 500;
+        line-height: 1.1;
+        color: black;
+    }
+    
+    #Parentdiv,#Childdiv
+    {
+        padding: 20px;text-align:center;border: 5px solid #787878;
+    }
+    
+    
+    .img-fluid ,.mt-5 ,.center
+    {
+        height:100px; width:100px;
+    }
+    .modal-content:hover {
+        box-shadow: 0 8px 16px 0 rgba(0.24, 0.24, 0.24, 0.24);
+    }
+    label {
+        display: inline-block;
+        max-width: 100%;
+        margin-bottom: 5px;
+      
+    }
+    .modal-body
+    {
+        background: url('../../../assets/img/LogoImage.PNG') center; background-repeat: no-repeat;
+       background-size: 84% 84%;
+    }
+   } */
+
+   .btn-success {
+    color: #fff;
+    background-color: #28a745;
+    border-color: #28a745;
+  }
+  .btn-warning {
+    color: #fff;
+    background-color: #ffcc00;
+    border-color:#ffcc00;
+  }
+  .btn-primary {
+    color: #fff;
+    background-color: #002080;
+    border-color:#002080;
+  }
+  .btn-danger {
+    color: #fff;
+    background-color:#e60000;
+    border-color:#e60000;
+  }
+   .underline {
+    text-decoration: underline;
+    float:right;
+  }
+  .row{
+    margin:auto;
+       }
+       .tdt1{
+       width:18%
+       }
+       .td2t1{
+       width:64%;
+       text-align: center;
+       
+       }
+  .maindiv{
+ margin: auto; margin-top:5px; border:1px solid black; background-color: white;
+  }
+  .tableBorder{
+  height: auto;width:auto; border:5px solid black ;margin:5px;
+  }
+  .table1
+  {
+      margin:10px;
+  }
+  .table2
+  {
+      margin-left:10px !important;
+      margin-top: 100px;
+  }
+  .imgHWL{
+  height:150px; width:150px ;
+  }
+  .imgHWR{
+  height:150px; width:150px ;
+   float:right;
+  }
+  .tdl{
+  width:20%; valign:top;
+  }
+  .tdm{
+  margin: auto; width:55%; valign:top;
+  }
+  .tdmh2{
+  margin-left:65px;
+  }
+  .tdmh2S{
+  margin-left:20%;
+  }
+  .tdmh2_1{
+  margin-left:35%;
+  }
+  .tdmh3{
+  margin-left:30%;
+  }
+  .tdmh4{
+  margin-left:10%;
+  }
+  .h3d{
+  margin-left:5%;
+  }
+  .h3dsH{
+  margin-left:25%;
+  }
+  .h3d_1{
+  margin-left:60%;
+  }
+  .h3d_1s{
+  margin-left:25%;
+  }
+  .tdr{
+  width:25%; valign:top;
+  }
+  #print-section
+  {
+      background-color: white;
+  }
+  @page { size: A4 portrait !important}
+@media only print {
+    .row{
+        margin:auto;
+           }
+           .tdt1{
+           width:18%
+           }
+           .td2t1{
+           width:64%;
+           text-align: center;
+           
+           }
+      .maindiv{
+     margin: auto !important; margin-top:5px !important; border:1px solid black !important; background-color: white !important;
+      }
+      .tableBorder{
+      height: auto!important;width:auto!important; border:5px solid black !important;margin:5px!important;
+      }
+      .table1
+      {
+          margin:10px;
+      }
+      .table2
+      {
+          margin-left:10px !important;
+          margin-top: 100px;
+      }
+      .imgHWL{
+      height:150px; width:150px ;
+      }
+      .imgHWR{
+      height:150px; width:150px ;
+       float:right;
+      }
+      .tdl{
+      width:20%;
+      }
+      .tdm{
+      margin: auto; width:55%;
+      }
+      .tdmh2{
+      margin-left:65px;
+      }
+      .tdmh2S{
+      margin-left:20%;
+      }
+      .tdmh2_1{
+      margin-left:35%;
+      }
+      .tdmh3{
+      margin-left:30%;
+      }
+      .tdmh4{
+      margin-left:10%;
+      }
+      .h3d{
+      margin-left:5%;
+      }
+      .h3dsH{
+      margin-left:25%;
+      }
+      .h3d_1{
+      margin-left:60%;
+      }
+      .h3d_1s{
+      margin-left:25%;
+      }
+      .tdr{
+      width:25%; valign:top;
+      }
+      #print-section
+      {
+          background-color: white;
+      }
+}

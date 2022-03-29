@@ -1,0 +1,133 @@
+
+
+<main>
+
+  
+    <!-- About Law End-->
+    <!--? Brand Area Start -->
+    <section class="team-area pt-180 pb-100 section-bg" style="background-image: url('../../../assets/MangalDal/img/gallery/section_bg02.png');">
+    
+            <div class="row RegForm">
+                <div class="col-md-12">
+                   <div class="card card-default">
+                  
+                       <div class="card-header"><h4>Upload Attachments</h4>
+                        <button type="button" class="btn btn-tool" data-card-widget="collapse" style="float: right;"><i class="fas fa-minus"></i></button>
+                    </div>
+                       <div class="card-body">
+                           <form autocomplete="off" #AttachmentForm="ngForm">
+                           
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label">गठन हेतु बैठक की तिथि :&nbsp;<code>*</code></label>
+                                        <input type="text" class="form-control" id="MeetingDate" name="MeetingDate" bsDatepicker [bsConfig]="{dateInputFormat:'DD/MM/YYYY'}" [class.is-invalid]="MeetingDate.invalid && MeetingDate.touched" placeholder="eg:15/08/1947" name="MeetingDate" #MeetingDate="ngModel" [(ngModel)]="Attachments.Dob" required>
+                                        <span class="help-block"  *ngIf="MeetingDate.invalid && MeetingDate.touched">कृपया  जन्मतिथि भरें </span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label">मंगल दल गठन के बैठक की कार्यवाही पुस्तिका का पेज:&nbsp;<code>*</code></label>
+                                        <input type="file" class="form-control"
+                    id="MeetingActionBook"
+                    name="MeetingActionBook"
+                    #MeetingActionBook="ngModel"
+                    [(ngModel)]="Attachments.MeetingActionBook"
+                    (change)="UploadMeetingActionBook($event)" required [class.is-invalid]="MeetingActionBook.invalid && MeetingActionBook.touched">
+                    <h6 style="color:red">Supported format .jpg/.jpeg/.png/.pdf,Maxsize:500kb-1MB</h6>
+                    <span class="help-block"  *ngIf="MeetingActionBook.invalid && MeetingActionBook.touched">कृपया  मंगल दल के बैठक के गठन हेतु कार्यवाही पुस्तिका अपलोड करें</span>
+                                    </div>
+                                </div>
+                            
+                   
+                            </div>
+                         <!--    <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label">स्टोर पंजिका:&nbsp;<code>*</code></label>
+                                        <input type="file" class="form-control"
+                                        id="StoreBook"
+                                        name="StoreBook"
+                                        #StoreBook="ngModel"
+                                        [(ngModel)]="Attachments.StoreBook"
+                                        (change)="UploadStoreBook($event)"  >
+                                        <h6 style="color:red">Supported format .jpg/.jpeg/.png/.pdf,Maxsize:500kb-1MB</h6>
+                                     
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label">निरिक्षण एवं सुझाव पुस्तिका:&nbsp;<code>*</code></label>
+                                        <input type="file" class="form-control"
+                                        id="NirikshanBook"
+                                        name="NirikshanBook"
+                                        #NirikshanBook="ngModel"
+                                        [(ngModel)]="Attachments.NirikshanBook"
+                                        (change)="UploadNirikshanBook($event)">
+                                        <h6 style="color:red">Supported format .jpg/.jpeg/.png,Maxsize:500kb-1MB</h6>
+                                      
+                                    </div>
+                                </div>
+                            </div> -->
+                            <div class="row">
+                                <div class="col-md-4" style="float: right;">
+                                    <div class="form-group">
+                                        <input type="button" class="btn btn-success" value="Upload Attachments" *ngIf="btnSave" [disabled]="AttachmentForm.invalid" (click)="AddAttachment(Attachments)">
+                                        <input type="button" class="btn btn-primary" value="Update Member" *ngIf="btnUpdate">
+                                    </div>
+                                 
+                                </div>
+                            </div>
+                    </form>
+                  
+                       </div>
+                 
+                   </div>
+                   <div class="card card-default">
+                  
+                    <div class="card-header"><h4>Attachment Details</h4>
+                        <button type="button" class="btn btn-tool" data-card-widget="collapse" style="float: right;"><i class="fas fa-minus"></i></button>
+                    </div>
+                    <div class="card-body">
+                       <div class="row">
+                           <div class="col-md-12">
+                               <table class="table table-bordered table-responsive">
+                                   <thead class="table table-primary">
+                                       <tr>
+                                     
+                                        <!-- <th>Action</th> -->
+                                        <th>बैठक की तिथि</th>
+                                        <th>मंगल दल के बैठक के गठन हेतु कार्यवाही पुस्तिका</th>
+                                       <!--  <th>स्टोर पंजिका</th>
+                                        <th>निरिक्षण एवं सुझाव पुस्तिका</th> -->
+                                       </tr>
+                                   </thead>
+                                   <tbody>
+                                       <tr *ngFor="let attachment of Attachmentlst">
+                                           <td>{{attachment.meetingDate}}</td>
+                                           <td><a class="btn btn-warning" (click)="DownloadMeetingActionBook(attachment.meetingActionBook)"><i class="fa fa-download"></i></a></td>
+                                         <!--   <td><a class="btn btn-warning" (click)="DownloadStoreBook(attachment.storeBook)" *ngIf="attachment.storeBook!=null"><i class="fa fa-download"></i></a></td>
+                                           <td><a class="btn btn-warning" (click)="DownloadNirikshanBook(attachment.nirikshanBook)"  *ngIf="attachment.nirikshanBook!=null"><i class="fa fa-download"></i></a></td>
+ -->
+                                       </tr>
+                                   </tbody>
+                               </table>
+                           </div>
+                       </div>
+                    </div>
+              
+                </div>
+                </div>
+           
+         
+               
+          
+              
+            
+            </div>
+      
+    </section>
+  
+    </main>
+   
+  

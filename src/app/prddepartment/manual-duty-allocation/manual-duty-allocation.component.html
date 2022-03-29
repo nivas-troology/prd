@@ -1,0 +1,204 @@
+
+<div class="content-wrapper" style="min-height: auto; padding-bottom: 20px;">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+  
+          </div><!-- /.col -->
+    
+        </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </div>
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-6">
+            <div class="card card-gray">
+                <div class="card-header">
+                    <h3>Manual Duty Allocation</h3>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group" [class.has-error]="ServiceNoControl.invalid && ServiceNoControl.touched" [class.has-success]="ServiceNoControl.valid" >
+                                <label class="control-label" for="ServiceNo">सर्विस नं0</label>
+                                <input type="text" class="form-control" id="ServiceNo" name="ServiceNo" #ServiceNoControl="ngModel" [(ngModel)]="ServiceNo" required autocomplete="off" (ngModelChange)="ServiceNo=$event.toUpperCase()">
+                                <span class="help-block" *ngIf="ServiceNoControl.invalid && ServiceNoControl.touched" >कृपया सर्विस नं0 डालिये</span>
+                            </div>
+                    
+                        </div>
+                        <div class="col-md-6">
+                            <input type="button" id="btnSearch" name="btnSearch" value="Search" class="btn btn-success" style="margin-top: 32px;" (click)="getMdutyAllocationStatus(ServiceNo)">
+                        </div>
+                    </div>
+                </div>
+            </div>
+                <div class="card card-gray" >
+                    <div class="card-header">
+                        <h3>Manual Duty Allocation Details</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                      <div class="col-md-12">
+    
+        <table id="tbl1" datatable class="table table-responsive table-hover" [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
+            <thead>
+                <tr>
+                    <th>क्रम संख्या</th>
+                    <th>सर्विस नं0</th>
+                    <th>स्वयंसेवक का नाम </th>
+                    <th>पिता  का नाम</th>
+                    <th>मण्डल  </th>
+                    <th>जिला </th>
+                    <th>थाना </th>
+                    <th>कम्पनी का नाम  </th>
+                   
+                 
+                 </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let jawan of ManualdutyAllocationlist;let i=index" >
+                <td>{{i+1}}</td>
+                <td>{{jawan.serviceNo}}</td>
+                <td>{{jawan.empName}}</td>
+                <td>{{jawan.fatherName}}</td>
+                <td>{{jawan.mondal}}</td>
+                <td>{{jawan.dist}}</td>
+                <td>{{jawan.thana}}</td>
+                <td>{{jawan.company}}</td>
+                
+               
+           
+            </tr>
+            
+            </tbody>
+        </table>
+       </div>
+                            </div>
+                            </div>
+                </div>
+                  </div>
+            <div class="col-md-6">
+                <div class="card card-gray">
+                    <div class="card-header">
+                        <h3>Manual Duty Allocation Process</h3>
+                    </div>
+                    <div class="card-body">
+                      
+                            <div class="col-md-12">
+                             
+                                <div class="row">
+                                    <div class="col-md-6">
+                                    <div class="form-group" [class.has-error]="CurrentZoneIdControl.pristine && CurrentZoneIdControl.touched" [class.has-success]="CurrentZoneIdControl.dirty">
+                                        <label class="control-label" for="CurrentZoneId">मण्डल :</label>
+                                        <select class="form-control" id="CurrentZoneId" name="CurrentZoneId" #CurrentZoneIdControl="ngModel" [(ngModel)]="dutyAllocation.CurrentZoneId" (change)="getdistrict(dutyAllocation.CurrentZoneId,'')" required  [disabled]="disableZone">
+                                            <option value="0">--Select--</option>
+                                            <option [value]="zone.zoneId" *ngFor="let zone of currentZonelist">{{zone.zoneName}}</option>
+                                     
+                                        </select>
+                                        <span class="help-block text-danger" *ngIf="CurrentZoneIdControl.pristine && CurrentZoneIdControl.touched"> कृपया मण्डल चुनें |</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group" [class.has-error]="CurrentDistIdControl.pristine && CurrentDistIdControl.touched" [class.has-success]="CurrentDistIdControl.dirty">
+                                            <label class="control-label" for="CurrentDistId">जिला :</label>
+                                            <select class="form-control" id="CurrentDistId" name="CurrentDistId" #CurrentDistIdControl="ngModel" [(ngModel)]="dutyAllocation.CurrentDistId" (change)="getThana(dutyAllocation.CurrentDistId)" required  [disabled]="disableDistrict">
+                                                <option value="0">--Select--</option>
+                                                <option [value]="district.distId" *ngFor="let district of currentdistlist">{{district.distName}}</option>
+                                           
+                                            </select>
+                                            <span class="help-block text-danger" *ngIf="CurrentDistIdControl.pristine && CurrentDistIdControl.touched"> कृपया जिला चुनें |</span>
+                                        </div>
+                                        </div>
+                                </div>
+                                
+                               
+                                <div class="row">
+                                    <div class="col-md-6">
+                                    <div class="form-group" [class.has-error]="ThanaIdControl.pristine && ThanaIdControl.touched" [class.has-success]="ThanaIdControl.dirty" >
+                                                            
+                                        <label class="control-label" for="ThanaId">थाना<span style="color:red;">*</span> :</label>
+                                        <select class="form-control" id="ThanaId" name="ThanaId" #ThanaIdControl="ngModel" [(ngModel)]="dutyAllocation.ThanaId" (change)="GetSites()" required >
+                                            <option value="0">--Select--</option>
+                                            <option [value]="thana.thanaId" *ngFor="let thana of thanalist">{{thana.thanaName}}</option> 
+                                        </select>
+                                        <span class="help-block text-danger" *ngIf="ThanaIdControl.pristine && ThanaIdControl.touched">कृपया थाना चुनें | </span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group" [class.has-error]="SiteIdControl.pristine && SiteIdControl.touched" [class.has-success]="SiteIdControl.dirty" >
+                                           <label class="control-label" for="SiteId">तैनाती स्थल <span style="color:red;">*</span> :</label>
+                                           <select class="form-control" id="SiteId" name="SiteId" #SiteIdControl="ngModel" [(ngModel)]="dutyAllocation.SiteId" required>
+                                    <option value="0">--Select--</option>
+                                    <option [value]="site.siteId" *ngFor="let site of siteList">{{site.siteName}}</option>
+                                  
+                                  </select>
+                                  <span class="help-block text-danger" *ngIf="SiteIdControl.pristine && SiteIdControl.touched">कृपया तैनाती स्थल चुनें | </span> 
+                                            </div>
+                                        </div>
+                                </div>
+                                
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group" [class.has-error]="PromisorNameControl.invalid && PromisorNameControl.touched" [class.has-success]="PromisorNameControl.valid" >
+                                            <label class="control-label" for="PromisorName">Promisor Name <span style="color:red;">*</span> :</label>
+                                            <input type="text" class="form-control" id="PromisorName" name="PromisorName"  #PromisorNameControl="ngModel" [(ngModel)]="dutyAllocation.PromisorName" required autocomplete="off" (ngModelChange)="dutyAllocation.PromisorName=$event.toUpperCase()" >
+                                            <span class="help-block" *ngIf="PromisorNameControl.invalid && PromisorNameControl.touched">Please enter  Promisor Name </span>
+                                        </div>
+                                
+                                    </div>
+                                    <div class="col-md-6">
+                                        
+                                            <div class="form-group">
+                                                <div class="form-group" [class.has-error]="DateFromControl.invalid && DateFromControl.touched" [class.has-success]="DateFromControl.valid" >
+                                                    
+                                                    <label class="control-label" for="DateFrom">दिनांक से :</label>
+                                                    <input type="text" class="form-control" id="DateFrom" name="DateFrom" #DateFromControl="ngModel" [(ngModel)]="dutyAllocation.DateFrom" bsDatepicker [bsConfig]="{dateInputFormat:'DD/MM/YYYY'}"  placeholder="eg:15/08/1947" required>
+                                                    <span class="help-block" *ngIf="DateFromControl.invalid && DateFromControl.touched ">कृपया दिनांक भरिये</span>
+                                                    </div>
+                                            </div>
+                                        </div>
+                                    </div>     
+                                
+                                       
+                                <div class="row">
+                                  
+                                    <div class="col-md-6">
+                                        <div class="form-group" [class.has-error]="DateToControl.invalid && DateToControl.touched" [class.has-success]="DateToControl.valid"  >
+                                            <label class="control-label" for="DateTo">दिनांक तक :</label>
+                                            <input type="text" class="form-control" id="DateTo" name="DateTo"  #DateToControl="ngModel" [(ngModel)]="dutyAllocation.DateTo" bsDatepicker [bsConfig]="{dateInputFormat:'DD/MM/YYYY'}"   placeholder="eg:15/08/1947" required>
+                                            <span class="help-block" *ngIf="DateToControl.invalid && DateToControl.touched " >कृपया दिनांक भरिये</span>
+                                            </div>
+                                        </div>  
+                                       
+                                        <div class="col-md-6">
+                                            <div class="form-group "  [class.has-error]="AllocatedOnControl.invalid && AllocatedOnControl.touched" [class.has-success]="AllocatedOnControl.valid">
+                                                <label class="control-label" for="AllocatedOn">Allocation Date <span style="color:red;">*</span> :</label>
+                                                <input type="text" class="form-control" id="AllocatedOn" name="AllocatedOn"  #AllocatedOnControl="ngModel" [(ngModel)]="dutyAllocation.AllocatedOn" bsDatepicker [bsConfig]="{dateInputFormat:'DD/MM/YYYY'}" required autocomplete="off" placeholder="eg:15/08/1947">
+                                                <span class="help-block" *ngIf="AllocatedOnControl.invalid && AllocatedOnControl.touched " >कृपया दिनांक भरिये</span>
+                                            </div>
+                                    
+                                        </div>
+                                    </div>   
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <input type="button" class="btn btn-success" value="Submit" (click)="JawanMDutyAllocation(dutyAllocation)" />
+                                    </div>
+                                </div>
+                                <br/>
+                                <br/>
+                 
+                            </div>
+                        
+              
+                    </div>
+                </div>
+            </div>
+            </div>
+
+                </div>
+            
+      </section>
+      </div>

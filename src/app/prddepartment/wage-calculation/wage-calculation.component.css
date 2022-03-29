@@ -1,0 +1,11 @@
+th,td{
+    font-family: 'Times New Roman', Times, serif;
+    }
+    th{
+        font-weight: lighter;
+    }
+    th
+    {
+     background-color: #3399ff;
+     color: white;
+    }

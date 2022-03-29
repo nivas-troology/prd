@@ -1,0 +1,93 @@
+
+
+<div class="content-wrapper " style="min-height: 242px; ">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 class="m-0 text-dark">Police Station</h1>
+          </div><!-- /.col -->
+    
+        </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <!-- Small boxes (Stat box) -->
+        <div class="card card-primary">
+            <div class="card-header">
+              <h3 class="card-title">Register Police Station</h3>
+            </div>
+            <!-- /.card-header -->
+            <!-- form start -->
+            <form role="form" #PoliceStationForm="ngForm" (ngSubmit)="savePoliceStation(PoliceStationForm)"autocomplete="off">
+              <div class="card-body">
+                <div class="form-group" [class.has-Error]="DistIdControl.pristine && DistIdControl.touched" [class.has-success]="DistIdControl.dirty">
+                  <label for="district" class="control-label">District</label>
+                 
+                  <select class="form-control" id="DistId" name="DistId" #DistIdControl="ngModel" [(ngModel)]="policestation.DistId" required>
+                    <option [value]="0">Select District</option>
+                    <option *ngFor="let district of districtlist"  [value]="district.distId">{{district.distName}}</option>
+                  </select>
+                  <span class="help-block" *ngIf="DistIdControl.pristine && DistIdControl.touched">Please Select District</span>
+                </div>
+                <div class="form-group" [class.has-Error]="policeStationNameControl.invalid && policeStationNameControl.touched" [class.has-success]="policeStationNameControl.valid">
+                  <label for="policeStationName">Police Station Name</label>
+                  <input type="text" class="form-control" id="policeStationName" name="ThanaName" #policeStationNameControl="ngModel" [(ngModel)]="policestation.ThanaName" placeholder="Police Station" required (ngModelChange)="policestation.ThanaName = $event.toUpperCase()">
+                  <span class="help-block" *ngIf="policeStationNameControl.invalid && policeStationNameControl.touched">Please Enter Police Station Name</span>
+                </div>
+               
+              </div>
+              <!-- /.card-body -->
+
+              <div class="card-footer">
+                <button type="submit" *ngIf="Issave" class="btn btn-success" [disabled]="PoliceStationForm.invalid">Save</button>
+                <button type="button"  *ngIf="IsUpdate" class="btn btn-success" (click)="updatePoliceStation(policestation)">Update</button>
+              </div>
+            </form>
+          </div>
+  
+          <div class="card card-primary" >
+            <div class="card-header">
+              <h3 class="card-title">Register Police Station</h3>
+            </div>
+            <div class="card-body">
+              <div class="table-responsive col-sm-12">
+                <table class="table table-bordered table-condensed table-striped" 
+                datatable 
+                [dtOptions]="dtOptions"
+                [dtTrigger]="dtTrigger">
+                    <thead>                  
+                      <tr>
+                        <th style="width: 10px">Sr No.</th>
+                        <th>District Name</th>
+                        <th>Police Station Name</th>
+                        <th style="width: 100px">Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                   <tr *ngFor="let thana of policestationList ; let i=index">
+                       <td>{{i+1}}</td>
+                       <td>{{thana.distName}}</td>
+                       <td>{{thana.thanaName}}</td>
+                       <td><button type="submit" value="Edit" class="btn btn-info btn-xs" (click)="Edit(thana.thanaId)"><i class="fa fa-pencil-square-o fa-2x"></i></button>&nbsp;<button type="submit" class="btn btn-danger btn-xs" value="Delete" (click)="Delete(thana.thanaId)"><i class="fa fa-trash fa-2x" aria-hidden="true"></i></button></td>
+                   </tr>
+                    </tbody>
+                  </table>
+                </div>
+            </div>
+            <ngx-spinner bdColor="rgba(51, 51, 51, 0.8)" size="default" type="ball-spin-clockwise">  
+              <p style="color: white">Please Wait. </p>  
+              </ngx-spinner> 
+              <div class="card-footer"></div>
+          </div>
+
+      </div><!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+  </div>
+  <br>

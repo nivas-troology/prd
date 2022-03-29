@@ -1,0 +1,329 @@
+
+<style>
+    @media print and (min-width: 768px)
+    {
+table,th,td {
+    border:1px solid black;
+};
+table{
+    border-collapse:collapse;
+}
+.row
+{
+    margin-left: 400px;
+}
+.col-md-8, .bordersolid
+{
+    border-style: solid;
+}
+} 
+</style>
+<div class="content-wrapper" style="min-height: 242px; padding-bottom: 40px; ">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+  
+          </div><!-- /.col -->
+    
+        </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <div class="card card-default">
+            <div class="card-header">
+                <h3>Mangal Dal Approval</h3>
+                <button type="button" class="btn btn-tool" data-card-widget="collapse" style="float: right;"><i class="fas fa-minus"></i></button>
+            </div>
+           
+            <div class="card-body">
+                      
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group" [class.has-error]="District.pristine && District.touched" [class.has-success]="District.dirty">
+                            <label class="control-label">जिला:&nbsp;<code>*</code></label>
+                            <select class="form-control" id="District" name="District" #District="ngModel" [(ngModel)]="Team.DistId" (change)="getBlock(Team.DistId)" required disabled>
+                                <option value=0>--Select--</option>
+                                <option [value]="dist.distId" *ngFor="let dist of distlist">{{dist.distName}}</option>
+                            </select>
+                            <span class="help-block" *ngIf="District.pristine && District.touched">कृपया जिला चुनें </span>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                     <div class="form-group" [class.has-error]="Block.pristine && Block.touched" [class.has-success]="Block.dirty">
+                         <label class="control-label">विकासखंड:&nbsp;<code>*</code></label>
+                         <select class="form-control" id="Block" name="Block" #Block="ngModel" [(ngModel)]="Team.BlockId" (change)="getGP(Team.BlockId)" required [disabled]="disableBlock">
+                             <option value=0>--Select--</option>
+                             <option [value]="block.blockId" *ngFor="let block of blocklst">{{block.blockName}}</option>
+                         </select>
+                         <span class="help-block" *ngIf="Block.pristine && Block.touched">कृपया विकासखंड चुनें</span>
+                     </div>
+                 </div>
+                 <div class="col-md-4">
+                     <div class="form-group" [class.has-error]="GP.pristine && GP.touched" [class.has-success]="GP.dirty">
+                         <label class="control-label">ग्रामपंचायत:&nbsp;<code>*</code></label>
+                         <select class="form-control" id="GP" name="GP" #GP="ngModel" [(ngModel)]="Team.Gpid" required>
+                             <option value=0>--Select--</option>
+                             <option [value]="gp.gramPId" *ngFor="let gp of Gplst">{{gp.gramPName}}</option>
+                         </select>
+                         <span class="help-block" *ngIf="GP.pristine && GP.touched">कृपया ग्रामपंचायत चुनें </span>
+                     </div>
+                 </div>
+                 
+                </div>
+  
+
+
+                  <div class="row">
+                      <div class="col-md-4">
+                          <input type="submit" value="Search" class="btn btn-success form-control" style="border-radius:24px;" (click)="GetMangalDalDetailsForApproval(Team.DistId,Team.BlockId,Team.Gpid)">
+                      </div>
+                  </div>
+                  <br/>
+                  <hr>
+                  
+             
+
+              
+            </div>
+          
+     
+        </div>
+        <div class="card card-default">
+            <div class="card-header"><h4>संस्था का विवरण</h4>
+                <button type="button" class="btn btn-tool" data-card-widget="collapse" style="float: right;"><i class="fas fa-minus"></i></button></div>
+                <div class="card-body">
+                    <table datatable [dtOptions]="dtOptions"  [dtTrigger]="dtTrigger" class="table table-responsive table-bordered" *ngIf="MRoleId==3">
+                        <thead class="table table-primary">
+                            <tr>
+                                <th>क्रम संख्या</th>
+                                <th style="width:128px">Cancel</th>
+                                <th style="width:128px">Approve</th>
+                                <th>सदस्यों का विवरण </th>
+                                <th>जिला</th>
+                                <th>विकासखंड</th>
+                                <th>ग्रामपंचायत</th>
+                                <th>संस्था का प्रकार</th>
+                                <th>संस्था का नाम</th>
+                                <th>मंगल दल के बैठक के गठन हेतु कार्यवाही पुस्तिका</th>
+                                <!-- <th>स्टोर पंजिका</th>
+                                <th>निरिक्षण एवं सुझाव पुस्तिका</th> -->
+                                <th>विकासखंड स्तर पर  दी गयी टिप्पणी</th>
+                                <th>विकासखंड स्तर पर की गयी कार्यवाही की स्थिति</th>
+                          
+                                <!-- <th>टिप्पणी</th> -->
+                               
+                                <th>अंतिम कार्यवाही की स्थिति</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let org of Orglst;let i=index" [ngStyle]="{'background-color':org.status2=='Approved'?'#b3f0ff':'white'}">
+                            <td>{{i+1}}</td>
+                            <td><a class="btn btn-danger" *ngIf="org.status2=='Pending' ||org.status2!='Cancelled'" data-toggle="modal" data-target="#RemarkModal" (click)="GetTeamForCancel(org.teamId)"><i class="fa fa-close"></i></a></td>
+                            <td><a class="btn btn-success" *ngIf="org.status2=='Pending' ||org.status2!='Approved'" data-toggle="modal" data-target="#RemarkModal" (click)="GetTeamForApprove(org.teamId)"><i class="fa fa-check" ></i></a></td>
+                            <td><a class="btn btn-primary" (click)="GetMemberDeailsByTeam(org.teamId)"><i class="fa fa-file-archive-o"></i></a></td>
+                            <td>{{org.district}}</td>
+                            <td>{{org.block}}</td>
+                            <td>{{org.gpanchayat}}</td>
+                            <td>{{org.teamType}}</td>
+                            <td>{{org.teamName}}</td>
+                            <td><a class="btn btn-warning" (click)="DownloadMeetingActionBook(org.meetingActionBook)"><i class="fa fa-download"></i></a></td>
+                        <!--     <td><a class="btn btn-warning" (click)="DownloadStoreBook(org.storeBook)" *ngIf="org.storeBook!=null"><i class="fa fa-download"></i></a></td>
+                            <td><a class="btn btn-warning" (click)="DownloadNirikshanBook(org.nirikshanBook)" *ngIf="org.nirikshanBook!=null"><i class="fa fa-download"></i></a></td>
+                          -->   
+                          <td>{{org.remark1}}</td>
+                            <td [ngStyle]="{'color':org.status1=='Cancelled'?'#ff0000':org.status1=='Approved'?'#009900':'#0033cc'}">{{org.status1}}</td>
+                           
+                            <td [ngStyle]="{'color':org.status2=='Cancelled'?'#ff0000':org.status2=='Approved'?'#009900':'#0033cc'}">{{org.status2}}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <table datatable [dtOptions]="dtOptions"  [dtTrigger]="dtTrigger" class="table table-responsive table-bordered" *ngIf="MRoleId==4">
+                        <thead class="table table-primary">
+                            <tr>
+                                <th>क्रम संख्या</th>
+                                <th style="width:128px">Cancel</th>
+                                <th style="width:128px">Approve</th>
+                                <th>सदस्यों का विवरण </th>
+                                <th>जिला</th>
+                                <th>विकासखंड</th>
+                                <th>ग्रामपंचायत</th>
+                                <th>संस्था का प्रकार</th>
+                                <th>संस्था का नाम</th>
+                                <th>मंगल दल के बैठक के गठन हेतु कार्यवाही पुस्तिका</th>
+                               <!--  <th>स्टोर पंजिका</th>
+                                <th>निरिक्षण एवं सुझाव पुस्तिका</th> -->
+                                <th>जिला स्तर पर  दी गयी टिप्पणी</th>
+                                <th>जिला स्तर पर की गयी कार्यवाही की स्थिति</th>
+                             
+                                <!-- <th>टिप्पणी</th> -->
+                               
+                                <th>अंतिम कार्यवाही की स्थिति</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let org of Orglst;let i=index" [ngStyle]="{'background-color':org.status2=='Approved'?'#b3f0ff':'white'}">
+                            <td>{{i+1}}</td>
+                            <td><a class="btn btn-danger" *ngIf="org.status1=='Pending' ||org.status1!='Cancelled'" data-toggle="modal" data-target="#RemarkModal" (click)="GetTeamForCancel(org.teamId)"><i class="fa fa-close"></i></a></td>
+                            <td><a class="btn btn-success" *ngIf="org.status1=='Pending' ||org.status1!='Approved'" data-toggle="modal" data-target="#RemarkModal" (click)="GetTeamForApprove(org.teamId)"><i class="fa fa-check" ></i></a></td>
+                            <td><a class="btn btn-primary"  (click)="GetMemberDeailsByTeam(org.teamId)"><i class="fa fa-file-archive-o"></i></a></td>
+                            
+                            <td>{{org.district}}</td>
+                            <td>{{org.block}}</td>
+                            <td>{{org.gpanchayat}}</td>
+                            <td>{{org.teamType}}</td>
+                            <td>{{org.teamName}}</td>
+                            <td><a class="btn btn-warning" (click)="DownloadMeetingActionBook(org.meetingActionBook)" ><i class="fa fa-download"></i></a></td>
+                           <!--  <td><a class="btn btn-warning" (click)="DownloadStoreBook(org.storeBook)" *ngIf="org.storeBook!=null"><i class="fa fa-download"></i></a></td>
+                            <td><a class="btn btn-warning" (click)="DownloadNirikshanBook(org.nirikshanBook)" *ngIf="org.nirikshanBook!=null"><i class="fa fa-download"></i></a></td>
+                            --> <td>{{org.remark2}}</td>
+                            <td [ngStyle]="{'color':org.status2=='Cancelled'?'#ff0000':org.status2=='Approved'?'#009900':'#0033cc'}">{{org.status2}}</td>
+                           
+                            <td [ngStyle]="{'color':org.status1=='Cancelled'?'#ff0000':org.status1=='Approved'?'#009900':'#0033cc'}">{{org.status1}}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-md-4" *ngIf="MRoleId==3">
+                    <div class="modal fade" id="RemarkModal" tabindex="-1" role="dialog" aria-labelledby="RemarkModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h5 class="modal-title" id="RemarkModalLabel">Action Process</h5>
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                              </button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label class="control-label">टिप्पणी :</label>
+                                             <input type="text" class="form-control" id="Remark" name="Remark" autocomplete="off">
+                                           
+                                             </div>
+                                    </div>
+                                  
+                                </div>
+                                <div class="row" *ngIf="divValidFrom">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label class="control-label">दिनांक से :</label>
+                                             <input type="text" class="form-control" id="ValidFrom" bsDatepicker [bsConfig]="{dateInputFormat:'DD/MM/YYYY'}" name="ValidFrom" autocomplete="off">
+                                           
+                                             </div>
+                                    </div>
+                                   
+                                </div>
+                                <div class="row" *ngIf="divValidTo">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label class="control-label">दिनांक तक :</label>
+                                             <input type="text" class="form-control" id="ValidTo" bsDatepicker [bsConfig]="{dateInputFormat:'DD/MM/YYYY'}" name="ValidTo" autocomplete="off">
+                                           
+                                             </div>
+                                    </div>
+                               
+                                </div>
+                               
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                              <button type="button" class="btn btn-danger" *ngIf="btnCancel" (click)="ApprovalByDistrict(TeamId,'Cancelled')">Cancel</button>
+                              <button type="button" class="btn btn-success" *ngIf="btnApprove" (click)="ApprovalByDistrict(TeamId,'Approved')">Approve</button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                </div>
+                <div class="col-md-4" *ngIf="MRoleId==4">
+                    <div class="modal fade" id="RemarkModal" tabindex="-1" role="dialog" aria-labelledby="RemarkModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h5 class="modal-title" id="RemarkModalLabel">टिप्पणी</h5>
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                              </button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="form-group">
+                                    <!-- <label class="control-label">टिप्पणी</label> -->
+                                     <input type="text" class="form-control" id="Remark" name="Remark" autocomplete="off">
+                                   
+                                     </div>
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                              <button type="button" class="btn btn-danger" *ngIf="btnCancel" (click)="ApprovalByBlock(TeamId,'Cancelled')">Cancel</button>
+                              <button type="button" class="btn btn-success" *ngIf="btnApprove" (click)="ApprovalByBlock(TeamId,'Approved')">Approve</button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                </div>
+          
+            </div>
+     
+            <div class="card card-default" *ngIf="divMemberDetails">
+                <div class="card-header"><h4>सदस्यों का विवरण</h4>
+                    <button type="button" class="btn btn-tool" data-card-widget="collapse" style="float: right;"><i class="fas fa-minus"></i></button></div>
+                    <div class="card-body">
+                        <table class="table table-bordered table-responsive">
+                            <thead class="table table-primary">
+                                <tr>
+                                 <th>क्रम संख्या0</th>
+                            
+                                 <th style="width: 20%;">सदस्य का नाम</th>
+                                 <th style="width: 20%;">पिता का नाम</th>
+                                 <th style="width: 20%;">माता का नाम</th>
+                                 <th style="width: 20%;">जन्मतिथि</th>
+                                 <th style="width: 20%;">लिंग</th>
+                                 <th style="width: 20%;">पद</th>
+                                 <th style="width: 20%;">लम्बाई(सेमी0 में)</th>
+                                 <th style="width: 20%;">सीना(सेमी0 में)</th>
+                                 <th style="width: 20%;">मोबाइल नं0</th>
+                                 <th style="width: 20%;">शैक्षिक योग्यता प्रमाण पत्र</th>
+                                 <th style="width: 20%;">पहचान पत्र</th>
+                                 <th style="width: 20%;">फोटो</th>
+                               
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let member of Memberlst;let i=index; ">
+                                    <td>{{i+1}}</td>
+                                    <td>{{member.memberName}}</td>
+                                    <td>{{member.fatherName}}</td>
+                                    <td>{{member.motherName}}</td>
+                                    <td>{{member.dob|date:"dd/MM/yyyy"}}</td>
+                                    <td>{{member.gender}}</td>
+                                    <td>{{member.desgName}}</td>
+                                    <td>{{member.height}}</td>
+                                    <td>{{member.chest}}</td>
+                                    <td>{{member.contactNo}}</td>
+                                    <td><a class="btn btn-warning" (click)="DownloadEduCert(member.eduCert)" *ngIf="member.eduCert!=null"><i class="fa fa-download"></i></a></td>
+                                    <td><a class="btn btn-warning" (click)="DownloadIdCard(member.idCard)"><i class="fa fa-download"></i></a></td>
+                                    <td><img [src]="MemDocUrl+member.memberPic" height="100px" width="100px"/></td>
+
+                                </tr>
+                            </tbody>
+                        </table>
+                     
+                    </div>
+                  
+                </div>
+    
+                
+        <ngx-spinner bdColor="rgba(51, 51, 51, 0.8)" size="default" type="ball-spin-clockwise">  
+            <p style="color: white">Please Wait. </p>  
+            </ngx-spinner>
+    </div><!-- /.container-fluid -->
+  </section>
+  <!-- /.content -->
+</div>
+

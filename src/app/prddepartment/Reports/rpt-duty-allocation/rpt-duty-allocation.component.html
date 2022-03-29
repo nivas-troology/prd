@@ -1,0 +1,111 @@
+<div class="content-wrapper" style="min-height: 242px;">
+  <!-- Content Header (Page header) -->
+  <div class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+
+        </div><!-- /.col -->
+
+      </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+  </div>
+  <!-- /.content-header -->
+
+  <!-- Main content -->
+  <section class="content">
+    <div class="container-fluid">
+      <div class="card card-default">
+        <div class="card-header">
+          <h3>Jawan Duty Allocation Report</h3>
+        </div>
+
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-3">
+              <label class="control-label">ड्यूटी स्थल का नाम :</label>
+
+              <select class="form-control" id="SiteId" name="SiteId" [(ngModel)]="SiteId">
+                <option value=0>--Select--</option>
+                <option [value]="dutyplace.siteId" *ngFor="let dutyplace of dutyplacelist">{{dutyplace.siteName}}
+                </option>
+
+              </select>
+            </div>
+            <div class="col-md-3">
+              <label class="control-label">दिनांक से :</label>
+              <input type="text" class="form-control" id="FromDate" bsDatepicker
+                [bsConfig]="{dateInputFormat:'DD/MM/YYYY'}" [(ngModel)]="FromDate" placeholder="eg:15/08/1947">
+            </div>
+            <div class="col-md-3">
+              <label class="control-label">दिनांक तक :</label>
+              <input type="text" class="form-control" id="ToDate" bsDatepicker
+                [bsConfig]="{dateInputFormat:'DD/MM/YYYY'}" [(ngModel)]="ToDate" placeholder="eg:15/08/1947">
+            </div>
+            <div class="col-md-3">
+              <label class="control-label">सर्विस नं0 :</label>
+              <input type="text" class="form-control" id="ServiceNo" [(ngModel)]="ServiceNo"
+                (ngModelChange)="ServiceNo= $event.toUpperCase()">
+            </div>
+
+          </div>
+          <br />
+          <div class="row">
+            <div class="col-md-12" style="text-align:center;">
+              <input type="button" class="btn btn-success" value="Search"
+                (click)="Search(FromDate,ToDate,ServiceNo,SiteId)">
+            </div>
+          </div>
+          <br />
+          <div class="card card-info">
+            <div class="card-header">
+              <h4>Duty Allocation List Of PRD Jawans</h4>
+            </div>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-md-12">
+                  <table datatable class="table table-responsive" [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
+                    <thead>
+                      <tr>
+                        <th>क्रम सं0</th>
+                        <th>सर्विस नं0</th>
+                        <th>स्वयंसेवक का नाम</th>
+                        <th>पिता का नाम</th>
+                        <th>विकास खण्ड/कम्पनी का नाम</th>
+                        <th>तैनाती स्थल</th>
+                        <th>मोबाइल नं0</th>
+                        <th>दिनांक से</th>
+                        <th>दिनांक तक</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let duty of dutylist;let i=index">
+                        <td>{{i+1}}</td>
+                        <td>{{duty.serviceno}}</td>
+                        <td>{{duty.empName}}</td>
+                        <td>{{duty.fatherName}}</td>
+                        <td>{{duty.blockName}}</td>
+                        <td>{{duty.siteName}}</td>
+                        <td>{{duty.mobile}}</td>
+                        <td>{{duty.dutyDateFrom}}</td>
+                        <td>{{duty.dutyDateTo}}</td>
+
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+      <ngx-spinner bdColor="rgba(51, 51, 51, 0.8)" size="default" type="ball-spin-clockwise">
+        <p style="color: white">Please Wait. </p>
+      </ngx-spinner>
+    </div><!-- /.container-fluid -->
+  </section>
+  <!-- /.content -->
+</div>

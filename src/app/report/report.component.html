@@ -1,0 +1,165 @@
+<div class="wrapper" >
+    <div class="content-wrapper" style="min-height: 729px; margin: 0px 0px 0px 0px;background-color: #00cccc; " >
+        <!-- Content Header (Page header) -->
+        <div class="content-header">
+          <div class="container-fluid">
+            <div class="row">
+                
+                <div class="col-md-10 text-center offset-1">
+            <img class="img-responsive" src="assets/homeimg/prd-logo.jpg" style="height: 150px;width: 150px;"/>
+            <h4>Yuva Kalyan & Prantiya Rakshak Dal</h4>
+              </div>
+            
+              </div>
+          </div>
+        </div>
+      <section class="content">
+          <div class="container-fluid">
+            
+            <div class="row">
+                <div class="col-md-1"></div>
+                <div class="col-md-10">
+                    <div class="card card-default" >
+                        <div class="card-header"><h3>Report</h3>
+                          
+                            <button class="btn btn-warning" routerLink="/PRDDepartment/RegisteredJawanReport">Back</button>       
+        <button class="btn btn-primary" style="float:right" [useExistingCss]="true" printSectionId="print-section" ngxPrint>Print Report</button>
+                                
+                               
+                          
+                        </div>
+                        <div class="card-body">
+                            <div class="col-md-12">
+                                <table datatable  class="table table-responsive table-hover cell-border stripe" style="width: 100%;" [dtOptions]="dtOptions"  [dtTrigger]="dtTrigger" id="example1">
+                                    <thead> 
+                                        <tr><th colspan="20"><h5>{{ReportHeaderName}}</h5></th></tr>
+                                        <tr>
+                                        <th>क्रम संख्या</th>
+                                        <th>मण्डल का नाम</th>
+                                        <th>जनपद का नाम</th>
+                                        <th>विकास खंड/ कम्पनी का नाम</th>
+                                        <th>क्षेत्र</th>
+                                        <th>स्वयंसेवक का नाम</th>
+                                        <th>पिता का नाम</th>
+                                        <th>पता </th>
+                                        <th>थाना </th>
+                                        <th>शैक्षिक योग्यता </th>
+                                        <th>विशेष योग्यता</th>
+                                        <th>जन्मतिथि</th>
+                                        <th>आयु</th>
+                                        <th>श्रेणी</th>
+                                        <th>लम्बाई(सेमी0)</th>
+                                        <th>सीना(सेमी0)</th>
+                                        <th>आवंटित कोड संख्या/सर्विस नं0</th>
+                                        <th>पुराना सर्विस नं0</th>
+                                        <th>नॉमिनल रोल रजिस्टर की क्रम संख्या: </th>
+                                        <th>सर्विस कोड</th>  
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let jawan of Jawanlist let i=index">
+                                        <td>{{i+1}}</td>
+                                        <td>{{jawan.zone}}</td>
+                                        <td>{{jawan.dist}}</td>
+                                        <td>{{jawan.company}}</td>
+                                        <td>{{jawan.residanceTypeCurrent}}</td>
+                                        <td>{{jawan.empName}}</td>
+                                        <td>{{jawan.fatherName}}</td>
+                                        <td>{{jawan.currAddress}}</td>
+                                        <td>{{jawan.thana}}</td>
+                                        <td>{{jawan.empEdu}}</td>
+                                        <td>{{jawan.empSplSkill}}</td>
+                                        <td>{{jawan.empDob}}</td>
+                                        <td>{{jawan.age}}</td>
+                                        <td>{{jawan.empCaste}}</td>
+                                        <td>{{jawan.height}}</td>
+                                        <td>{{jawan.chest}}</td>
+                                        <td>{{jawan.empOfficialId}}</td>
+                                        <td>{{jawan.oldServiceNo}}</td>
+                                        <td>{{jawan.nominalRegNo}}</td>
+                                        <td>{{jawan.serialCode}}</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+
+
+                            </div>
+                            <div style="display: none;" id="print-section">
+                                  
+                <div class="col-md-10 text-center offset-1">
+                    <img class="img-responsive" src="assets/homeimg/prd-logo.jpg"  style="height: 150px;width: 150px;"/>
+                    <h4>Yuva Kalyan & Prantiya Rakshak Dal</h4>
+                      </div>
+                                  <br/>
+                                  <div id="printtable">
+                                    <table>
+                                        <thead>
+                                            <tr><th colspan="20"><h5>{{ReportHeaderName}}</h5></th></tr>
+                                            <tr>
+                                                <th>क्रम संख्या</th>
+                                          
+                                                <th>मण्डल का नाम</th>
+                                                <th>जनपद का नाम</th>
+                                                <th>विकास खंड<br/>/ कम्पनी का नाम</th>
+                                                <th>क्षेत्र</th>
+                                                <th>स्वयंसेवक<br/> का नाम</th>
+                                                <th>पिता का नाम</th>
+                                                <th>पता </th>
+                                                <th>थाना </th>
+                                                <th>शैक्षिक योग्यता </th>
+                                                <th>विशेष योग्यता</th>
+                                                <th>जन्मतिथि</th>
+                                                <th>आयु</th>
+                                                <th>श्रेणी</th>
+                                                <th>लम्बाई(सेमी0)</th>
+                                                <th>सीना(सेमी0)</th>
+                                                <th>आवंटित कोड <br/>संख्या/सर्विस नं0</th>
+                                                <!-- <th>पुराना सर्विस नं0</th>
+                                                <th>नॉमिनल रोल रजिस्टर की क्रम संख्या: </th> -->
+                                                <th>सर्विस कोड</th>   
+                                            </tr>
+                                          
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let jawan of Jawanlist let i=index">
+                                            <td>{{i+1}}</td>
+                                           
+                                            <td>{{jawan.zone}}</td>
+                                            <td>{{jawan.dist}}</td>
+                                            <td>{{jawan.company}}</td>
+                                            <td>{{jawan.residanceTypeCurrent}}</td>
+                                            <td>{{jawan.empName}}</td>
+                                            <td>{{jawan.fatherName}}</td>
+                                            <td>{{jawan.currAddress}}</td>
+                                            <td>{{jawan.thana}}</td>
+                                            <td>{{jawan.empEdu}}</td>
+                                            <td>{{jawan.empSplSkill}}</td>
+                                            <td>{{jawan.empDob}}</td>
+                                            <td>{{jawan.age}}</td>
+                                            <td>{{jawan.empCaste}}</td>
+                                            <td>{{jawan.height}}</td>
+                                            <td>{{jawan.chest}}</td>
+                                            <td>{{jawan.empOfficialId}}</td>
+                                            <!-- <td>{{jawan.oldServiceNo}}</td>
+                                            <td>{{jawan.nominalRegNo}}</td> -->
+                                            <td>{{jawan.serialCode}}</td>
+                                        </tr>
+                                        </tbody>
+                                    </table> 
+                                  </div>
+                                  </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-1"></div>
+                <ngx-spinner bdColor="rgba(51, 51, 51, 0.8)" size="default" type="ball-spin-clockwise">  
+                    <p style="color: white">Please Wait. </p>  
+                    </ngx-spinner>
+         
+            </div>
+        
+          </div>
+        </section>
+        <!-- /.content -->
+      </div>
+</div>

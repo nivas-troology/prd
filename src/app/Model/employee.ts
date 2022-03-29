@@ -1,0 +1,155 @@
+import { FormBuilder } from '@angular/forms';
+
+
+export class employee
+{
+    EmpId:number
+    EmpName:string
+    EmpGender:string
+    EmpCaste:string
+    EmpDob:string
+    FatherName:string
+    MotherName:string
+    Height:string
+    EmpEdu:string
+    EmpDesigId:string
+    IdProof1Type:string
+    IdProof1No:string
+    IdProof1Pic:string
+    IdProof2Type:string
+    IdProof2No:string
+    IdProof2Pic:string
+    IdProof3Type:string
+    IdProof3No:string
+    IdProof3Pic:string
+    RegistrationStatus1:string
+    RegistrationRemarks1:string
+    RegistrationStatus2:string
+    RegistrationRemarks2:string
+    RegistrationStatusFinal:string
+    RegistrationRmarksFinal:string
+    EmpOfficialId:string
+    EmpPic:string
+    EmpSplSkill:string
+    Chest:string
+    CreatedBy:number
+    ModifiedBy:number
+    FileExtention1:string
+    FileExtention2:string
+    FileExtention3:string
+    FileExtention4:string
+    FileExtention5:string
+    BirthCerName:string
+    BirthCerNo:string
+    BirthCerPic:string
+    MroleId:number
+UserLoginId:number
+AadharNo:string
+PanNo:string
+OtherSplSkill:string
+NominalRegNo:string
+IsAvailableForDuty:number
+OldServiceNo:string
+Status:string
+NewJawanStatus:string
+TransCert:string
+FileExtention6:string
+IsTrained:string
+}
+export class empContact
+{
+    EmpContactId:string
+    EmpId:number
+    ResidanceAddress:string
+    ResidanceZoneId:string
+    ResidanceDistId:string
+    ResidanceCityId:string
+    ResidanceMobile1:string
+    ResidanceEmpEmail:string
+    ResidancePincode:string
+    ResidanceEmpMohalla:string
+    ResidanceEmpPoliceStation:string
+    CurrentZoneId:string
+    CurrentDistId:string
+    CurrentCityId:string
+    CurrentAddress:string
+    CurrentCompanyId:string
+   
+    CurrentMobile1:string
+    CurrentEmpEmail:string
+    CurrentEmpMohalla:string
+    ResidanceBlockId:string
+    ResidanceThanaId:string
+    CurrentBlockId:string
+    CurrentThanaId:string
+    CurrentPincode:string
+    CreatedBy:number
+    ModifiedBy:number
+    residanceTypePerm:string
+    residanceTypeCurrent:string
+    CurrentEmpPoliceStation:string
+    ResidanceCompanyId:string
+    empChkAddress:string
+    MroleId:number
+    UserLoginId:number
+}
+export class empAccount
+{
+    EmpAccDetailD:string;
+    EmpOfficialId:number;
+    AccNo:string;
+    AccName:string;
+    Bank:string;
+    Branch:string;
+    Ifsc:string;
+    CreatedBy:number;
+    ModifiedBy:number;
+    MroleId:number;
+    UserLoginId:number;
+}
+
+export class empTraining
+{
+    EmpTrainingId:string;
+    EmpId:number;
+    TrainingSession:string;
+    CompId:string;
+    DateFrom:string;
+    DateTo:string;
+    TrainingCertificate:string;
+    CreatedBy:number;
+    ModifiedBy:number;
+    TrainingCertificatefile:string;
+    FileExtention:string;
+    MroleId:number;
+    UserLoginId:number;
+}
+
+export class EmployeeReg
+{
+    Employee:employee
+    EmployeeAccount:empAccount
+    EmployeeContact:empContact
+    EmployeeTraining:empTraining
+}
+export class TableReport{
+    empId:number;
+    zone:string;
+    dist:string;
+    company:string;
+    empName:string;
+    fatherName:string;
+    currAddress:string;
+    thana:string;
+    empEdu:string;
+    empSplSkill:string;
+    empDob:string;
+    age:string;
+    empCaste:string;
+    height:string;
+    chest:string;
+    empOfficialId:string;
+    oldServiceNo:string;
+    nominalRegNo:string;
+    serialCode:string;
+  }

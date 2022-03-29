@@ -1,0 +1,92 @@
+.logodiv
+{
+    text-align: left;
+   
+}
+.logo
+{
+    height: 150px;
+    text-align: left;
+}
+h3{
+    text-align: left;
+}
+td{
+    width:300px;
+    font-family:auto;
+}
+th{
+    font-weight: lighter;
+}
+    @media print and (min-width: 768px)
+    {
+        td{
+            width:300px;
+            font-family:auto;
+        }
+        th{
+            font-weight: lighter;
+        }
+        .logodiv
+        {
+            text-align: left;
+           
+        }
+        .logo
+        {
+            height: 220px;
+            text-align: left;
+        }
+        h3{
+            text-align: left;
+        }
+        .card {
+            position: relative;
+            display: -ms-flexbox;
+            display: flex;
+            -ms-flex-direction: column;
+            flex-direction: column;
+            min-width: 0;
+            word-wrap: break-word;
+            background-color: #ffffff;
+            background-clip: border-box;
+            border: 0 solid rgba(17, 5, 5, 0.911);
+            border-radius: 0.25rem;
+           
+          }
+          .card-success:not(.card-outline) > .card-header {
+            background-color: #28a745;
+          }
+.card-header {
+    padding: 0.75rem 1.25rem;
+    margin-bottom: 0;
+    background-color: rgba(0, 0, 0, 0.03);
+    border-bottom: 0 solid rgba(0, 0, 0, 0.125);
+    color: black;
+  }
+  .card-body {
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto;
+    min-height: 1px;
+    padding: 1.25rem;
+  }
+  
+        .row {
+            display: -ms-flexbox;
+            display: flex;
+            -ms-flex-wrap: wrap;
+            flex-wrap: wrap;
+            margin-right: -7.5px;
+            margin-left: -7.5px;
+        }
+        .col-md-12 {
+            -ms-flex: 0 0 100%;
+            flex: 0 0 100%;
+            max-width: 100%;
+        }
+        
+
+  .table-striped tbody tr:nth-of-type(odd) {
+    background-color: rgba(0, 0, 0, 0.05);
+  }
+} 

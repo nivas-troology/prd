@@ -1,0 +1,247 @@
+
+
+<div class="content-wrapper" style="min-height: 242px; padding-bottom: 30px;">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+  
+          </div><!-- /.col -->
+    
+        </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <div class="card card-default">
+            <div class="card-header">
+                <h3>Wage Settlement</h3>
+            </div>
+        
+            <div class="card-body">
+                      
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label" for="CurrentZoneId">मण्डल :</label>
+                            <select class="form-control" id="CurrentZoneId" name="CurrentZoneId" #CurrentZoneIdControl="ngModel" [(ngModel)]="empcontact.CurrentZoneId" required (change)="getdistrict(empcontact.CurrentZoneId,'')" disabled>
+                                <option value="--Select--">--Select--</option>
+                                <option [value]="zone.zoneId" *ngFor="let zone of currentZonelist">{{zone.zoneName}}</option>
+                            </select>
+       
+                            </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label" for="CurrentDistId">जिला :</label>
+                            <select class="form-control" id="CurrentDistId" name="CurrentDistId" #CurrentDistIdControl="ngModel" [(ngModel)]="empcontact.CurrentDistId" (click)="getCompany(empcontact.CurrentDistId,'')" disabled>
+                                <option value="--Select--">--Select--</option>
+                                <option [value]="district.distId" *ngFor="let district of currentdistlist">{{district.distName}}</option>
+                            </select>
+    
+                        </div>
+                    </div>
+                
+      
+                    </div>
+                    <div class="row">
+                    <div class="col-md-4">
+                        <label></label>
+                        <div class="form-group clearfix">
+                            <div class="icheck-primary d-inline">
+                                <input type="radio" [(ngModel)]="empcontact.residanceTypeCurrent" value="Urban" id="rbnCity"  (click)="ClickUrbanRuralCurrent()">
+                            
+                                <label for="rbnCity">
+                                    शहरी
+                                </label>
+                              </div>
+                              <div class="icheck-primary d-inline ml-2">
+                                <input type="radio" [(ngModel)]="empcontact.residanceTypeCurrent" id="rbnVillage" value="Rural" (click)="ClickUrbanRuralCurrent()"
+                               >
+                                <label for="rbnVillage">
+                                    ग्रामीण
+                                </label>
+                              </div>
+                        </div>
+                      
+                    </div>
+            
+                    <div class="col-md-4" *ngIf="empcontact.residanceTypeCurrent=='Rural'">
+                        <div class="form-group" >
+                                
+                          <label class="control-label" for="CurrentBlockId">कंपनी का नाम/विकास खंड  :</label>
+                            <select class="form-control" id="CurrentBlockId" name="CurrentBlockId" #CurrentBlockIdControl="ngModel" [(ngModel)]="empcontact.CurrentBlockId" (change)="getCompany(empcontact.CurrentDistId,empcontact.CurrentBlockId)">
+                                <option value="--Select--">--Select--</option>
+                                
+                                <option [value]="block.blockId" *ngFor="let block of blocklst">{{block.blockName}}</option>
+                            </select>
+                         
+                            </div>
+                      
+                    </div>
+                    <div class="col-md-4"  *ngIf="empcontact.residanceTypeCurrent=='Urban'">
+                        <div class="form-group">
+    
+                          <label class="control-label" for="CurrentBlockId">कंपनी का नाम/विकास खंड  :</label>
+                          
+                            <select class="form-control" id="CurrentCompanyId" name="CurrentCompanyId" #CurrentCompanyIdControl="ngModel" [(ngModel)]="empcontact.CurrentCompanyId" required >
+                                <option value="--Select--">--Select--</option>
+                                <option [value]="company.compId" *ngFor="let company of companylst">{{company.compName}}</option>
+                            </select>
+                            </div>
+                    </div>
+                  
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+            
+                                <label class="control-label" for="CurrentThanaId">थाना :</label>
+                              
+                                <select class="form-control" id="CurrentThanaId" name="CurrentThanaId" #CurrentThanaIdControl="ngModel" [(ngModel)]="empcontact.CurrentThanaId" (change)="GetSites()">
+                                    <option value="--Select--">--Select--</option>
+                                    <option [value]="thana.thanaId" *ngFor="let thana of thanalist">{{thana.thanaName}}</option>
+                                    
+                                </select>
+                                </div>
+                            </div>
+                        <div class="col-md-6">
+                            <div class="form-group" [class.has-error]="SiteIdControl.pristine && SiteIdControl.touched" [class.has-success]="SiteIdControl.dirty">
+                              <label class="control-label" for="SiteId">तैनाती स्थल :</label>
+                        
+                              <select class="form-control" id="SiteId" name="SiteId" #SiteIdControl="ngModel" [(ngModel)]="site.SiteId" required>
+                                  <option value="-1">--Select--</option>
+                                  <option [value]="site.siteId" *ngFor="let site of siteList">{{site.siteName}}</option>
+                                  
+                              </select>
+                              <span class="help-block" *ngIf="SiteIdControl.pristine && SiteIdControl.touched">कृपया तैनाती स्थल चुनें</span>
+                            </div>
+                        </div>
+              
+                 
+                    </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group" [class.has-error]="YearControl.pristine && YearControl.touched" [class.has-success]="YearControl.dirty">
+                      <label class="control-label" for="Month">वर्ष :</label>
+                
+                      <select class="form-control" id="Year" name="Year" #YearControl="ngModel" [(ngModel)]="Year.YearId" (change)="GetMonth(Year.YearId)" required>
+                          <option value="-1">--Select--</option>
+                          <option [value]="year.yearId" *ngFor="let year of Years">{{year.year1}}</option>
+                          
+                      </select>
+                      <span class="help-block" *ngIf="YearControl.pristine && YearControl.touched">कृपया वर्ष चुनें</span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group" [class.has-error]="MonthControl.pristine && MonthControl.touched" [class.has-success]="MonthControl.dirty">
+                      <label class="control-label" for="Month">माह :</label>
+                
+                      <select class="form-control" id="Month" name="Month" #MonthControl="ngModel" [(ngModel)]="Month.MonthId" required>
+                          <option value="-1">--Select--</option>
+                          <option [value]="month.monthId" *ngFor="let month of Months">{{month.month1}}</option>
+                          
+                      </select>
+                      <span class="help-block" *ngIf="MonthControl.pristine && MonthControl.touched">कृपया माह चुनें</span>
+                    </div>
+                </div>
+            </div>
+                  <div class="row">
+                  
+                      <div class="col-md-3">
+                          <input type="submit" value="Search" class="btn btn-success" style="border-radius:24px;width:100px;margin-top:30px" (click)="GetJawanWages(Year.YearId,Month.MonthId,site.SiteId)" [disabled]="site.SiteId==-1||Year.YearId==-1||Month.MonthId==-1">
+                      </div>
+                  </div>
+                  <br/>
+    <div class="row" *ngIf="divJawanlst">
+        <div class="col-md-12">
+<div class="card card-default">
+    <div class="card-header"><h5>Jawan List</h5></div>
+    <div class="card-body">
+        <div class="row">
+          
+            <div class="col-md-12">
+                <table  class="table table-responsive table-bordered table-condensed" >
+                    <thead>
+                        <tr>
+                            <th>क्रम सं0</th>
+                            <th style="width:33%">सर्विस नं0</th>
+                            <th style="width:33%">स्वयंसेवक का नाम</th>
+                            <th style="width:33%">कुल ड्यूटी भत्ता </th>
+                          
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let jawan of jawanForAttlst;let i=index">
+                    <td>{{i+1}}</td>
+                    <td>{{jawan.serviceNo}}</td>
+                    <td>{{jawan.name}}</td>
+                    <td>{{jawan.totalWage}}</td>
+                   
+                        </tr>
+                        <tr><td colspan="4"><strong style="float: right;">Grand Total:{{GrandTotalOfwages}}</strong></td></tr>
+                    </tbody>
+                            </table>
+            </div>
+           
+        </div>
+      
+    </div>
+</div>
+        </div>
+    </div>
+          <footer *ngIf="savediv">
+              <div class="row" >
+                <div class="col-md-6">
+                  
+            
+                    <label class="control-label" for="Attdoc">Upload  Document:</label>
+                    <input type="file" class="form-control"
+                    id="WSettlementdoc"
+                    name="WSettlementdoc"
+                    #WSettlementdocControl="ngModel"[(ngModel)]="Settlement.UploadFile"
+                    (change)="UploadwSettlementdoc($event)" required>
+                
+                   <h6 style="color:red">Supported format .xls/.xlsx,Maxsize:500kb-1MB</h6>
+                 
+                </div>
+                <div class="col-md-6">
+                   <label class="control-label">Reference No.</label>
+                   <input type="text" class="form-control" [(ngModel)]="Settlement.RefNo" (ngModelChange)="Settlement.RefNo = $event.toUpperCase()">
+                </div>
+    
+            
+              </div>
+              <div class="row">
+                  <div class="col-md-6">
+                    <label class="control-label">Remarks</label>
+                    <input type="text" class="form-control" [(ngModel)]="Settlement.Remarks" (ngModelChange)="Settlement.Remarks = $event.toUpperCase()">
+                  </div>
+                  <div class="col-md-6">
+                    <label class="control-label">Date</label>
+                    <input type="text" class="form-control" id="Date" bsDatepicker [bsConfig]="{dateInputFormat:'DD/MM/YYYY'}" [(ngModel)]="Settlement.Date">
+                  </div>
+              </div>
+              <div class="row">
+                <div class="col-md-3" style="margin-top: 37px;">
+                    <input type="button" class="btn btn-success" value="Submit" (click)="SaveWageSettlement()">
+                                      </div>
+              </div>
+          </footer>
+              
+            </div>
+       
+        </div>
+ 
+        <ngx-spinner bdColor="rgba(51, 51, 51, 0.8)" size="default" type="ball-spin-clockwise">  
+            <p style="color: white">Please Wait. </p>  
+            </ngx-spinner>
+    </div><!-- /.container-fluid -->
+  </section>
+  <!-- /.content -->
+</div>
+
